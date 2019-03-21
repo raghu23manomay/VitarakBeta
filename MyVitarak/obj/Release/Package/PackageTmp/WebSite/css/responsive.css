@@ -1,0 +1,150 @@
+/* Medium Layout: 1280px. */
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    
+    .single-testimonial p {
+        padding-left: 30px;
+    }
+}
+/* Tablet Layout: 768px. */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+    a.navbar-brand {
+        float: none;
+        text-align: center;
+        display: block;
+        height: 100%;
+        width: 100%;
+        margin: auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+    ul.nav.navbar-nav.navbar-right {
+        padding: 40px 0 0;
+    }
+    .navbar-right {
+        float: none!important;
+    }
+    .mainmenu-area ul.nav.navbar-nav li {
+        margin-left: 20px;
+    }
+    
+    .single-slide-item h1 {
+        font-size: 30px;
+        line-height: 35px;
+    }
+    
+    .single-service {
+        margin: 15px 0;
+    }
+    
+    .about-img img {
+        width: 100%;
+    }
+    .about-us-info {
+        margin-top: 30px;
+    }
+    
+    .single-testimonial p {
+        padding-left: 25px;
+    }
+    
+    .single-team {
+        margin: 15px 0;
+    }
+    .single-team img {
+        width: 100%;
+    }
+    
+    .single-pricing {
+        margin: 15px 0;
+    }
+    
+    .single-blog {
+        margin: 15px 0;
+    }
+    
+    .related-projects {
+        margin-top: 30px;
+    }
+    
+    .widgets {
+        margin-top: 50px;
+    }
+}
+/* Mobile Layout: 320px. */
+
+@media only screen and (max-width: 767px) {
+    .section-title p {
+        width: 100%;
+    }
+    
+    .navbar-brand {
+        padding: 15px 15px;
+    }
+    .mainmenu-area {
+        background-color: #ffffff;
+        padding: 8px 0;
+    }
+    .mainmenu-area ul.nav.navbar-nav li {
+        margin-left: 15px;
+    }
+    .mainmenu-area ul.nav.navbar-nav li a {
+        color: #333;
+    }
+    
+    .single-slide-item h1 {
+        font-size: 28px;
+        line-height: 40px;
+        margin-bottom: 20px;
+    }
+    
+    .single-service {
+        margin: 15px 0;
+    }
+    
+    .about-us-info {
+        margin-top: 30px;
+    }
+    
+    .single-fun-fact {
+        margin: 15px 0;
+    }
+    
+    .single-portfolio img {
+        width: 100%;
+    }
+    
+    .single-team {
+        margin: 15px 0;
+    }
+    .single-team img {
+        width: 100%;
+    }
+    
+    .single-pricing {
+        margin-bottom: 30px;
+    }
+    
+    .single-blog {
+        margin-bottom: 40px;
+    }
+    .single-contact {
+        margin: 15px 0;
+    }
+    
+    .related-projects {
+        margin-top: 30px;
+    }
+    
+    .widgets {
+        margin-top: 50px;
+    }
+}
+/* Wide Mobile Layout: 480px. */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	
+}

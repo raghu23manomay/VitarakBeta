@@ -1,0 +1,122 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <!-- this meta viewport is required for BOLT //-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- BOLT Sandbox/test //-->
+    <script id="bolt" src="https://sboxcheckout-static.citruspay.com/bolt/run/bolt.min.js" bolt-color="e34524" bolt-logo="http://boltiswatching.com/wp-content/uploads/2015/09/Bolt-Logo-e14421724859591.png"></script>
+    <!-- BOLT Production/Live //-->
+    <!--// script id="bolt" src="https://checkout-static.citruspay.com/bolt/run/bolt.min.js" bolt-color="e34524" bolt-logo="http://boltiswatching.com/wp-content/uploads/2015/09/Bolt-Logo-e14421724859591.png"></script //-->
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <title>Payementresponce</title>
+    <style>
+        span.text {
+            float: left;
+            width: 180px;
+        }
+
+        div.dv {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <form runat="server" id="payment_form" name="payment_form">
+
+        <h3>Transaction Sucessfull please Login Again</h3>
+        <div class="hidden">
+        <p class="hidden" id="planename">@Session["planename"] </p>
+        <p class="hidden" id="plandesc">@Session["plandesc"]</p>
+        <p class="hidden" id="regrate">@Session["regrate"]</p>
+        <p class="hidden" id="planrate">@Session["planrate"]</p>
+        <p class="hidden" id="total">@Session["total"] </p>
+        <p class="hidden" id="pid">@Session["pid"] </p>
+        <p class="hidden" id="username">@Session["username"] </p> 
+        <p class="hidden" id="RegId">@Session["RegId"] </p>
+        </div>
+
+
+    </form>
+    <div id="grid1"></div>
+</body>
+</html>
+<script type="text/javascript">
+<!--   
+
+    $(document).ready(function () {
+        $('#planename').hide();
+        $('#plandesc').hide();
+        $('#regrate').hide();
+        $('#planrate').hide();
+        $('#total').hide();
+        $('#username').hide();
+        $('#RegId').hide();
+        SavePayment();
+        SaveTenant();
+
+    });
+
+    function SavePayment() {
+
+        var payid = "vitarak1234"
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/Home/insert_Payment',
+
+            data:
+            {
+                payment_id: payid,
+                registration_id: $("#RegId").text(),
+                p_id: $("#pid").text(),
+                amount: $("#total").text()          
+            },
+
+            success: function (da) {
+                alert(da); 
+            },
+
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                alert(textStatus);
+            }
+        });
+
+        return false;
+    }
+
+    function SaveTenant() {
+
+        var url = "/home/index";
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/Home/insert_tenant',
+
+            data:
+            {
+                RegistrationID: $("#RegId").text()           
+
+            },
+            success: function (da) {
+                alert(da +' Please Login again');     
+                window.location.href = url;
+            },
+
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                alert(textStatus);
+            }
+        });
+
+        return false;
+    }
+  
+</script>

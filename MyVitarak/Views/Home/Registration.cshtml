@@ -1,0 +1,338 @@
+﻿
+@model MyVitarak.Models.Registration
+@{
+    Layout = null;
+}
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+<style>
+    .emailred
+    {
+        color:red
+    }
+
+    .emailgreen {
+        color: green;
+    }
+
+</style>
+<div class="modal-header">
+    <button type="button"class="pull-right" data-dismiss="modal" aria-label="Close" onclick="frmclose();" style="background-color: #ffffff;border: none;font-size:21px;"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user-plus marginRight15px" aria-hidden="true"></i>Registration</h4>
+</div>
+@using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-horizontal", id = "frmregistration" }))
+{
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="exampleInputName2" class="col-sm-3 control-label">Name</label>
+                <div class="col-sm-9">
+                    <p class="hidden" id="regplanid">@Session["pid"]</p>
+                    @Html.TextBoxFor(a => a.Name, new { @class = "form-control", placeholder = "Enter Name", title = "Name", @id = "Name" })
+                    <p class="hidden" style="color: maroon;" id="valname">Name field should not empty</p>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="customerAddress" class="col-sm-3 control-label">Address</label>
+                <div class="col-sm-9">
+                    @Html.TextAreaFor(a => a.Address, new { @class = "form-control", placeholder = "Enter Address", title = "Address", @id = "Address" })
+                    <p class="hidden" style="color: maroon;" id="valaddress">Address field should not empty</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputName2" class="col-sm-3 control-label">Mobile No.</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(a => a.Mobile, new { @class = "form-control", placeholder = "Enter Mobile", title = "Mobile", @id = "Mobile" })
+                    <p class="hidden" style="color: maroon;" id="valmobile">Mobile field should not empty</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputName2" class="col-sm-3 control-label">Contact Person</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(a => a.ContactPerson, new { @class = "form-control", placeholder = "Enter Contact Person", title = "ContactPerson", @id = "ContactPerson" })
+                    <p class="hidden" style="color: maroon;" id="valcontactperson">Contact person field should not empty</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputName2" class="col-sm-3 control-label">Email</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(a => a.Email, new { @class = "form-control", placeholder = "Enter Email", title = "Email", @id = "Email" })
+                    <p class="hidden" id="EmailCheckExist"></p>
+                    <p class="hidden" style="color: maroon;" id="valemail">Email field should not empty</p>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputName2" class="col-sm-3 control-label">Password</label>
+                <div class="col-sm-9">
+                    @Html.PasswordFor(a => a.password, new { @class = "form-control", placeholder = "Enter password", title = "password", @id = "password" })
+                    <p class="hidden" style="color: maroon;" id="valpassword">Password field should not empty</p>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputName2" class="col-sm-3 control-label">Confirm Password</label>
+                <div class="col-sm-9">
+                    @Html.PasswordFor(a => a.password, new { @class = "form-control", placeholder = "Enter password", title = "password", @id = "confirmpassword" })
+                    <p class="hidden" style="color: maroon;" id="valconfirmpassword">Confirm password field should not empty</p>
+                    <p class="hidden" style="color: maroon;" id="valpasserror">Password not match</p>
+
+                </div>
+            </div>
+
+            @*<div class="form-group">
+            <label for="exampleInputName2" class="col-sm-3 control-label">Security Code</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(a => a.SecurityCode, new { @class = "form-control", placeholder = "Enter Security Code", title = "SecurityCode", @id = "SecurityCode" })
+            </div>
+        </div>*@
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success" onclick="Registration();">Submit</button>        
+        <button type="button" class="btn btn-warning" onclick="frmclose();">close</button>
+    </div>
+}
+
+    <script>
+
+
+        function frmclose()
+        {
+            $("#myModal .close").click()
+            location.reload();
+        }
+
+        $('#frmregistration').on("submit", function (e) {
+            e.preventDefault();
+            alert('hi');
+
+        });
+
+        $(document).ready(function () {
+                     
+                
+        });
+
+        $('#Email').on('change', function () {
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Home/EmailCheck',
+
+                data:
+                {
+                    email: $("#Email").val()
+                },
+                success: function (da)
+                {
+                    $('#EmailCheckExist').html(da);
+                    if ($('#EmailCheckExist').text() == 'Email id is available')
+                    {
+                        $("#EmailCheckExist").removeClass("hidden");
+                        $("#EmailCheckExist").removeClass("emailred")
+                        $("#EmailCheckExist").addClass("emailgreen");
+                        $("#valemail").addClass("hidden");
+                    }
+                    else {
+                        $("#EmailCheckExist").removeClass("hidden");
+                        $("#EmailCheckExist").removeClass("emailgreen");
+                        $("#EmailCheckExist").addClass("emailred");
+                        $("#valemail").addClass("hidden");
+                    }
+                  },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                    alert(textStatus);
+                }
+            });                 
+
+        });
+                    
+
+
+        //============================================== LoginPaymet modal call ========================================================== 
+
+        function Loginmodalcall() {
+
+            var TeamDetailPostBackURL = '/Home/LoginForPayment';
+
+            $.ajax({
+                type: "GET",
+                url: TeamDetailPostBackURL,
+                contentType: "application/json; charset=utf-8",
+                data: { planid: $("#regplanid").text()},
+                datatype: "json",
+                success: function (data) {
+                    $('#mdlLoginpay12').html(data);
+
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+
+        }
+
+        //============================================== Estimate modal call ========================================================== 
+
+        function callestimate() {
+
+            var TeamDetailPostBackURL = '/Home/EstimateCost';
+
+            $.ajax({
+                type: "GET",
+                url: TeamDetailPostBackURL,
+                contentType: "application/json; charset=utf-8",
+                data: {},
+                datatype: "json",
+                success: function (data) {
+                    $('#mdlLoginpay12').html(data);
+
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+
+        }
+
+        function Registration() {
+             
+
+            if ($("#Name").val() == "") {
+                
+                $("#valname").removeClass("hidden");
+                $("#valaddress").addClass("hidden");
+                $("#valemail").addClass("hidden");
+                $("#valpassword").addClass("hidden");
+                $("#valconfirmpassword").addClass("hidden");
+                $("#valcontactperson").addClass("hidden");
+                $("#valmobile").addClass("hidden");
+                   
+                return false;
+            }
+            else if ($("#Address").val() == "") {
+                $("#valaddress").removeClass("hidden");
+                $("#valname").addClass("hidden");
+                $("#valemail").addClass("hidden");
+                $("#valpassword").addClass("hidden");
+                $("#valconfirmpassword").addClass("hidden");
+                $("#valcontactperson").addClass("hidden");
+                $("#valmobile").addClass("hidden");
+                return false;
+            }
+            else if ($("#Mobile").val() == "") {
+                $("#valmobile").removeClass("hidden");
+                $("#valconfirmpassword").addClass("hidden");
+                $("#valpassword").addClass("hidden");
+                $("#valemail").addClass("hidden");
+                $("#valaddress").addClass("hidden");
+                $("#valname").addClass("hidden");
+                return false;
+            }
+            else if ($("#ContactPerson").val() == "") {
+                $("#valcontactperson").removeClass("hidden");
+                $("#valconfirmpassword").addClass("hidden");
+                $("#valpassword").addClass("hidden");
+                $("#valemail").addClass("hidden");
+                $("#valaddress").addClass("hidden");
+                $("#valname").addClass("hidden");
+                $("#valmobile").addClass("hidden");
+                return false;
+            }
+            else if ($("#Email").val() == "") {
+                $("#EmailCheckExist").addClass("hidden");
+                $("#valemail").removeClass("hidden");
+                $("#valaddress").addClass("hidden");
+                $("#valname").addClass("hidden");
+                $("#valpassword").addClass("hidden");
+                $("#valconfirmpassword").addClass("hidden");
+                $("#valcontactperson").addClass("hidden");
+                $("#valmobile").addClass("hidden");
+                return false;
+            }
+            
+            else if ($("#password").val() == "") {
+                $("#valpassword").removeClass("hidden");
+                $("#valemail").addClass("hidden");
+                $("#valaddress").addClass("hidden");
+                $("#valname").addClass("hidden");
+                $("#valconfirmpassword").addClass("hidden");
+                $("#valcontactperson").addClass("hidden");
+                $("#valmobile").addClass("hidden");
+                return false;
+            }
+            else if ($("#confirmpassword").val() == "") {
+                $("#valconfirmpassword").removeClass("hidden");
+                $("#valpassword").addClass("hidden");
+                $("#valemail").addClass("hidden");
+                $("#valaddress").addClass("hidden");
+                $("#valname").addClass("hidden");
+                $("#valcontactperson").addClass("hidden");
+                $("#valmobile").addClass("hidden");
+                return false;
+            }
+            else if ($("#password").val() != $("#confirmpassword").val()) {
+                $("#valpasserror").removeClass("hidden");
+                $("#valpassword").addClass("hidden");
+                $("#valemail").addClass("hidden");
+                $("#valaddress").addClass("hidden");
+                $("#valname").addClass("hidden");
+                $("#valconfirmpassword").addClass("hidden");
+                $("#valcontactperson").addClass("hidden");
+                $("#valmobile").addClass("hidden");
+                return false;
+            }
+            else if ($("#EmailCheckExist").text() == "Email id already exist")
+            {
+
+                return false;
+            }
+           
+           
+           
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Home/insert_Registration',
+
+                data:
+                {
+                    Name: $("#Name").val(),
+                    Address: $("#Address").val(),
+                    Email: $("#Email").val(),
+                    Mobile: $("#Mobile").val(),
+                    ContactPerson: $("#ContactPerson").val(),
+                    Email: $("#Email").val(),
+                    password: $("#password").val()
+
+                },
+                success: function (da) {
+                    alert(da);
+                    if (da == 'Registration Sucessfull')
+                    {
+                        $("#myModal .close").click()
+                        location.reload();
+                        //callestimate();
+                        
+                    }
+                    
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                    alert(textStatus);
+                }
+            });
+
+            return false;
+        }
+    </script>
+
+

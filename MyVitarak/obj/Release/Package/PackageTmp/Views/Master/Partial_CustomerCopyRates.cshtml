@@ -1,0 +1,134 @@
+﻿
+
+@model  IEnumerable<MyVitarak.Models.copyrate>
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+
+<style>
+    .Mytable {
+        width: 130%;
+        max-width: 130%;
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Copy Customer Rates</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-40px"><span aria-hidden="true">&times;</span></button>
+
+            <div class="row">
+
+                <div class="col-lg-5">
+                    Copy Rate Of:@Html.DropDownList("model.s", new SelectList((System.Collections.IEnumerable)ViewData["CustomerRateCopyList"], "Value", "Text"), "Customer List", new { @class = "form-control input-sm", @id = "CustomerRateListID", Title = "ModeName", style = "width: 135px;margin-left:85px;margin-top:-20px" })
+
+                </div>
+
+                <div class="col-lg-4" style="margin-left:-10px">
+                    For:@Html.DropDownList("model.s", new SelectList((System.Collections.IEnumerable)ViewData["ProductList"], "Value", "Text"), "All Products", new { @class = "form-control input-sm", @id = "ProductListID", Title = "ModeName", style = "width: 120px;margin-left:25px;margin-top:-20px" })
+
+                </div>
+                <div class="col-md-3">
+                    <label style="margin-left:-40px">w.e.f:</label> <input type="date" id="txtmydate" class="form-control " style="width: 130px;margin-top:-25px">
+
+                </div>
+            </div>
+            <div class="modal-body" style=" height:400px; overflow-y:scroll;">
+                <form class="form-horizontal">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Sr.No</th>
+                                <th>Customer Name</th>
+                                <th>Area</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr><td><input class="form-check-input1" type="checkbox" id="one" value="@item.Sr_No">@item.Sr_No</td>
+                                <td>@item.CustomerName</td>
+                                <td>@item.Area</td></tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="Close" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" id="btnsave" class="btn btn-primary">Copy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#Close').on('click', function () {
+        location.reload();
+    });
+    $('#btnsave').on('click', function () {
+        var error = 0;
+        var addchkval = [];
+
+        $('input:checked').each(function () {
+
+            addchkval.push($(this).attr("value"));
+        });
+       
+      
+        if ($('#CustomerRateListID').val() == '') {
+           
+            error = 1;
+
+        }
+
+        else if ($("#ProductListID").val() == "") {
+
+
+            error = 1;
+
+        }
+       
+
+        else if (error) {
+            return false;
+        }
+
+        else
+        {
+          
+           var copyrate = { Sr_No:addchkval,};
+            alert(copyrate);
+                     
+
+            $.ajax({
+
+                type: 'Post',
+                dataType: 'json',
+                url: '/Master/CopyRate',
+
+                data:
+                {
+                    copyrate: addchkval,
+                   CustomerId: $("#CustomerRateListID").val(),
+                   ProductId: $("#ProductListID").val(),
+                    pdate: $("#txtmydate").val(),
+                },
+                success: function (da) {
+
+                    alert(da);
+                    location.reload();
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(da);
+
+                }
+            });
+        }
+    });
+       
+</script>
+
+

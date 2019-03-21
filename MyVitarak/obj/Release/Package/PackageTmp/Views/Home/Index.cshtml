@@ -1,0 +1,588 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+
+
+<!-- start preloader -->
+<!-- end preloader -->
+<!-- start scroll to top button -->
+<div class="smooth-scroll">
+    <a href="#" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
+</div>
+<!-- end scroll to top button -->
+<!-- start welcome-hero-area -->
+<header id="welcome" class="welcome-hero-area">
+    <!-- start header-area -->
+    <div class="header-area">
+        <!-- start navbar area -->
+        <div id="mainmenu-sticky-wrapper" class="sticky-wrapper" style="height: 70px;">
+            <nav id="mainmenu" class="mainmenu-area" style="width: 1349px;">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navMenu" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button> <!-- mobile menu button, shows only in mobile -->
+                        <a class="navbar-brand" href="#welcome">Vitarak</a> <!-- main logo here -->
+                       
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navMenu">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a href="#welcome">home</a></li>
+                            <li><a href="#about">about us</a></li>
+                            <li><a href="#feature">features</a></li>
+                            <li><a href="#pricing">pricing</a></li>
+                            <li><a href="#contact">contact</a></li>
+                            <li> <a href="@Url.Action("Login", "Home")" data-toggle="modal" data-target="#myModal">Login</a></li>
+                            @*<li> <a href="@Url.Action("Registration", "Home")" data-toggle="modal" data-target="#mdlRegister">Register</a></li>*@
+                            <!--li><a href="#">log in</a></li-->
+                        </ul>
+                    </div>
+                    <!-- / end navbar-collapse -->
+                </div>
+            </nav>
+        </div>
+        <!-- / end navbar area -->
+    </div>
+    <!-- / end header-area -->
+    <!-- start home-slider-area -->
+    <div class="home-slider-area">
+        <div id="home-slide-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#home-slide-carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#home-slide-carousel" data-slide-to="1" class=""></li>
+                <li data-target="#home-slide-carousel" data-slide-to="2" class=""></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <!-- start single-slide-item -->
+                <div class="item active">
+                    <div class="single-slide-item slide-bg-one">
+                        <div class="slide-item-table">
+                            <div class="slide-item-tablecell">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <h1 data-animation="animated bounceInLeft" class="">Welcome to <span>Vitarak</span></h1>
+                                            <p data-animation="animated bounceInRight" class="">Vitarak is the only Real Accounting & Inventory Software which gives you 100% control on your business. Due to easiness, flexibility, self-customization options and time to time up-gradations are the major reasons behind its success.</p>
+                                            <!--a data-animation="animated zoomInUp" class="btn btn-default btn-sm-one" href="javascript:;">Show More</a-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /end single-slide-item -->
+                <!-- start single-slide-item -->
+                <div class="item">
+                    <div class="single-slide-item slide-bg-two">
+                        <div class="slide-item-table">
+                            <div class="slide-item-tablecell">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <h1 data-animation="animated bounceInRight" class="">Order <span>Management</span></h1>
+                                            <p data-animation="animated zoomIn" class="">Sales & Purchase Order management is very advance, there is facility of loading partial or full order.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /end single-slide-item -->
+                <!-- start single-slide-item -->
+                <div class="item">
+                    <div class="single-slide-item slide-bg-three">
+                        <div class="slide-item-table">
+                            <div class="slide-item-tablecell">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <h1 data-animation="animated zoomInLeft" class="">Paper <span>Less</span></h1>
+                                            <p data-animation="animated flipInX" class="">Vitarak  is a proven, full-featured, cost-justified, integrated software solution for automating transactions across your dairy business and reducing paperwork. This dairy management software is fully customisable to interface with your existing accounting system or can work as a stand-alone solution for your mobile workforce and office personnel.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /end single-slide-item -->
+            </div>
+        </div>
+    </div>
+    <!-- /end home-slider-area -->
+</header>
+<!-- / end welcome-hero-area -->
+<!-- start about-us area -->
+<div class="modal fade bs-example-modal-md" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md" role="document">
+        <div id="myModal12" class="modal-content" style="margin-top:90px;">
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-md" id="mdlLoginpay" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md" role="document">
+        <div id ="mdlLoginpay12" class="modal-content" style="margin-top:90px;">
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-md" id="mdlRegister" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content" style="margin-top:90px;">
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-md" id="mdlESCost" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md" role="document">
+        <div  class="modal-content" style="margin-top:90px;">
+
+        </div>
+    </div>
+</div>
+
+<section id="about" class="about-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h2>About Us</h2>
+                </div>
+            </div>
+        </div>
+        <!-- /end section-title row -->
+        <div class="row">
+            <!-- /end about-img -->
+            <div class="col-md-12 col-sm-12">
+                <div class="about-us-info">
+                    <h3 class="text-center">Vitarak</h3>
+                    <p>Vitarak is a fully featured software application that can help you manage your milk delivery business and achieve more control and information at a very low cost of total ownership compared to other systems.</p>
+                    <p>When you implement a software system you should make sure that it works smoothly and is easy to operate.</p>
+                    <p>Vitarak  is very easy to use and does everything we know of that a software billing system needs to do for the smooth operation of your milk delivery business.</p>
+                    <p>Vitarak has powerful reporting tools that will show you where you are at in your business profit and what you can do to get where you need to be.</p>
+                    <!--ul>
+                        <li><i class="fa fa-check"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+                        <li><i class="fa fa-check"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+                        <li><i class="fa fa-check"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+                    </ul>
+                    <a class="btn btn-default btn-sm-one" href="http://devutpol.com/tf/return-preview/#">Read More</a-->
+                </div>
+            </div>
+            <!-- /end about-us-info -->
+        </div>
+    </div>
+</section>
+<!-- / end about-us area -->
+<!-- start fun-fact-area -->
+<!--section class="fun-fact-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="single-fun-fact">
+                    <div class="fun-fact-icon">
+                        <i class="icon-profile-male"></i>
+                    </div>
+                    <h3 class="counter">780</h3>
+                    <p>Professionals</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="single-fun-fact">
+                    <div class="fun-fact-icon">
+                        <i class="icon-happy"></i>
+                    </div>
+                    <h3 class="counter">999</h3>
+                    <p>Happy Clients</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="single-fun-fact">
+                    <div class="fun-fact-icon">
+                        <i class="icon-trophy"></i>
+                    </div>
+                    <h3 class="counter">122</h3>
+                    <p>Awards Win</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="single-fun-fact">
+                    <div class="fun-fact-icon">
+                        <i class="icon-wine"></i>
+                    </div>
+                    <h3 class="counter">672</h3>
+                    <p>Cup Off Coffee</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section-->
+<!-- / end fun-fact-area -->
+<!-- start our-feature-area -->
+<section id="feature" class="feature-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h2>Features</h2>
+                </div>
+            </div>
+        </div>
+        <!-- /end section-title row -->
+        <div class="row marginbottom20">
+            <div class="col-md-5 col-md-offset-1 col-sm-6">
+                <h4 class="text-capitalize">Benefits to your business</h4>
+                <ul>
+                    <li><i class="fa fa-check"></i> Increase productivity and number of deliveries</li>
+                    <li><i class="fa fa-check"></i> Maximise sales</li>
+                    <li><i class="fa fa-check"></i> Manage payment collection (eliminating possible fraud)</li>
+                    <li><i class="fa fa-check"></i> Reduce distribution/administration costs and errors</li>
+                    <li><i class="fa fa-check"></i> Eliminate delivery paperwork</li>
+                    <li><i class="fa fa-check"></i> Reduce fuel and vehicle maintenance costs</li>
+                    <li><i class="fa fa-check"></i> Improve customer service</li>
+                    <li><i class="fa fa-check"></i> Report driver progress in real-time</li>
+                    <li><i class="fa fa-check"></i> Gain greater business insight</li>
+                    <li><i class="fa fa-check"></i> Gain competitive advantage and portray a professional company image</li>
+                </ul>
+            </div>
+            <div class="col-md-5 col-sm-6">
+                <h4 class="text-capitalize">Dairy features include</h4>
+                <ul>
+                    <li><i class="fa fa-check"></i> Accurate billing to three decimal places</li>
+                    <li><i class="fa fa-check"></i> Easy invoice creation including weekly invoice formats</li>
+                    <li><i class="fa fa-check"></i> Credit control managed to point of delivery improves cash flow and reduces debtor days</li>
+                    <li><i class="fa fa-check"></i> Multi-wave picking reduces labour costs</li>
+                    <li><i class="fa fa-check"></i> Suggested vehicle loads ensure vehicles are correctly stocked</li>
+                    <li><i class="fa fa-check"></i> Faster and more accurate billing</li>
+                    <li><i class="fa fa-check"></i> Improved driver productivity reduces delivery costs</li>
+                    <li><i class="fa fa-check"></i> Efficient and paperless order processing reduces administration overheads and costs</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="feature-info marginbottom20">
+                    <p>Vitarak  is a proven, full-featured, cost-justified, integrated software solution for automating transactions across your dairy business and reducing paperwork. This dairy management software is fully customisable to interface with your existing accounting system or can work as a stand-alone solution for your mobile workforce and office personnel.</p>
+                </div>
+            </div>
+            <!-- /end feature-info -->
+        </div>
+        <div class="row">
+            <div class="col-md-5 col-md-offset-1 col-sm-6">
+                <div class="single-feature">
+                    <div class="feature-icon">
+                        <i class="icon-linegraph"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>Rate Management</h4>
+                        <p>Rate Master of Vitarak is very much advanced for the fulfilment of the customer's need. In this 9 Price Lists, Party wise Special Rates, Minimum Rates, Pick Rates from Last Delivery, Net Rate and Lot Rate etc… advanced options are available, so there is no need to remember rates at the time of billing.</p>
+                    </div>
+                </div>
+                <div class="single-feature">
+                    <div class="feature-icon">
+                        <i class="icon-bargraph"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>Outstanding Analysis</h4>
+                        <p>In Vitarak, several reports are available in outstanding these are very beneficial for your company. You can check Area/Salesman/Route/Party or whole outstanding. Tagging system for collection in Vitarak software is very strong.</p>
+                    </div>
+                </div>
+                <div class="single-feature">
+                    <div class="feature-icon">
+                        <i class="icon-happy"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>User Friendly</h4>
+                        <p>Vitarak is fully menu driven and pop-up based software so there is no need of remembering codes. Vitarak is designed according to those businessmen's who have less knowledge of computer so they can operate this software easily.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-6">
+                <div class="single-feature">
+                    <div class="feature-icon">
+                        <i class="icon-genius"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>Flexibility</h4>
+                        <p>Vitarak is very advance and flexible software as you can customize it according to your business. It means there is no need to change yourself according to software as software will change according to your requirements.</p>
+                    </div>
+                </div>
+                <div class="single-feature">
+                    <div class="feature-icon">
+                        <i class="icon-strategy"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>Securities</h4>
+                        <p>In Vitarak, management can set powers and boundations operator wise. There is a provision through which you can freeze ledger's transactions. There are provisions through which data can run with defined hard disk or only on defined computer.</p>
+                    </div>
+                </div>
+                <div class="single-feature">
+                    <div class="feature-icon">
+                        <i class="icon-target"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>One time Masters</h4>
+                        <p>In Vitarak, once you set all the setups or masters then there is no need to remember and software can run accordingly.</p>
+                    </div>
+                </div>
+                <div class="single-feature">
+                    <div class="feature-icon">
+                        <i class="icon-documents"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>Accounting Reports</h4>
+                        <p>Vitarak is an advance accounting software. Its reporting system is very powerful as you can convert any report in XML, XLS, CSV formats etc. and can mail to your customers on a single click.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / end our-feature-area -->
+<!-- start pricing-area -->
+<section id="pricing" class="pricing-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h2>Our Pricing</h2>
+                    <!--p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi veritatis odit quos sit, voluptatum repudiandae tempora quae excepturi iusto eveniet.</p-->
+                </div>
+            </div>
+        </div>
+        <!-- /end section-title row -->
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="single-pricing">
+                    <div class="pricing-head">
+                        <h4>Basic</h4>
+                    </div>
+                    <div class="pricing-price">
+                        <h3>
+                            &#8377; 500
+                            <span>Monthly</span>
+                            <span>&nbsp;</span>
+                            <span>Registration &#8377; 2000</span>
+                                                       
+                        </h3>
+                    </div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>
+                                <a id="lfp" class="btn btn-default btn-sm-one" href="@Url.Action("LoginForPayment", "Home",new { planid = 1})" data-toggle="modal" data-target="#mdlLoginpay">Select Plan</a>
+                            </li>
+                            <li>2 Mobile apps</li>
+                            <li>Purchase</li>
+                            <li>Sales</li>
+                            <li>Partywise leakage</li>
+                            <li>Monthly customer ledger</li>
+                            <li>Monthly supplier ledger</li>
+                            <li>Flexible customer rates management</li>
+                            <li>Monthly crates ledger</li>
+                            <li>Leakage analysis</li>
+                            <li>Routewise sales reports</li>
+                            <li>Daily payment collection report</li>
+                            <li>Payment outstanding report</li>
+                            <li>Daily stock reports</li>
+                            <li>Tally integration</li>
+                        </ul>
+                    </div>
+                    @*<div class="pricing-action">
+                       
+                    </div>*@
+                </div>
+            </div>
+            <!-- /end single-pricing -->
+            <div class="col-md-3 col-sm-6">
+                <div class="single-pricing">
+                    <div class="pricing-head">
+                        <h4>Advance</h4>
+                    </div>
+                    <div class="pricing-price">
+                        <h3>
+                            &#8377; 1500
+                            <span>3 Months</span>
+                            <span>&nbsp;</span>
+                            <span>Registration &#8377; 2000</span>
+                        </h3>
+                    </div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>
+                                <a id="lfp" class="btn btn-default btn-sm-one" href="@Url.Action("LoginForPayment", "Home",new { planid = 2})" data-toggle="modal" data-target="#mdlLoginpay">Select Plan</a>
+                            </li>
+                            <li>5 Mobile apps</li>
+                            <li>Purchase</li>
+                            <li>Sales</li>
+                            <li>Partywise leakage</li>
+                            <li>Monthly customer ledger</li>
+                            <li>Monthly supplier ledger</li>
+                            <li>Flexible customer rates management</li>
+                            <li>Monthly crates ledger</li>
+                            <li>Leakage analysis</li>
+                            <li>Routewise sales reports</li>
+                            <li>Daily payment collection report</li>
+                            <li>Payment outstanding report</li>
+                            <li>Daily stock reports</li>
+                            <li>Tally integration</li>
+                        </ul>
+                    </div>
+                   
+                </div>
+            </div>
+            <!-- /end single-pricing -->
+            <div class="col-md-3 col-sm-6">
+                <div class="single-pricing">
+                    <div class="pricing-head">
+                        <h4>Premium</h4>
+                    </div>
+                    <div class="pricing-price">
+                        <h3>
+                            &#8377; 3000
+                            <span>6 Months</span>
+                            <span>&nbsp;</span>
+                            <span>Registration &#8377; 2000</span>
+                        </h3>
+                    </div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>
+                                <a id="lfp" class="btn btn-default btn-sm-one" href="@Url.Action("LoginForPayment", "Home",new { planid = 3})" data-toggle="modal" data-target="#mdlLoginpay">Select Plan</a>
+                            </li>
+                            <li>10 Mobile apps</li>
+                            <li>Purchase</li>
+                            <li>Sales</li>
+                            <li>Partywise leakage</li>
+                            <li>Monthly customer ledger</li>
+                            <li>Monthly supplier ledger</li>
+                            <li>Flexible customer rates management</li>
+                            <li>Monthly crates ledger</li>
+                            <li>Leakage analysis</li>
+                            <li>Routewise sales reports</li>
+                            <li>Daily payment collection report</li>
+                            <li>Payment outstanding report</li>
+                            <li>Daily stock reports</li>
+                            <li>Tally integration</li>
+                        </ul>
+                    </div>
+                   
+                </div>
+            </div>
+            <!-- /end single-pricing -->
+            <div class="col-md-3 col-sm-6">
+                <div class="single-pricing">
+                    <div class="pricing-head">
+                        <h4>Ultimate</h4>
+                    </div>
+                    <div class="pricing-price">
+                        <h3>
+                            &#8377; 6000
+                            <span>12 Months</span>
+                            <span>&nbsp;</span>
+                            <span>Registration &#8377; 2000</span>
+                        </h3>
+                    </div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>
+                                <a id="lfp" class="btn btn-default btn-sm-one" href="@Url.Action("LoginForPayment", "Home",new { planid = 4})" data-toggle="modal" data-target="#mdlLoginpay">Select Plan</a>
+                            </li>
+                            <li>Unlimited Mobile apps</li>
+                            <li>Purchase</li>
+                            <li>Sales</li>
+                            <li>Partywise leakage</li>
+                            <li>Monthly customer ledger</li>
+                            <li>Monthly supplier ledger</li>
+                            <li>Flexible customer rates management</li>
+                            <li>Monthly crates ledger</li>
+                            <li>Leakage analysis</li>
+                            <li>Routewise sales reports</li>
+                            <li>Daily payment collection report</li>
+                            <li>Payment outstanding report</li>
+                            <li>Daily stock reports</li>
+                            <li>Tally integration</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+            <!-- /end single-pricing -->
+        </div>
+    </div>
+</section>
+<!-- / end pricing-area -->
+<!-- start contact-area -->
+<section id="contact" class="contact-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h2>Contact us</h2>
+                </div>
+            </div>
+        </div>
+        <!-- /end section-title row -->
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-12">
+                <div class="contact-info">
+                    <div class="col-md-4 col-sm-4">
+                        <div class="single-contact">
+                            <i class="icon-phone"></i>
+                            <h4>Phone</h4>
+                            <p>+91 99230 00063</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="single-contact">
+                            <i class="icon-map-pin"></i>
+                            <h4>Address</h4>
+                            <p>Pune</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="single-contact">
+                            <i class="icon-envelope"></i>
+                            <h4>Email</h4>
+                            <p>sales@manomaysoftwares.com</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /end contact-info -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-12">
+                <form action="#" method="post" class="contact-form">
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-6">
+                            <input type="text" class="form-control" placeholder="Your Name*" required="required">
+                        </div>
+                        <div class="form-group col-md-6 col-sm-6">
+                            <input type="email" class="form-control" placeholder="Your Email*" required="required">
+                        </div>
+                        <div class="form-group col-md-12 col-sm-12">
+                            <textarea placeholder="Your Message*" class="form-control" rows="8" required="required"></textarea>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="action-submit text-center">
+                                <input type="submit" class="btn btn-default btn-contact" value="Send Message">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- /end contact-form -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / end contact-area -->
