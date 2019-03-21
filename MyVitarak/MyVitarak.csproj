@@ -335,6 +335,7 @@
     <Content Include="Views\Action\Hash.cshtml" />
     <Content Include="Views\Home\EstimateCost.cshtml" />
     <Content Include="Views\Home\LoginForPayment.cshtml" />
+    <Content Include="Views\Home\Reg.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
