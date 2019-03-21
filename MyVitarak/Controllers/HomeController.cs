@@ -16,7 +16,12 @@ namespace MyVitarak.Controllers
 {
     public class HomeController : Controller
     {
-        
+
+        public ActionResult Reg()
+        {
+            return View();
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -37,7 +42,7 @@ namespace MyVitarak.Controllers
         {
             try
             {
-                
+
                 JobDbContext2 _db = new JobDbContext2();
                 var result = _db.LoginDetail.SqlQuery(@"exec usp_login 
                 @Email,@password",
@@ -52,18 +57,18 @@ namespace MyVitarak.Controllers
                 }
                 else
                 {
-                    
-                 Session["username"] = data.Email;
-                 Session["RegId"] = data.RegistrationID;
-                 Session["dbname"] = data.DbName;
-                 GetDbSchemaStatus(data.RegistrationID);
-                 return Json("Login Sucessfull");
-                    
+
+                    Session["username"] = data.Email;
+                    Session["RegId"] = data.RegistrationID;
+                    Session["dbname"] = data.DbName;
+                    GetDbSchemaStatus(data.RegistrationID);
+                    return Json("Login Sucessfull");
+
                 }
             }
 
-            
-         catch(Exception ex)
+
+            catch (Exception ex)
             {
                 return Json(ex.Message);
             }
@@ -71,7 +76,7 @@ namespace MyVitarak.Controllers
         }
 
 
-       public void InsertDbschemaInUSerDatabase()
+        public void InsertDbschemaInUSerDatabase()
         {
 
             using (JobDbContext context = new JobDbContext())
@@ -114,7 +119,7 @@ namespace MyVitarak.Controllers
         }
 
 
-       public void updateDbShemaStatus(Int64? regid)
+        public void updateDbShemaStatus(Int64? regid)
         {
             JobDbContext2 _db2 = new JobDbContext2();
             var result = _db2.Database.ExecuteSqlCommand(@"exec Usp_UpdateDbScemaStatus @RegistrationID",
@@ -157,7 +162,7 @@ namespace MyVitarak.Controllers
                     new SqlParameter("@mEmail", rs.Email),
                     new SqlParameter("@mpassword", rs.password),
                     new SqlParameter("@mMobile", rs.Mobile),
-                    new SqlParameter("@mRegistrationDate",DateTime.Now)
+                    new SqlParameter("@mRegistrationDate", DateTime.Now)
                     );
 
                 if (res == 0)
@@ -183,16 +188,16 @@ namespace MyVitarak.Controllers
                 string message = ex.Message;
                 return Json(message);
             }
-            
+
         }
 
         [HttpPost]
         public ActionResult insert_tenant(Tenant rs)
         {
-                       
+
             using (JobDbContext2 context = new JobDbContext2())
             {
-                
+
                 var conn = context.Database.Connection;
                 var connectionState = conn.State;
                 try
@@ -208,12 +213,12 @@ namespace MyVitarak.Controllers
                         cmd.Parameters.Add(new SqlParameter("@misActive", true));
                         cmd.Parameters.Add(new SqlParameter("@misReadOnly", false));
                         cmd.Parameters.Add(new SqlParameter("@mDbName", "testdb"));
-                        cmd.Parameters.Add(new SqlParameter("@isDbSchema",false));
-                        cmd.ExecuteNonQuery();                       
+                        cmd.Parameters.Add(new SqlParameter("@isDbSchema", false));
+                        cmd.ExecuteNonQuery();
 
                     }
 
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -229,7 +234,7 @@ namespace MyVitarak.Controllers
                 return Json("Application deployied sucessfull");
             }
 
-        }     
+        }
 
 
         [HttpPost]
@@ -241,13 +246,13 @@ namespace MyVitarak.Controllers
 
                 var res = _db.Database.ExecuteSqlCommand(@"exec [uspInsertPayment] @mpayment_id,@mregistration_id,@mp_id,@mamount,@mpayment_date",
                     new SqlParameter("@mpayment_id", rs.payment_id),
-                    new SqlParameter("@mregistration_id",rs.registration_id),
+                    new SqlParameter("@mregistration_id", rs.registration_id),
                     new SqlParameter("@mp_id", rs.p_id),
                     new SqlParameter("@mamount", rs.amount),
-                    new SqlParameter("@mpayment_date",DateTime.Now)
+                    new SqlParameter("@mpayment_date", DateTime.Now)
                     );
 
-                               
+
                 if (res == 0)
                 {
                     return Json("need to contact support team");
@@ -268,8 +273,8 @@ namespace MyVitarak.Controllers
         }
 
 
-       
-        public ActionResult EmailCheck(string email="")
+
+        public ActionResult EmailCheck(string email = "")
         {
             try
             {
@@ -318,9 +323,9 @@ namespace MyVitarak.Controllers
                 else
                 {
                     var tt = data.plan_rate + data.registration_rate;
-                    Session["planename"]= data.plan_name;
+                    Session["planename"] = data.plan_name;
                     Session["plandesc"] = data.plan_desc;
-                    Session["regrate"]  = data.registration_rate;
+                    Session["regrate"] = data.registration_rate;
                     Session["planrate"] = data.plan_rate;
                     Session["total"] = tt;
                     Session["pid"] = planid;
@@ -333,7 +338,7 @@ namespace MyVitarak.Controllers
             {
                 return Json(ex.Message);
             }
-           
+
         }
 
         [HttpPost]
