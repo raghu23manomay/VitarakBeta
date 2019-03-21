@@ -17,7 +17,7 @@ namespace MyVitarak.Models
         [Display(Name = "Password")]
         public string password { get; set; }
         public string DbName { get; set; }
-        
+
     }
 
     public partial class Payment
@@ -29,30 +29,37 @@ namespace MyVitarak.Models
         public int p_id { get; set; }
         public DateTime payment_date { get; set; }
         public Decimal amount { get; set; }
-        
+
     }
 
     public partial class MailCheck
     {
         [Key]
         public Int64 RegistrationID { get; set; }
-        public string Email { get; set; }      
+        public string Email { get; set; }
     }
 
     public partial class Registration
     {
-        [Key] 
+        [Key]
         public Int64 RegistrationID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
-        public string password { get; set; }        
+        public string password { get; set; }
         public Int64 Mobile { get; set; }
         public string ContactPerson { get; set; }
         public string SecurityCode { get; set; }
         public bool isactive { get; set; }
         public bool isreadonly { get; set; }
         public string DbName { get; set; }
+
+        public string BusinessName { get; set; }
+        public string ContactPersonMobile { get; set; }
+        public string City { get; set; }
+        public string PinCode { get; set; }
+        public string UserName { get; set; }
+
     }
 
     public partial class RegistrationDetails
@@ -65,7 +72,7 @@ namespace MyVitarak.Models
         public string password { get; set; }
         public string Mobile { get; set; }
         public string ContactPerson { get; set; }
-        
+
     }
 
 
@@ -87,20 +94,20 @@ namespace MyVitarak.Models
         public Int64 TenantID { get; set; }
         public Int64 RegistrationID { get; set; }
         public Boolean isDbSchema { get; set; }
-        
+
     }
 
     public partial class PlanePrice
     {
         [Key]
-        public int plan_id                { get; set; }
-        public string plan_name           { get; set; }
-        public string plan_desc            { get; set; }
-        public decimal registration_rate   { get; set; }
-        public decimal plan_rate           { get; set; }
-        public int isactive                { get; set; }
-        public DateTime? created_date      { get; set; }
-              
+        public int plan_id { get; set; }
+        public string plan_name { get; set; }
+        public string plan_desc { get; set; }
+        public decimal registration_rate { get; set; }
+        public decimal plan_rate { get; set; }
+        public int isactive { get; set; }
+        public DateTime? created_date { get; set; }
+
     }
 
 

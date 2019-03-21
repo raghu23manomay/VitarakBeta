@@ -488,7 +488,6 @@ F:\Manomay\projects\Gitproject\MyVitarak\bin\System.Web.Razor.dll
 F:\Manomay\projects\Gitproject\MyVitarak\bin\System.Web.Webpages.Deployment.dll
 F:\Manomay\projects\Gitproject\MyVitarak\bin\System.Web.Webpages.dll
 F:\Manomay\projects\Gitproject\MyVitarak\bin\System.Web.Webpages.Razor.dll
-F:\Manomay\projects\Gitproject\MyVitarak\bin\payu_bolt.pdb
 F:\Manomay\projects\Gitproject\MyVitarak\bin\System.Web.Razor.xml
 F:\Manomay\projects\Gitproject\MyVitarak\bin\System.Web.Webpages.xml
 F:\Manomay\projects\Gitproject\MyVitarak\bin\System.Web.Webpages.Deployment.xml
@@ -496,7 +495,6 @@ F:\Manomay\projects\Gitproject\MyVitarak\bin\System.Web.Webpages.Razor.xml
 F:\Manomay\projects\Gitproject\MyVitarak\bin\System.Web.Helpers.xml
 F:\Manomay\projects\Gitproject\MyVitarak\bin\System.Web.Mvc.xml
 F:\Manomay\projects\Gitproject\MyVitarak\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-F:\Manomay\projects\Gitproject\MyVitarak\obj\Debug\MyVitarak.csprojAssemblyReference.cache
 F:\Manomay\projects\Gitproject\MyVitarak\obj\Debug\MyVitarak.csproj.CoreCompileInputs.cache
 F:\Manomay\projects\Gitproject\MyVitarak\obj\Debug\MyVitarak.csproj.CopyComplete
 F:\Manomay\projects\Gitproject\MyVitarak\obj\Debug\MyVitarak.dll
