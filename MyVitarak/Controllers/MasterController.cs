@@ -19,8 +19,8 @@ namespace MyVitarak.Controllers
 
         public ActionResult Dashboard()
         {
-             var user = Session["username"];
-            
+            var user = Session["username"];
+
             if (user == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -50,7 +50,7 @@ namespace MyVitarak.Controllers
         {
 
             JobDbContext _db = new JobDbContext();
-           // _db.Database.Connection.ConnectionString = "Data Source=103.67.236.131,4433;Initial Catalog="+Session["dbname"].ToString()+";User ID=sa;Password=Sunil@123";
+            // _db.Database.Connection.ConnectionString = "Data Source=103.67.236.131,4433;Initial Catalog="+Session["dbname"].ToString()+";User ID=sa;Password=Sunil@123";
             var pageIndex = (page ?? 1);
             const int pageSize = 11;
             int totalCount = 11;
@@ -954,7 +954,7 @@ namespace MyVitarak.Controllers
             }
             var itemsAsIPagedList = new StaticPagedList<OpeningBalanceDeatils>(result, pageIndex, pageSize, totalCount);
             return itemsAsIPagedList;
-                       
+
         }
 
 
@@ -979,7 +979,7 @@ namespace MyVitarak.Controllers
                 return Json("Opening Balance Added Sucessfully");
             }
             catch (Exception e)
-            
+
 
             {
                 var messege = e.Message;
@@ -1220,7 +1220,7 @@ namespace MyVitarak.Controllers
             }
 
         }
-        
+
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult SaveSupplierExcelData(List<SupplierMaster> SaveSupplierData)
@@ -1701,8 +1701,8 @@ namespace MyVitarak.Controllers
                     if (connectionState != ConnectionState.Closed) conn.Close();
                 }
 
-                TempData["Data"] = dt;
-                Download();
+                //TempData["Data"] = dt;
+                //Download();
                 return View(dt);
             }
 
@@ -1748,8 +1748,8 @@ namespace MyVitarak.Controllers
                     if (connectionState != ConnectionState.Closed) conn.Close();
                 }
 
-                TempData["Data"] = dt;
-                Download();
+                //TempData["Data"] = dt;
+                //Download();
                 return View("Partial_CustomerRates", dt);
             }
 
@@ -1984,7 +1984,7 @@ namespace MyVitarak.Controllers
 
 
 
-        public ActionResult LoadDataCustomer(int? page, String Name,int? area)
+        public ActionResult LoadDataCustomer(int? page, String Name, int? area)
         {
             var user = Session["username"];
             if (user == null)
@@ -1992,7 +1992,7 @@ namespace MyVitarak.Controllers
                 return RedirectToAction("Index", "Home");
             }
             StaticPagedList<CustomerDetails> itemsAsIPagedList;
-            itemsAsIPagedList = GridListCustomer(page, Name,area);
+            itemsAsIPagedList = GridListCustomer(page, Name, area);
 
             Session["MasterName"] = "CustomerMaster";
             return Request.IsAjaxRequest()
@@ -2000,7 +2000,7 @@ namespace MyVitarak.Controllers
                     : View("Partial_CustomerGridList", itemsAsIPagedList);
         }
 
-        public StaticPagedList<CustomerDetails> GridListCustomer(int? page, String Name,int? area)
+        public StaticPagedList<CustomerDetails> GridListCustomer(int? page, String Name, int? area)
         {
 
             JobDbContext _db = new JobDbContext();
@@ -2043,7 +2043,7 @@ namespace MyVitarak.Controllers
             {
                 DataTable dt = new DataTable();
                 DataSet ds = new DataSet();
-                if(date==null)
+                if (date == null)
                 {
                     date = System.DateTime.Now;
                 }
@@ -2073,8 +2073,8 @@ namespace MyVitarak.Controllers
                     if (connectionState != ConnectionState.Closed) conn.Close();
                 }
                 //return Redirect("Home/SalesOrder");
-                TempData["Data"] = dt;
-                DownloadSalesExcelSheet();
+                //TempData["Data"] = dt;
+                //DownloadSalesExcelSheet();
 
                 return View(dt);
             }
@@ -2118,9 +2118,9 @@ namespace MyVitarak.Controllers
                 {
                     if (connectionState != ConnectionState.Closed) conn.Close();
                 }
-                //return Redirect("Home/SalesOrder");
-                TempData["Data"] = dt;
-                DownloadSalesExcelSheet();
+
+                //TempData["Data"] = dt;
+                //DownloadSalesExcelSheet();
                 return PartialView("Partial_LoadSalesOrder", dt);
                 // return View(dt);
             }
@@ -2156,7 +2156,7 @@ namespace MyVitarak.Controllers
         public ActionResult CustomerCopyRates()
         {
             ViewData["CustomerRateCopyList"] = binddropdown("CustomerRateCopyList", 0);
-            
+
             ViewData["ProductList"] = binddropdown("ProductList", 0);
 
             JobDbContext _db = new JobDbContext();
@@ -2208,16 +2208,16 @@ namespace MyVitarak.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult CopyRate(int[] copyrate,int? CustomerId,int? ProductId,DateTime? pdate)
+        public ActionResult CopyRate(int[] copyrate, int? CustomerId, int? ProductId, DateTime? pdate)
         {
 
             JobDbContext _db = new JobDbContext();
             try
             {
-                                       
+
                 foreach (var item in copyrate)
                 {
-                    
+
                     var res = _db.Database.ExecuteSqlCommand(@"exec CustomerRateCopy @CustomerId,@ProductId,@CheckCustomerID,@pdate",
                     new SqlParameter("@CustomerId", CustomerId),
                     new SqlParameter("@ProductId", ProductId),
@@ -2225,7 +2225,7 @@ namespace MyVitarak.Controllers
                     new SqlParameter("@pdate", pdate)
 
                    );
-                }               
+                }
 
                 return Json("Data Copied Sucessfully");
             }
