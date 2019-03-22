@@ -310,10 +310,10 @@ namespace MyVitarak.Controllers
             try
             {
                 JobDbContext2 _db = new JobDbContext2();
-                var result = _db.PlanePrice.SqlQuery(@"exec Usp_GetplanDetails 
-                @plan_id",
-                    new SqlParameter("@plan_id", planid)).ToList<PlanePrice>();
-                PlanePrice data = new PlanePrice();
+                var result = _db.PlanRate.SqlQuery(@"exec Usp_GetplanDetailById 
+                @PlanID",
+                    new SqlParameter("@PlanID", planid)).ToList<PlanRate>();
+                PlanRate data = new PlanRate();
                 data = result.FirstOrDefault();
 
                 if (data == null)
@@ -322,13 +322,12 @@ namespace MyVitarak.Controllers
                 }
                 else
                 {
-                    var tt = data.plan_rate + data.registration_rate;
-                    Session["planename"] = data.plan_name;
-                    Session["plandesc"] = data.plan_desc;
-                    Session["regrate"] = data.registration_rate;
-                    Session["planrate"] = data.plan_rate;
-                    Session["total"] = tt;
-                    Session["pid"] = planid;
+                    var tt = data.PlanAmount + data.OTIAmount;
+                    Session["PlanName"] = data.PlanName;
+                    Session["PlanDesc"] = data.PlanDesc;
+                    Session["PlanAmount"] = data.PlanAmount; 
+                    Session["Total"] = tt;
+                    Session["PlanID"] = data.PlanID;
                     return View();
 
                 }
@@ -373,6 +372,17 @@ namespace MyVitarak.Controllers
                 return Json(ex.Message);
             }
 
+        }
+         
+        public ActionResult PlanRate(int id=0 )
+        {
+            JobDbContext2 _db = new JobDbContext2();
+            var result = _db.PlanRate.SqlQuery(@"exec usp_GetPlanRate").ToList<PlanRate>();
+            IEnumerable<PlanRate> data = result; 
+
+            return Request.IsAjaxRequest()
+                   ? (ActionResult)PartialView("PlanRate",data)
+                   : View("PlanRate",data);
         }
     }
 }

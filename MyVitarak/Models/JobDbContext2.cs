@@ -17,7 +17,7 @@ namespace MyVitarak.Models
         {
         }
 
-        public DbSet<PlanePrice> PlanePrice { get; set; }
+        public DbSet<PlanRate> PlanRate { get; set; }
         public DbSet<Login> LoginDetail { get; set; }
         public DbSet<RegistrationDetails> RegistrationDetails { get; set; }
         public DbSet<CheckDbSchema> CheckDbSchema { get; set; }

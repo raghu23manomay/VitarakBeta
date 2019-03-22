@@ -274,6 +274,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AllMaster.cs" />
+    <Compile Include="Models\HomeModels.cs" />
     <Compile Include="Models\JobDbContext.cs" />
     <Compile Include="Models\JobDbContext2.cs" />
     <Compile Include="Models\Login.cs" />
@@ -337,6 +338,7 @@
     <Content Include="Views\Home\LoginForPayment.cshtml" />
     <Content Include="Views\Home\Reg.cshtml" />
     <Content Include="Views\Shared\_TempLayout.cshtml" />
+    <Content Include="Views\Home\PlanRate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
