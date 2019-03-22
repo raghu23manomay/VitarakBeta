@@ -337,6 +337,7 @@
     <Content Include="Views\Home\LoginForPayment.cshtml" />
     <Content Include="Views\Home\Reg.cshtml" />
     <Content Include="Views\Shared\_TempLayout.cshtml" />
+    <Content Include="Views\Home\_PartialLogin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

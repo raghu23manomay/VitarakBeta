@@ -32,7 +32,13 @@ namespace MyVitarak.Controllers
             return View();
         }
 
+
         public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult _PartialLogin()
         {
             return View();
         }
@@ -293,6 +299,68 @@ namespace MyVitarak.Controllers
                 {
 
                     return Json("Email id already exist");
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+
+        }
+
+                     
+        public ActionResult MobileCheck(string Mobile = "")
+        {
+            try
+            {
+                JobDbContext2 _db = new JobDbContext2();
+                var result = _db.MailCheck.SqlQuery(@"exec Usp_CheckMobileExistance 
+                @Mobile",
+                    new SqlParameter("@Mobile", Mobile)).ToList<MailCheck>();
+                MailCheck data = new MailCheck();
+                data = result.FirstOrDefault();
+
+                if (data == null)
+                {
+                   return Json("");
+                }
+                else
+                {
+
+                    return Json("Mobile no already exist");
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+
+        }
+
+
+        public ActionResult UserNameCheck(string UserName = "")
+        {
+            try
+            {
+                JobDbContext2 _db = new JobDbContext2();
+                var result = _db.MailCheck.SqlQuery(@"exec Usp_CheckMobileExistance 
+                @UserName",
+                    new SqlParameter("@UserName", UserName)).ToList<MailCheck>();
+                MailCheck data = new MailCheck();
+                data = result.FirstOrDefault();
+
+                if (data == null)
+                {
+                    return Json("");
+                }
+                else
+                {
+
+                    return Json("User Name already exist");
 
                 }
             }

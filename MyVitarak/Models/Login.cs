@@ -37,6 +37,7 @@ namespace MyVitarak.Models
         [Key]
         public Int64 RegistrationID { get; set; }
         public string Email { get; set; }
+        public string mobile { get; set; }
     }
 
     public partial class Registration

@@ -1,120 +1,213 @@
-﻿
-@model MyVitarak.Models.Registration
+﻿@model MyVitarak.Models.Registration
 @{
-    Layout = null;
+                /**/
+
+                ViewBag.Title = "Reg";
+                Layout = "~/Views/Shared/_TempLayout.cshtml";
 }
+
+
+<div class="modal fade bs-example-modal-md" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md" role="document">
+        <div id="myModal12" class="modal-content" style="margin-top:90px;">
+
+        </div>
+    </div>
+</div>
+
 <script src="~/Scripts/jquery-1.12.4.min.js"></script>
 <style>
-    .emailred
-    {
-        color:red
+    .emailred {
+        color: red
     }
 
     .emailgreen {
         color: green;
     }
-
 </style>
-<div class="modal-header">
-    <button type="button"class="pull-right" data-dismiss="modal" aria-label="Close" onclick="frmclose();" style="background-color: #ffffff;border: none;font-size:21px;"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user-plus marginRight15px" aria-hidden="true"></i>Registration</h4>
-</div>
-@using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-horizontal", id = "frmregistration" }))
-{
-    <div class="modal-body">
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label for="exampleInputName2" class="col-sm-3 control-label">Name</label>
-                <div class="col-sm-9">
-                    <p class="hidden" id="regplanid">@Session["pid"]</p>
-                    @Html.TextBoxFor(a => a.Name, new { @class = "form-control", placeholder = "Enter Name", title = "Name", @id = "Name" })
-                    <p class="hidden" style="color: maroon;" id="valname">Name field should not empty</p>
+<div id="grid">
+    <div class="container" style="margin-top:80px;">
+        <div class="alert alert-warning" role="alert">
+            <strong>Already Registered?</strong> <a href="#" onclick="Loginmodalcall();return false" class="alert-link">Click here to login</a>
+        </div>
+        <div class="modal-header">
+
+            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user-plus marginRight15px" aria-hidden="true"></i>Registration</h4>
+        </div>
+        <br>
+        @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-horizontal", id = "frmregistration" }))
+        {
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputName2" class="col-sm-3 control-label  left">Name</label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(a => a.Name, new { @class = "form-control", placeholder = "Enter Name", title = "Name", @id = "Name" })
+                            <p class="hidden" style="color: maroon;" id="valname">Name field should not empty</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="customerAddress" class="col-sm-3 control-label left">Business Name</label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(a => a.BusinessName, new { @class = "form-control", placeholder = "Enter BusinessName", title = "BusinessName", @id = "BusinessName" })
+                            <p class="hidden" style="color: maroon;" id="valBusinessName">Please Enter Business Name</p>
+                        </div>
+                    </div>
 
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="customerAddress" class="col-sm-3 control-label">Address</label>
-                <div class="col-sm-9">
-                    @Html.TextAreaFor(a => a.Address, new { @class = "form-control", placeholder = "Enter Address", title = "Address", @id = "Address" })
-                    <p class="hidden" style="color: maroon;" id="valaddress">Address field should not empty</p>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="customerAddress" class="col-sm-3 control-label left">Address</label>
+                            <div class="col-sm-9">
+                                @Html.TextAreaFor(a => a.Address, new { @class = "form-control", placeholder = "Enter Address", title = "Address", @id = "Address" })
+                                <p class="hidden" style="color: maroon;" id="valaddress">Please Enter Address</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="col-sm-6">
 
-            <div class="form-group">
-                <label for="exampleInputName2" class="col-sm-3 control-label">Mobile No.</label>
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(a => a.Mobile, new { @class = "form-control", placeholder = "Enter Mobile", title = "Mobile", @id = "Mobile" })
-                    <p class="hidden" style="color: maroon;" id="valmobile">Mobile field should not empty</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputName2" class="col-sm-3 control-label">Contact Person</label>
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(a => a.ContactPerson, new { @class = "form-control", placeholder = "Enter Contact Person", title = "ContactPerson", @id = "ContactPerson" })
-                    <p class="hidden" style="color: maroon;" id="valcontactperson">Contact person field should not empty</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputName2" class="col-sm-3 control-label">Email</label>
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(a => a.Email, new { @class = "form-control", placeholder = "Enter Email", title = "Email", @id = "Email" })
-                    <p class="hidden" id="EmailCheckExist"></p>
-                    <p class="hidden" style="color: maroon;" id="valemail">Email field should not empty</p>
-
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputName2" class="col-sm-3 control-label">Password</label>
-                <div class="col-sm-9">
-                    @Html.PasswordFor(a => a.password, new { @class = "form-control", placeholder = "Enter password", title = "password", @id = "password" })
-                    <p class="hidden" style="color: maroon;" id="valpassword">Password field should not empty</p>
-
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputName2" class="col-sm-3 control-label">Confirm Password</label>
-                <div class="col-sm-9">
-                    @Html.PasswordFor(a => a.password, new { @class = "form-control", placeholder = "Enter password", title = "password", @id = "confirmpassword" })
-                    <p class="hidden" style="color: maroon;" id="valconfirmpassword">Confirm password field should not empty</p>
-                    <p class="hidden" style="color: maroon;" id="valpasserror">Password not match</p>
+                    <div class="form-group">
+                        <label for="exampleInputName2" class="col-sm-3 control-label left">Mobile No.</label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(a => a.Mobile, new { @class = "form-control", placeholder = "Enter Mobile", title = "Mobile", @id = "Mobile" })
+                            <p class="hidden" id="CheckMobileExist"></p>
+                            <p class="hidden" style="color: maroon;" id="valmobile">Please Enter Mobile Number</p>
+                        </div>
+                    </div>
 
                 </div>
             </div>
 
-            @*<div class="form-group">
-            <label for="exampleInputName2" class="col-sm-3 control-label">Security Code</label>
-            <div class="col-sm-9">
-                @Html.TextBoxFor(a => a.SecurityCode, new { @class = "form-control", placeholder = "Enter Security Code", title = "SecurityCode", @id = "SecurityCode" })
-            </div>
-        </div>*@
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputName2" class="col-sm-3 control-label left">City</label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(a => a.City, new { @class = "form-control", placeholder = "Enter City", title = "City", @id = "City" })
+                            <p class="hidden" style="color: maroon;" id="valmobile">Please Select City Name</p>
+                        </div>
+                    </div>
+                </div>
 
-        </form>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputName2" class="col-sm-3 control-label left">Zip Code</label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(a => a.PinCode, new { @class = "form-control", placeholder = "Enter PinCode", title = "PinCode", @id = "PinCode" })
+                            <p class="hidden" style="color: maroon;" id="valmobile">Please Enter Zip Code</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputName2" class="col-sm-3 control-label  left">Contact Person</label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(a => a.ContactPerson, new { @class = "form-control", placeholder = "Enter Contact Person", title = "ContactPerson", @id = "ContactPerson" })
+                            <p class="hidden" style="color: maroon;" id="valcontactperson">Please Enter Contact Person</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="customerAddress" class="col-sm-3 control-label left">Contact Person Mobile</label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(a => a.ContactPersonMobile, new { @class = "form-control", placeholder = "Enter ContactPersonMobile", title = "ContactPersonMobile", @id = "ContactPersonMobile" })
+                            <p class="hidden" style="color: maroon;" id="valmobile">Please Enter Contact Person Mobile Number</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="customerAddress" class="col-sm-3 control-label left">User Name</label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(a => a.UserName, new { @class = "form-control", placeholder = "Enter UserName", title = "UserName", @id = "UserName" })
+                            <p class="hidden" id="CheckUserNameExist"></p>
+                            <p class="hidden" style="color: maroon;" id="valmobile">Please Enter User Name</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputName2" class="col-sm-3 control-label  left">Email</label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(a => a.Email, new { @class = "form-control", placeholder = "Enter Email", title = "Email", @id = "Email" })
+                            <p class="hidden" id="EmailCheckExist"></p>
+                            <p class="hidden" style="color: maroon;" id="valemail">Please Enter Email Id</p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputName2" class="col-sm-3 control-label  left">Password</label>
+                        <div class="col-sm-9">
+                            @Html.PasswordFor(a => a.password, new { @class = "form-control", placeholder = "Enter password", title = "password", @id = "password" })
+                            <p class="hidden" style="color: maroon;" id="valpassword">Please Enter Password </p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputName2" class="col-sm-3 control-label  left">Confirm Password</label>
+                        <div class="col-sm-9">
+                            @Html.PasswordFor(a => a.password, new { @class = "form-control", placeholder = "Enter password", title = "password", @id = "confirmpassword" })
+                            <p class="hidden" style="color: maroon;" id="valconfirmpassword">Please Confirm Your password</p>
+                            <p class="hidden" style="color: maroon;" id="valpasserror">Password not match</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+                       
+        </div>
+            <div class="modal-footer" style="background-color: #f0f4f7;">
+                <div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;background-color:azure;"><img src='~/images/demo_wait.gif' width="64" height="64" /><br><b>Loading..</b></div>
+                <button type="button" class="btn btn-success" onclick="Registration();">Submit</button>
+                <button type="button" class="btn btn-warning" onclick="frmclose();">close</button>
+            </div>
+        }
     </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-success" onclick="Registration();">Submit</button>        
-        <button type="button" class="btn btn-warning" onclick="frmclose();">close</button>
     </div>
-}
 
     <script>
 
-
-        function frmclose()
-        {
-            $("#myModal .close").click()
-            location.reload();
-        }
-
-        $('#frmregistration').on("submit", function (e) {
-            e.preventDefault();
-            alert('hi');
-
-        });
-
         $(document).ready(function () {
-                     
-                
+            $(document).ajaxStart(function () {
+                $("#wait").css("display", "block");
+            });
+            $(document).ajaxComplete(function () {
+                $("#wait").css("display", "none");
+            });
+
         });
 
         $('#Email').on('change', function () {
@@ -128,11 +221,9 @@
                 {
                     email: $("#Email").val()
                 },
-                success: function (da)
-                {
+                success: function (da) {
                     $('#EmailCheckExist').html(da);
-                    if ($('#EmailCheckExist').text() == 'Email id is available')
-                    {
+                    if ($('#EmailCheckExist').text() == 'Email id is available') {
                         $("#EmailCheckExist").removeClass("hidden");
                         $("#EmailCheckExist").removeClass("emailred")
                         $("#EmailCheckExist").addClass("emailgreen");
@@ -144,32 +235,103 @@
                         $("#EmailCheckExist").addClass("emailred");
                         $("#valemail").addClass("hidden");
                     }
-                  },
+                },
 
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
 
                     alert(textStatus);
                 }
-            });                 
+            });
 
         });
-                    
 
 
-        //============================================== LoginPaymet modal call ========================================================== 
+
+        $('#Mobile').on('change', function () {
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Home/MobileCheck',
+
+                data:
+                {
+                    Mobile: $("#Mobile").val()
+                },
+                success: function (da) {
+                    $('#CheckMobileExist').html(da);
+                    if ($('#CheckMobileExist').text() == 'Email id is available') {
+                      $("#valMobile").addClass("hidden");
+                    }
+                    else {
+                        $("#CheckMobileExist").removeClass("hidden");
+                        $("#CheckMobileExist").removeClass("emailgreen");
+                        $("#CheckMobileExist").addClass("emailred");
+                        $("#valMobile").addClass("hidden");
+                    }
+                },
+             error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                    alert(textStatus);
+                }
+            });
+
+        });
+
+
+
+
+
+
+        $('#UserName').on('change', function () {
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Home/UserNameCheck',
+
+                data:
+                {
+                    UserName: $("#UserName").val()
+                },
+                success: function (da) {
+                    $('#CheckUserNameExist').html(da);
+                    if ($('#CheckUserNameExist').text() == 'Email id is available') {
+                        $("#CheckUserNameExist").removeClass("hidden");
+                        $("#CheckUserNameExist").removeClass("emailred")
+                        $("#CheckUserNameExist").addClass("emailgreen");
+                        $("#valUserName").addClass("hidden");
+                    }
+                    else {
+                        $("#CheckUserNameExist").removeClass("hidden");
+                        $("#CheckUserNameExist").removeClass("emailgreen");
+                        $("#CheckUserNameExist").addClass("emailred");
+                        $("#valUserName").addClass("hidden");
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                    alert(textStatus);
+                }
+            });
+
+        });
+
+
+        //============================================== LoginPaymet modal call ==========================================================
 
         function Loginmodalcall() {
 
-            var TeamDetailPostBackURL = '/Home/LoginForPayment';
+            var TeamDetailPostBackURL = '/Home/Login';
 
             $.ajax({
                 type: "GET",
                 url: TeamDetailPostBackURL,
                 contentType: "application/json; charset=utf-8",
-                data: { planid: $("#regplanid").text()},
+                data: {  },
                 datatype: "json",
                 success: function (data) {
-                    $('#mdlLoginpay12').html(data);
+                    $('#grid').html(data);
 
                 },
                 error: function () {
@@ -179,7 +341,7 @@
 
         }
 
-        //============================================== Estimate modal call ========================================================== 
+        //============================================== Estimate modal call ==========================================================
 
         function callestimate() {
 
@@ -203,10 +365,10 @@
         }
 
         function Registration() {
-             
+
 
             if ($("#Name").val() == "") {
-                
+
                 $("#valname").removeClass("hidden");
                 $("#valaddress").addClass("hidden");
                 $("#valemail").addClass("hidden");
@@ -214,7 +376,7 @@
                 $("#valconfirmpassword").addClass("hidden");
                 $("#valcontactperson").addClass("hidden");
                 $("#valmobile").addClass("hidden");
-                   
+
                 return false;
             }
             else if ($("#Address").val() == "") {
@@ -257,7 +419,7 @@
                 $("#valmobile").addClass("hidden");
                 return false;
             }
-            
+
             else if ($("#password").val() == "") {
                 $("#valpassword").removeClass("hidden");
                 $("#valemail").addClass("hidden");
@@ -289,14 +451,13 @@
                 $("#valmobile").addClass("hidden");
                 return false;
             }
-            else if ($("#EmailCheckExist").text() == "Email id already exist")
-            {
+            else if ($("#EmailCheckExist").text() == "Email id already exist") {
 
                 return false;
             }
-           
-           
-           
+
+
+
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -315,14 +476,13 @@
                 },
                 success: function (da) {
                     alert(da);
-                    if (da == 'Registration Sucessfull')
-                    {
+                    if (da == 'Registration Sucessfull') {
                         $("#myModal .close").click()
                         location.reload();
                         //callestimate();
-                        
+
                     }
-                    
+
                 },
 
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -334,5 +494,7 @@
             return false;
         }
     </script>
+
+
 
 
