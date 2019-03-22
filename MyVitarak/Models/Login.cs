@@ -96,20 +96,6 @@ namespace MyVitarak.Models
         public Int64 RegistrationID { get; set; }
         public Boolean isDbSchema { get; set; }
 
-    }
-
-    public partial class PlanePrice
-    {
-        [Key]
-        public int plan_id { get; set; }
-        public string plan_name { get; set; }
-        public string plan_desc { get; set; }
-        public decimal registration_rate { get; set; }
-        public decimal plan_rate { get; set; }
-        public int isactive { get; set; }
-        public DateTime? created_date { get; set; }
-
-    }
-
+    } 
 
 }
