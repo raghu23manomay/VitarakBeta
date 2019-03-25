@@ -1,136 +1,177 @@
 ﻿
 @model MyVitarak.Models.Login
 @{
-    Layout = null;
+    
+    Layout = "~/Views/Shared/_TempLayout.cshtml";
 }
+@*<script src="~/bootstrap-notify-master/bootstrap-notify.min.js"></script>*@
 <script src="~/Scripts/jquery-1.12.4.min.js"></script>
-<div class="modal-header">
-    <button type="button" class="pull-right" data-dismiss="modal" aria-label="Close" onclick="frmclose();" style="background-color: #ffffff;border: none;font-size:21px;"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user-plus marginRight15px" aria-hidden="true"></i> Login</h4>
-</div>
-
-
-@using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-horizontal", id = "frmloginmodal" }))
-{
-<div class="modal-body">
-    <div class="form-group">
-        <label for="exampleInputName1" class="col-sm-3 control-label">User Name</label>
-        <div class="col-sm-9">
-            @Html.TextBoxFor(a => a.Email, new { @class = "form-control", placeholder = "Enter User Name", title = "UserName", @id = "username" })
+<div id="grid">
+ <div class="container" style="margin-top:80px;" >
+        <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user-plus marginRight15px" aria-hidden="true"></i> Login</h4>
         </div>
-    </div>
+        @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-horizontal", id = "frmloginmodal" }))
+        {
+            <div class="modal-body">
 
-    <div class="form-group">
-        <label for="exampleInputName2" class="col-sm-3 control-label">Password</label>
-        <div class="col-sm-9">
-            @Html.PasswordFor(a => a.password, new { @class = "form-control", placeholder = "Enter Password", title = "Password", @id = "password" })
-        </div>
-    </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="exampleInputName1" class="col-sm-3 control-label">User Name</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(a => a.UserName, new { @class = "form-control", placeholder = "Enter User Name", title = "UserName", @id = "username" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="exampleInputName2" class="col-sm-3 control-label">Password</label>
+                            <div class="col-sm-9">
+                                @Html.PasswordFor(a => a.password, new { @class = "form-control", placeholder = "Enter Password", title = "Password", @id = "password" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <p class="pull-left" id="error" style="color:brown;margin-top:-28px;"></p>
-    <div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;background-color:azure;"><img src='~/images/demo_wait.gif' width="64" height="64" /><br><b>Loading..</b></div>
-
-    <div class="modal-footer" style="margin-top:18px;">
-
-        <button id="btnlogin" type="submit" class="btn btn-success">Submit</button>
-        <button id="btnregister" type="submit" class="btn btn-info" onclick="RegistrationModal();">Register</button>
-        @*<button id="btnRegister" href="@Url.Action("Registration", "Home")" data-toggle="modal" data-target="#mdlRegister" type="button" class="btn btn-info">Register</button>*@
 
 
-    </div>
-</div>
-}
 
-    <div class="modal fade bs-example-modal-md" id="registration" tabindex="5" role="dialog" aria-labelledby="mySmallModalLabel">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content" style="margin-top:90px;">
 
+                <p class="pull-left" id="error" style="color:brown;margin-top: 38px;margin-left: 20px;"></p>
+                <div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;background-color:azure;"><img src='~/images/demo_wait.gif' width="64" height="64" /><br><b>Loading..</b></div>
+
+                <div class="modal-footer" style="margin-top:18px;">
+
+                    <button id="btnlogin" type="button" class="btn btn-success">Submit</button>
+                    <button id="btnregister" type="button" class="btn btn-info" onclick="RegistrationModal();">Register</button>
+                    @*<button id="btnRegister" href="@Url.Action("Registration", "Home")" data-toggle="modal" data-target="#mdlRegister" type="button" class="btn btn-info">Register</button>*@
+
+
+                </div>
             </div>
-        </div>
+        }
+
     </div>
+</div>
 
 
-    <script>
 
-        function frmclose() {
-            $("#myModal .close").click()
-            location.reload();
-        }
+<script>
 
-        $(document).ready(function () {
-            $(document).ajaxStart(function () {
-                $("#wait").css("display", "block");
-            });
-            $(document).ajaxComplete(function () {
-                $("#wait").css("display", "none");
-            });
+    function frmclose() {
+        $("#myModal .close").click()
+        location.reload();
+    }
+
+    $(document).ready(function () {
+        $(document).ajaxStart(function () {
+            $("#wait").css("display", "block");
+        });
+        $(document).ajaxComplete(function () {
+            $("#wait").css("display", "none");
         });
 
-        $('#frmloginmodal').on("submit", function (e) {
-            e.preventDefault();
-            login();
-        });
-
-
-
-
-        //============================================== Registration modal call ========================================================== 
-
-        function RegistrationModal() {
-
-            var TeamDetailPostBackURL = '/Home/Registration';
+        var url = "/Master/Dashboard";
+        $('#btnlogin').on('click', function (e) {
 
             $.ajax({
-                type: "GET",
-                url: TeamDetailPostBackURL,
-                contentType: "application/json; charset=utf-8",
-                data: {},
-                datatype: "json",
-                success: function (data) {
-                    $('#myModal12').html(data);
-
-                },
-                error: function () {
-                    alert("Dynamic content load failed.");
-                }
-            });
-
-        }
-
-        function login() {
-            var url = "/Master/Dashboard";
-
-            $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                url: '/Home/Login',
-
-                data:
-                {
-
-                    Email: $("#username").val(),
+                type: "POST",
+                cache: false,
+                url: "/Home/Login",
+                data: {
+                    UserName: $("#username").val(),
                     password: $("#password").val()
-
                 },
                 success: function (da) {
-                    // alert(da);
                     if (da == "Login Sucessfull") {
                         $('#error').html(da);
                         window.location.href = url;
                     }
-                    else
-                    {
+                    else {
                         $('#error').html(da);
                     }
+
                 },
-
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-
-                    alert(textStatus);
+                error: function (errorData) {
                 }
             });
 
-            return false;
-        }
+            return true;
+        });
 
-    </script>
+
+
+    });
+
+    //$('#frmloginmodal').on("submit", function (e) {
+    //    e.preventDefault();
+    //    login();
+    //});
+
+
+
+
+    //============================================== Registration modal call ==========================================================
+
+    function RegistrationModal() {
+
+        var TeamDetailPostBackURL = '/Home/Registration';
+
+        $.ajax({
+            type: "GET",
+            url: TeamDetailPostBackURL,
+            contentType: "application/json; charset=utf-8",
+            data: {},
+            datatype: "json",
+            success: function (data) {
+                $('#grid').html(data);
+
+            },
+            error: function () {
+                alert("Dynamic content load failed.");
+            }
+        });
+
+    }
+
+            //function login() {
+
+            //    debugger;
+            //    var url = "/Master/Dashboard";
+
+            //    $.ajax({
+            //        type: 'POST',
+            //        dataType: 'json',
+            //        url: '/Home/Login',
+
+            //        data:
+            //        {
+
+            //            Email: $("#username").val(),
+            //            password: $("#password").val()
+
+            //        },
+            //        success: function (da) {
+            //            // alert(da);
+            //            if (da == "Login Sucessfull") {
+            //                $('#error').html(da);
+            //                window.location.href = url;
+            //            }
+            //            else {
+            //                $('#error').html(da);
+            //            }
+            //        },
+
+            //        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            //            alert(textStatus);
+            //        }
+            //    });
+
+            //    return false;
+            //}
+
+</script>

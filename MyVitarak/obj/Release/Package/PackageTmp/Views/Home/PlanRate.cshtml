@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MyVitarak.Models.PlanRate>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-title text-center">
+                <h2>Our Pricing</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-pricing">
+                        <div class="pricing-head">
+                            <h4>@item.PlanName</h4>
+                        </div>
+                        <div class="pricing-price">
+                            <h3>
+                                &#8377; @item.PlanAmount
+                                <span>@item.PlanDesc</span>
+                                <span>&nbsp;</span>
+                                <span>Registration &#8377; @item.OTIAmount</span>
+                            </h3>
+                        </div>
+                        <div class="pricing-details">
+                            <ul>
+                                <li>
+                                    <a id="lfp" class="btn btn-default btn-sm-one" href="@Url.Action("Registration", "Home", new { planid = item.PlanID })" >Select Plan</a>
+                                </li>
+
+                                <li>2 Mobile apps</li>
+                                <li>Purchase</li>
+                                <li>Sales</li>
+                                <li>Partywise leakage</li>
+                                <li>Monthly customer ledger</li>
+                                <li>Monthly supplier ledger</li>
+                                <li>Flexible customer rates management</li>
+                                <li>Monthly crates ledger</li>
+                                <li>Leakage analysis</li>
+                                <li>Routewise sales reports</li>
+                                <li>Daily payment collection report</li>
+                                <li>Payment outstanding report</li>
+                                <li>Daily stock reports</li>
+                                <li>Tally integration</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>
