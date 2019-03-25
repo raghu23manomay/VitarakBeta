@@ -8,3 +8,8 @@
 *.ide
 *.ide-shm
 *.ide-wal
+/MyVitarak/Scripts/autocomplete/license.txt
+/MyVitarak/Properties/PublishProfiles/FolderProfile1.pubxml.user
+/MyVitarak/Properties/PublishProfiles/FolderProfile1.pubxml
+*.dll
+
