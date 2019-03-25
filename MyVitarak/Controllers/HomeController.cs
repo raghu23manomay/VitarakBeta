@@ -95,17 +95,19 @@ namespace MyVitarak.Controllers
             
             using (JobDbContext context = new JobDbContext())
             {
-                var c=context.Database.BeginTransaction();
+              //  var c=context.Database.BeginTransaction();
                
                 var conn = context.Database.Connection;
                 var connectionState = conn.State;
-                //var temp = "";
-
+               
                 try
                 {
                     var script = System.IO.File.ReadAllText(Server.MapPath(@"~/Scripts/DBSchema.sql"));
                     IEnumerable<string> commandStrings = Regex.Split(script, @"^\s*GO\s*$", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-
+                    
+                    // Start a local transaction.
+                    
+                   
                     if (connectionState != ConnectionState.Open) conn.Open();
                     foreach (string commandString in commandStrings)
                     {
@@ -119,12 +121,12 @@ namespace MyVitarak.Controllers
                             }
                         }
                     }
-                    c.Commit();
+                   // c.Commit();
                 }
                 catch (Exception ex)
                 {
                     // error handling
-                    c.Rollback();
+                  //  c.Rollback();
                     var messege = ex.Message;
 
                 }
@@ -165,9 +167,11 @@ namespace MyVitarak.Controllers
             try
             {
                 if (planid > 0)
-                {
-
-
+                { 
+                    if(Session["UserID"]!=null)
+                    {
+                        Response.Redirect("PaymentCheckout",false);
+                    }
                     JobDbContext2 _db = new JobDbContext2();
                     var result = _db.PlanRate.SqlQuery(@"exec Usp_GetplanDetailById 
                 @PlanID",
@@ -584,6 +588,12 @@ namespace MyVitarak.Controllers
                     new SqlParameter("@RegistrationId", Session["UserID"])).ToList<RegistrationDetails>();
             RegistrationDetails  data = result.FirstOrDefault();
 
+            Session["CName"] = data.Name;
+            Session["BusinessName"] = data.BusinessName.Replace(" ", ""); ;
+            Session["ContactPerson"] = data.ContactPerson;
+            Session["Address"] = data.Address;
+            Session["Mobile"] = data.Mobile;
+            Session["UserName"] = data.UserName;
             return Request.IsAjaxRequest()
                    ? (ActionResult)PartialView("Profile", data)
                    : View("Profile", data);

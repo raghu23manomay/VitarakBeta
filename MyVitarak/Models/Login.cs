@@ -76,6 +76,7 @@ namespace MyVitarak.Models
         public string Mobile { get; set; }
         public string ContactPerson { get; set; }
         public string BusinessName { get; set; }
+        public string UserName { get; set; }
     }
 
     public partial class SecurityCode
