@@ -27,7 +27,7 @@
                             <span class="icon-bar"></span>
                         </button> <!-- mobile menu button, shows only in mobile -->
                         <a class="navbar-brand" href="#welcome">Vitarak</a> <!-- main logo here -->
-                       
+
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="navMenu">
@@ -37,7 +37,7 @@
                             <li><a href="#feature">features</a></li>
                             <li><a href="#pricing">pricing</a></li>
                             <li><a href="#contact">contact</a></li>
-                            <li> <a href="@Url.Action("Login", "Home")" data-toggle="modal" data-target="#myModal">Login</a></li>
+                            <li> <a href="@Url.Action("Login", "Home")">Login</a></li>
                             @*<li> <a href="@Url.Action("Registration", "Home")" data-toggle="modal" data-target="#mdlRegister">Register</a></li>*@
                             <!--li><a href="#">log in</a></li-->
                         </ul>
@@ -130,7 +130,7 @@
 
 <div class="modal fade bs-example-modal-md" id="mdlLoginpay" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-md" role="document">
-        <div id ="mdlLoginpay12" class="modal-content" style="margin-top:90px;">
+        <div id="mdlLoginpay12" class="modal-content" style="margin-top:90px;">
 
         </div>
     </div>
@@ -146,7 +146,7 @@
 
 <div class="modal fade bs-example-modal-md" id="mdlESCost" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-md" role="document">
-        <div  class="modal-content" style="margin-top:90px;">
+        <div class="modal-content" style="margin-top:90px;">
 
         </div>
     </div>
@@ -183,52 +183,7 @@
         </div>
     </div>
 </section>
-<!-- / end about-us area -->
-<!-- start fun-fact-area -->
-<!--section class="fun-fact-area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="single-fun-fact">
-                    <div class="fun-fact-icon">
-                        <i class="icon-profile-male"></i>
-                    </div>
-                    <h3 class="counter">780</h3>
-                    <p>Professionals</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="single-fun-fact">
-                    <div class="fun-fact-icon">
-                        <i class="icon-happy"></i>
-                    </div>
-                    <h3 class="counter">999</h3>
-                    <p>Happy Clients</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="single-fun-fact">
-                    <div class="fun-fact-icon">
-                        <i class="icon-trophy"></i>
-                    </div>
-                    <h3 class="counter">122</h3>
-                    <p>Awards Win</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="single-fun-fact">
-                    <div class="fun-fact-icon">
-                        <i class="icon-wine"></i>
-                    </div>
-                    <h3 class="counter">672</h3>
-                    <p>Cup Off Coffee</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section-->
-<!-- / end fun-fact-area -->
-<!-- start our-feature-area -->
+
 <section id="feature" class="feature-area section-padding">
     <div class="container">
         <div class="row">
@@ -351,173 +306,8 @@
 <!-- / end our-feature-area -->
 <!-- start pricing-area -->
 <section id="pricing" class="pricing-area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="section-title text-center">
-                    <h2>Our Pricing</h2>
-                    <!--p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi veritatis odit quos sit, voluptatum repudiandae tempora quae excepturi iusto eveniet.</p-->
-                </div>
-            </div>
-        </div>
-        <!-- /end section-title row -->
-        <div class="row">
-            <div class="col-md-3 col-sm-6">
-                <div class="single-pricing">
-                    <div class="pricing-head">
-                        <h4>Basic</h4>
-                    </div>
-                    <div class="pricing-price">
-                        <h3>
-                            &#8377; 500
-                            <span>Monthly</span>
-                            <span>&nbsp;</span>
-                            <span>Registration &#8377; 2000</span>
-                                                       
-                        </h3>
-                    </div>
-                    <div class="pricing-details">
-                        <ul>
-                            <li>
-                                <a id="lfp" class="btn btn-default btn-sm-one" href="@Url.Action("LoginForPayment", "Home",new { planid = 1})" data-toggle="modal" data-target="#mdlLoginpay">Select Plan</a>
-                            </li>
-                            <li>2 Mobile apps</li>
-                            <li>Purchase</li>
-                            <li>Sales</li>
-                            <li>Partywise leakage</li>
-                            <li>Monthly customer ledger</li>
-                            <li>Monthly supplier ledger</li>
-                            <li>Flexible customer rates management</li>
-                            <li>Monthly crates ledger</li>
-                            <li>Leakage analysis</li>
-                            <li>Routewise sales reports</li>
-                            <li>Daily payment collection report</li>
-                            <li>Payment outstanding report</li>
-                            <li>Daily stock reports</li>
-                            <li>Tally integration</li>
-                        </ul>
-                    </div>
-                    @*<div class="pricing-action">
-                       
-                    </div>*@
-                </div>
-            </div>
-            <!-- /end single-pricing -->
-            <div class="col-md-3 col-sm-6">
-                <div class="single-pricing">
-                    <div class="pricing-head">
-                        <h4>Advance</h4>
-                    </div>
-                    <div class="pricing-price">
-                        <h3>
-                            &#8377; 1500
-                            <span>3 Months</span>
-                            <span>&nbsp;</span>
-                            <span>Registration &#8377; 2000</span>
-                        </h3>
-                    </div>
-                    <div class="pricing-details">
-                        <ul>
-                            <li>
-                                <a id="lfp" class="btn btn-default btn-sm-one" href="@Url.Action("LoginForPayment", "Home",new { planid = 2})" data-toggle="modal" data-target="#mdlLoginpay">Select Plan</a>
-                            </li>
-                            <li>5 Mobile apps</li>
-                            <li>Purchase</li>
-                            <li>Sales</li>
-                            <li>Partywise leakage</li>
-                            <li>Monthly customer ledger</li>
-                            <li>Monthly supplier ledger</li>
-                            <li>Flexible customer rates management</li>
-                            <li>Monthly crates ledger</li>
-                            <li>Leakage analysis</li>
-                            <li>Routewise sales reports</li>
-                            <li>Daily payment collection report</li>
-                            <li>Payment outstanding report</li>
-                            <li>Daily stock reports</li>
-                            <li>Tally integration</li>
-                        </ul>
-                    </div>
-                   
-                </div>
-            </div>
-            <!-- /end single-pricing -->
-            <div class="col-md-3 col-sm-6">
-                <div class="single-pricing">
-                    <div class="pricing-head">
-                        <h4>Premium</h4>
-                    </div>
-                    <div class="pricing-price">
-                        <h3>
-                            &#8377; 3000
-                            <span>6 Months</span>
-                            <span>&nbsp;</span>
-                            <span>Registration &#8377; 2000</span>
-                        </h3>
-                    </div>
-                    <div class="pricing-details">
-                        <ul>
-                            <li>
-                                <a id="lfp" class="btn btn-default btn-sm-one" href="@Url.Action("LoginForPayment", "Home",new { planid = 3})" data-toggle="modal" data-target="#mdlLoginpay">Select Plan</a>
-                            </li>
-                            <li>10 Mobile apps</li>
-                            <li>Purchase</li>
-                            <li>Sales</li>
-                            <li>Partywise leakage</li>
-                            <li>Monthly customer ledger</li>
-                            <li>Monthly supplier ledger</li>
-                            <li>Flexible customer rates management</li>
-                            <li>Monthly crates ledger</li>
-                            <li>Leakage analysis</li>
-                            <li>Routewise sales reports</li>
-                            <li>Daily payment collection report</li>
-                            <li>Payment outstanding report</li>
-                            <li>Daily stock reports</li>
-                            <li>Tally integration</li>
-                        </ul>
-                    </div>
-                   
-                </div>
-            </div>
-            <!-- /end single-pricing -->
-            <div class="col-md-3 col-sm-6">
-                <div class="single-pricing">
-                    <div class="pricing-head">
-                        <h4>Ultimate</h4>
-                    </div>
-                    <div class="pricing-price">
-                        <h3>
-                            &#8377; 6000
-                            <span>12 Months</span>
-                            <span>&nbsp;</span>
-                            <span>Registration &#8377; 2000</span>
-                        </h3>
-                    </div>
-                    <div class="pricing-details">
-                        <ul>
-                            <li>
-                                <a id="lfp" class="btn btn-default btn-sm-one" href="@Url.Action("LoginForPayment", "Home",new { planid = 4})" data-toggle="modal" data-target="#mdlLoginpay">Select Plan</a>
-                            </li>
-                            <li>Unlimited Mobile apps</li>
-                            <li>Purchase</li>
-                            <li>Sales</li>
-                            <li>Partywise leakage</li>
-                            <li>Monthly customer ledger</li>
-                            <li>Monthly supplier ledger</li>
-                            <li>Flexible customer rates management</li>
-                            <li>Monthly crates ledger</li>
-                            <li>Leakage analysis</li>
-                            <li>Routewise sales reports</li>
-                            <li>Daily payment collection report</li>
-                            <li>Payment outstanding report</li>
-                            <li>Daily stock reports</li>
-                            <li>Tally integration</li>
-                        </ul>
-                    </div>
-                    
-                </div>
-            </div>
-            <!-- /end single-pricing -->
-        </div>
+    <div id="PlanRate">
+        
     </div>
 </section>
 <!-- / end pricing-area -->
@@ -586,3 +376,20 @@
     </div>
 </section>
 <!-- / end contact-area -->
+
+<script>
+
+    $(document).ready(function () { 
+        
+         $.ajax({
+            url: "@Url.Action("PlanRate", "Home")",
+             data: JSON.stringify({ id: 0}),
+             dataType: "text",
+             success: function (data) {
+                 $('#PlanRate').html(data);
+            }
+        }); 
+         
+    });
+ 
+</script>

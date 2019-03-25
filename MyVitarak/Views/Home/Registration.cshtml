@@ -1,10 +1,11 @@
 ﻿@model MyVitarak.Models.Registration
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Reg";
-                Layout = "~/Views/Shared/_TempLayout.cshtml";
+    ViewBag.Title = "Reg";
+    Layout = "~/Views/Shared/_TempLayout.cshtml";
 }
+
 
 
 <div class="modal fade bs-example-modal-md" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -68,6 +69,7 @@
                             <div class="col-sm-9">
                                 @Html.TextBoxFor(a => a.BusinessName, new { @class = "form-control", placeholder = "Enter BusinessName", title = "BusinessName", @id = "BusinessName" })
                                 <p class="hidden" style="color: maroon;" id="valBusinessName">Please Enter Business Name</p>
+                                <p class="hidden" id="CheckBusinessNameExist"></p>
                             </div>
                         </div>
 
@@ -93,7 +95,7 @@
                             <div class="col-sm-9">
                                 @Html.TextBoxFor(a => a.Mobile, new { @class = "form-control", placeholder = "Enter Mobile", title = "Mobile", @id = "Mobile" })
                                 <p class="hidden" id="CheckMobileExist"></p>
-                                <p class="hidden" style="color: maroon;" id="valmobile">Please Enter Mobile Number</p>
+                                <p class="hidden" style="color: maroon;" id="valmobile">Please Enter 10 Digit Mobile Number</p>
                             </div>
                         </div>
 
@@ -105,8 +107,9 @@
                         <div class="form-group">
                             <label for="exampleInputName2" class="col-sm-3 control-label left">City</label>
                             <div class="col-sm-9">
-                                @Html.TextBoxFor(a => a.City, new { @class = "form-control", placeholder = "Enter City", title = "City", @id = "City" })
-                                <p class="hidden" style="color: maroon;" id="valmobile">Please Select City Name</p>
+                                @Html.TextBoxFor(a => a.City, new { @class = "form-control", placeholder = "Select City Name", title = "City", @id = "City" })                              
+                                <input type="text" class="hidden" id="CityId" value="" />
+                                <p class="hidden" style="color: maroon;" id="valCity">Please Select City Name</p>
                             </div>
                         </div>
                     </div>
@@ -140,15 +143,11 @@
                             <label for="customerAddress" class="col-sm-3 control-label left">Contact Person Mobile</label>
                             <div class="col-sm-9">
                                 @Html.TextBoxFor(a => a.ContactPersonMobile, new { @class = "form-control", placeholder = "Enter ContactPersonMobile", title = "ContactPersonMobile", @id = "ContactPersonMobile" })
-                                <p class="hidden" style="color: maroon;" id="valmobile">Please Enter Contact Person Mobile Number</p>
+                                <p class="hidden" style="color: maroon;" id="valContactPersonMobile">Please Enter Contact Person Mobile Number</p>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
-
 
                 <div class="row">
                     <div class="col-sm-6">
@@ -182,7 +181,7 @@
                             <label for="exampleInputName2" class="col-sm-3 control-label  left">Password</label>
                             <div class="col-sm-9">
                                 @Html.PasswordFor(a => a.password, new { @class = "form-control", placeholder = "Enter password", title = "password", @id = "password" })
-                                <p class="hidden" style="color: maroon;" id="valpassword">Please Enter Password </p>
+                                <p class="hidden" style="color: maroon;" id="valpassword">Please Enter 4 digit Password </p>
 
                             </div>
                         </div>
@@ -210,11 +209,14 @@
             </div>
         }
     </div>
-        </div>
+</div>
+<script src="~/Scripts/autocomplete/jquery.autocomplete.min.js"></script>
 
-    <script>
+<script>
 
         $(document).ready(function () {
+            getCity();
+            
             $(document).ajaxStart(function () {
                 $("#wait").css("display", "block");
             });
@@ -273,7 +275,7 @@
                     Mobile: $("#Mobile").val()
                 },
                 success: function (da) {
-                    
+
                     $('#CheckMobileExist').html(da);
                     if ($('#CheckMobileExist').text() == 'Mobile no already exist') {
                         $("#CheckMobileExist").removeClass("hidden");
@@ -295,34 +297,64 @@
 
         });
 
+    $('#UserName').on('change', function () {
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/Home/UserNameCheck',
+
+            data:
+            {
+                UserName: $("#UserName").val()
+            },
+            success: function (da) {
+                $('#CheckUserNameExist').html(da);
+                if ($('#CheckUserNameExist').text() == 'User Name already exist') {
+                    $("#CheckUserNameExist").removeClass("hidden");
+                    $("#CheckUserNameExist").addClass("emailred");
+                    $("#valUserName").addClass("hidden");
+                }
+                else {
+                    $("#CheckUserNameExist").removeClass("hidden");
+                    $("#CheckUserNameExist").removeClass("emailgreen");
+                    $("#CheckUserNameExist").addClass("emailred");
+                    $("#valUserName").addClass("hidden");
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                alert(textStatus);
+            }
+        });
+
+    });
+    
 
 
-
-
-
-        $('#UserName').on('change', function () {
+    $('#BusinessName').on('change', function () {
 
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: '/Home/UserNameCheck',
+                url: '/Home/BusinessNameCheck',
 
                 data:
                 {
-                    UserName: $("#UserName").val()
+                    BusinessName: $("#BusinessName").val()
                 },
                 success: function (da) {
-                    $('#CheckUserNameExist').html(da);
-                    if ($('#CheckUserNameExist').text() == 'User Name already exist') {
-                        $("#CheckUserNameExist").removeClass("hidden");
-                        $("#CheckUserNameExist").addClass("emailred");
-                        $("#valUserName").addClass("hidden");
+                    $('#CheckBusinessNameExist').html(da);
+                    if ($('#CheckBusinessNameExist').text() == 'Business Name already exist') {
+                        $("#CheckBusinessNameExist").removeClass("hidden");
+                        $("#CheckBusinessNameExist").addClass("emailred");
+                        $("#valBusinessName").addClass("hidden");
                     }
                     else {
-                        $("#CheckUserNameExist").removeClass("hidden");
-                        $("#CheckUserNameExist").removeClass("emailgreen");
-                        $("#CheckUserNameExist").addClass("emailred");
-                        $("#valUserName").addClass("hidden");
+                        $("#CheckBusinessNameExist").removeClass("hidden");
+                        $("#CheckBusinessNameExist").removeClass("emailgreen");
+                        $("#CheckBusinessNameExist").addClass("emailred");
+                        $("#valBusinessName").addClass("hidden");
                     }
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -382,7 +414,7 @@
 
         function Registration() {
 
-
+            
             if ($("#Name").val() == "") {
 
                 $("#valname").removeClass("hidden");
@@ -392,9 +424,27 @@
                 $("#valconfirmpassword").addClass("hidden");
                 $("#valcontactperson").addClass("hidden");
                 $("#valmobile").addClass("hidden");
+                $("#valContactPersonMobile").addClass("hidden");
+                $("#valCity").addClass("hidden");
+                $("#valBusinessName").addClass("hidden");
 
                 return false;
             }
+            else if ($("#BusinessName").val() == "") {
+                $("#valBusinessName").removeClass("hidden");
+                $("#valname").addClass("hidden");
+                $("#valaddress").addClass("hidden");
+                $("#valemail").addClass("hidden");
+                $("#valpassword").addClass("hidden");
+                $("#valconfirmpassword").addClass("hidden");
+                $("#valcontactperson").addClass("hidden");
+                $("#valmobile").addClass("hidden");
+                $("#valContactPersonMobile").addClass("hidden");
+                $("#valCity").addClass("hidden");
+
+                return false;
+            }
+           
             else if ($("#Address").val() == "") {
                 $("#valaddress").removeClass("hidden");
                 $("#valname").addClass("hidden");
@@ -403,15 +453,21 @@
                 $("#valconfirmpassword").addClass("hidden");
                 $("#valcontactperson").addClass("hidden");
                 $("#valmobile").addClass("hidden");
+                $("#valContactPersonMobile").addClass("hidden");
+                $("#valCity").addClass("hidden");
+                $("#valBusinessName").addClass("hidden");
                 return false;
             }
-            else if ($("#Mobile").val() == "") {
+            else if ($("#Mobile").val() == "" || $("#Mobile").val().length < 10) {
                 $("#valmobile").removeClass("hidden");
                 $("#valconfirmpassword").addClass("hidden");
                 $("#valpassword").addClass("hidden");
                 $("#valemail").addClass("hidden");
                 $("#valaddress").addClass("hidden");
                 $("#valname").addClass("hidden");
+                $("#valContactPersonMobile").addClass("hidden");
+                $("#valCity").addClass("hidden");
+                $("#valBusinessName").addClass("hidden");
                 return false;
             }
             else if ($("#ContactPerson").val() == "") {
@@ -422,6 +478,9 @@
                 $("#valaddress").addClass("hidden");
                 $("#valname").addClass("hidden");
                 $("#valmobile").addClass("hidden");
+                $("#valContactPersonMobile").addClass("hidden");
+                $("#valCity").addClass("hidden");
+                $("#valBusinessName").addClass("hidden");
                 return false;
             }
             else if ($("#Email").val() == "") {
@@ -433,10 +492,14 @@
                 $("#valconfirmpassword").addClass("hidden");
                 $("#valcontactperson").addClass("hidden");
                 $("#valmobile").addClass("hidden");
+                $("#valContactPersonMobile").addClass("hidden");
+                $("#valCity").addClass("hidden");
+                $("#valBusinessName").addClass("hidden");
                 return false;
             }
 
-            else if ($("#password").val() == "") {
+            else if ($("#password").val() == "" || $("#password").val().length < 4) {
+
                 $("#valpassword").removeClass("hidden");
                 $("#valemail").addClass("hidden");
                 $("#valaddress").addClass("hidden");
@@ -444,6 +507,9 @@
                 $("#valconfirmpassword").addClass("hidden");
                 $("#valcontactperson").addClass("hidden");
                 $("#valmobile").addClass("hidden");
+                $("#valContactPersonMobile").addClass("hidden");
+                $("#valCity").addClass("hidden");
+                $("#valBusinessName").addClass("hidden");
                 return false;
             }
             else if ($("#confirmpassword").val() == "") {
@@ -454,6 +520,9 @@
                 $("#valname").addClass("hidden");
                 $("#valcontactperson").addClass("hidden");
                 $("#valmobile").addClass("hidden");
+                $("#valContactPersonMobile").addClass("hidden");
+                $("#valCity").addClass("hidden");
+                $("#valBusinessName").addClass("hidden");
                 return false;
             }
             else if ($("#password").val() != $("#confirmpassword").val()) {
@@ -465,7 +534,41 @@
                 $("#valconfirmpassword").addClass("hidden");
                 $("#valcontactperson").addClass("hidden");
                 $("#valmobile").addClass("hidden");
+                $("#valContactPersonMobile").addClass("hidden");
+                $("#valCity").addClass("hidden");
+                $("#valBusinessName").addClass("hidden");
                 return false;
+            }
+            else if ($("#ContactPersonMobile").val() == "")
+            {
+                $("#valContactPersonMobile").removeClass("hidden");
+                $("#valpasserror").addClass("hidden");
+                $("#valpassword").addClass("hidden");
+                $("#valemail").addClass("hidden");
+                $("#valaddress").addClass("hidden");
+                $("#valname").addClass("hidden");
+                $("#valconfirmpassword").addClass("hidden");
+                $("#valcontactperson").addClass("hidden");
+                $("#valmobile").addClass("hidden");
+                $("#valCity").addClass("hidden");
+                $("#valBusinessName").addClass("hidden");
+                return false;
+
+            }
+            else if ($("#CityId").val() == "") {
+                $("#valCity").removeClass("hidden");
+                $("#valContactPersonMobile").addClass("hidden");
+                $("#valpasserror").addClass("hidden");
+                $("#valpassword").addClass("hidden");
+                $("#valemail").addClass("hidden");
+                $("#valaddress").addClass("hidden");
+                $("#valname").addClass("hidden");
+                $("#valconfirmpassword").addClass("hidden");
+                $("#valcontactperson").addClass("hidden");
+                $("#valmobile").addClass("hidden");
+                $("#valBusinessName").addClass("hidden");
+                return false;
+
             }
             else if ($("#EmailCheckExist").text() == "Email id already exist") {
                 return false;
@@ -476,7 +579,7 @@
             else if ($("#CheckUserNameExist").text() == "User Name already exist") {
                 return false;
             }
-                       
+
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -489,7 +592,7 @@
                     ContactPerson: $("#ContactPerson").val(),
                     ContactPersonMobile: $("#ContactPersonMobile").val(),
                     Address: $("#Address").val(),
-                    City: $("#City").val(),
+                    City: $("#CityId").val(),
                     PinCode: $("#PinCode").val(),
                     Email: $("#Email").val(),
                     Mobile: $("#Mobile").val(),
@@ -499,7 +602,7 @@
 
                 },
                 success: function (da) {
-                  
+
                     if (da == 'Registration Sucessfull') {
                         alert(da);
                        // Loginmodalcall()
@@ -517,7 +620,37 @@
 
             return false;
         }
-    </script>
+
+
+
+        function getCity()
+    {
+             var returnResult = [];
+                          $.ajax({
+                        contentType: "application/json; charset=utf-8",
+                         url: "@Url.Action("GetCity", "Home")",
+                        method: 'GET',
+                        async: 'false',
+                        dataType: 'json',
+                        success: function (result) {
+                            var data = $.map(result, function (obj) {
+                                obj.value = obj.Text; // desired field
+                                obj.data = obj.Value; // desired field
+                                returnResult.push(obj);
+                                $("#City").autocomplete({
+                                    lookup: returnResult,
+                                    onSelect: function (suggestion) {
+                                        $("#CityId").val(suggestion.data);
+
+                                    }
+                                });
+
+                            });
+                        },
+                        error: function () { }
+                  });
+    }
+</script>
 
 
 

@@ -17,19 +17,20 @@
         <div class="form-group">
             <label for="exampleInputName1" class="col-sm-3 control-label">User Name</label>
             <p id="price" class="hidden">
-                @Session["planename"]
-                @Session["plandesc"]
-                @Session["regrate"]
-                @Session["planrate"]
-                @Session["total"]
-                
+                @Session["PlanID"]
+                @Session["PlanName"]
+                @Session["PlanDesc"]
+                @Session["PlanAmount"]
+                @Session["OTIAmount"]
+                @Session["Total"]
+
             </p>
-            <p class="hidden" id="regplanid">@Session["pid"]</p>
+            <p class="hidden" id="regplanid">@Session["PlanID"]</p>
                 
 
-                        <div class="col-sm-9">
-               @Html.TextBoxFor(a => a.Email, new { @class = "form-control", placeholder = "Enter User Name", title = "UserName", @id = "username" })
-                        </div>
+            <div class="col-sm-9">
+            @Html.TextBoxFor(a => a.Email, new { @class = "form-control", placeholder = "Enter User Name", title = "UserName", @id = "username" })
+            </div>
 </div>
 
         <div class="form-group">
@@ -44,11 +45,9 @@
 
         <div class="modal-footer" style="margin-top:18px;">
 
-            <button id="btnlogin" type="submit" class="btn btn-success">Submit</button>
-            @*<button id="btnRegister" href="@Url.Action("Registration", "Home")" data-toggle="modal" data-target="#mdlRegister" type="button" class="btn btn-info">Register</button>*@
+            <button id="btnlogin" type="submit" class="btn btn-success">Submit</button> 
             <button id="btnRegister" type="button" class="btn btn-info" onclick="frmclose();">Close</button>
-
-
+             
         </div>
     </div>
    

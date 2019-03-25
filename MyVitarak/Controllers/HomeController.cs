@@ -424,6 +424,37 @@ namespace MyVitarak.Controllers
         }
 
 
+        public ActionResult BusinessNameCheck(string BusinessName = "")
+        {
+            try
+            {
+                JobDbContext2 _db = new JobDbContext2();
+                var result = _db.MailCheck.SqlQuery(@"exec Usp_CheckBusinessNameExistance 
+                @BusinessName",
+                new SqlParameter("@BusinessName", BusinessName)).ToList<MailCheck>();
+                MailCheck data = new MailCheck();
+                data = result.FirstOrDefault();
+
+                if (data == null)
+                {
+                    return Json("");
+                }
+                else
+                {
+
+                    return Json("Business Name already exist");
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+
+        }
+
+
         public ActionResult LoginForPayment(int? planid)
         {
             try
@@ -502,6 +533,36 @@ namespace MyVitarak.Controllers
             return Request.IsAjaxRequest()
                    ? (ActionResult)PartialView("PlanRate",data)
                    : View("PlanRate",data);
+        }
+
+
+        public List<SelectListItem> binddropdown(string action, int val = 0)
+        {
+            JobDbContext2 _db = new JobDbContext2();
+
+            var res = _db.Database.SqlQuery<SelectListItem>("exec USP_BindDropDown @action , @val",
+                   new SqlParameter("@action", action),
+                    new SqlParameter("@val", val))
+                   .ToList()
+                   .AsEnumerable()
+                   .Select(r => new SelectListItem
+                   {
+                       Text = r.Text.ToString(),
+                       Value = r.Value.ToString(),
+                       Selected = r.Value.Equals(Convert.ToString(val))
+                   }).ToList();
+
+            return res;
+        }
+
+
+
+        public JsonResult GetCity()
+        {
+            JobDbContext2 _db = new JobDbContext2();
+            var lstItem = binddropdown("City", 0).Select(i => new { i.Value, i.Text }).ToList();
+            //_spService.BindDropdown("PricingUser", "", "").Select(i => new { i.Value, i.Text }).ToList();
+            return Json(lstItem, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -40,6 +40,7 @@ namespace MyVitarak.Models
         public string Email { get; set; }
         public string mobile { get; set; }
         public string UserName { get; set; }
+        public string BusinessName { get; set; }
     }
 
     public partial class Registration
