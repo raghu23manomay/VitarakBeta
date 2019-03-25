@@ -16,7 +16,7 @@ namespace MyVitarak.Models
         public JobDbContext() : base("Name=JobDbContext")
         {
             
-            Database.Connection.ConnectionString = "Data Source=103.67.236.131,4433;Initial Catalog="+HttpContext.Current.Session["dbname"]+ ";User ID=sa;Password=Sunil@123";
+            Database.Connection.ConnectionString = "Data Source=103.67.238.75,1433;Initial Catalog=" + HttpContext.Current.Session["BusinessName"] + ";User ID=sa;Password=Sunil@123";
         }
 
         public DbSet<ProductDetails> ProductDetails { get; set; }

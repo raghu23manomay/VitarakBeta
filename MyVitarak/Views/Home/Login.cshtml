@@ -1,7 +1,7 @@
 ﻿
 @model MyVitarak.Models.Login
 @{
-    ViewBag.Title = "Reg";
+    
     Layout = "~/Views/Shared/_TempLayout.cshtml";
 }
 @*<script src="~/bootstrap-notify-master/bootstrap-notify.min.js"></script>*@
@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <label for="exampleInputName1" class="col-sm-3 control-label">User Name</label>
                             <div class="col-sm-9">
-                                @Html.TextBoxFor(a => a.Email, new { @class = "form-control", placeholder = "Enter User Name", title = "UserName", @id = "username" })
+                                @Html.TextBoxFor(a => a.UserName, new { @class = "form-control", placeholder = "Enter User Name", title = "UserName", @id = "username" })
                             </div>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                 cache: false,
                 url: "/Home/Login",
                 data: {
-                    Email: $("#username").val(),
+                    UserName: $("#username").val(),
                     password: $("#password").val()
                 },
                 success: function (da) {

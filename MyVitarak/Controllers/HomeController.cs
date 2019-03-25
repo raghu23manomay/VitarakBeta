@@ -17,11 +17,7 @@ namespace MyVitarak.Controllers
     public class HomeController : Controller
     {
 
-        public ActionResult Reg()
-        {
-            return View();
-        }
-
+        
         public ActionResult Index()
         {
             return View();
@@ -33,12 +29,12 @@ namespace MyVitarak.Controllers
         }
 
 
-        public ActionResult Login()
+        public ActionResult PaymentCheckout()
         {
             return View();
         }
 
-        public ActionResult _PartialLogin()
+        public ActionResult Login()
         {
             return View();
         }
@@ -52,7 +48,7 @@ namespace MyVitarak.Controllers
                 JobDbContext2 _db = new JobDbContext2();
                 var result = _db.LoginDetail.SqlQuery(@"exec usp_login 
                 @Email,@password",
-                    new SqlParameter("@Email", L.Email),
+                    new SqlParameter("@Email", L.UserName),
                     new SqlParameter("@password", L.password)).ToList<Login>();
                 Login data = new Login();
                 data = result.FirstOrDefault();
@@ -64,10 +60,12 @@ namespace MyVitarak.Controllers
                 else
                 {
 
-                    Session["username"] = data.Email;
-                    Session["RegId"] = data.RegistrationID;
-                    Session["dbname"] = data.DbName;
-                    GetDbSchemaStatus(data.RegistrationID);
+                    Session["username"] = data.UserName;
+                    Session["BusinessName"] = data.DbName;
+                    Session["MobileNo"] = data.MobileNo;
+                    Session["Name"] = data.Name;
+
+                    //  GetDbSchemaStatus(data.RegistrationID);
                     return Json("Login Sucessfull");
 
                 }
@@ -149,8 +147,44 @@ namespace MyVitarak.Controllers
 
         }
 
-        public ActionResult Registration()
+        public ActionResult Registration(int? planid)
         {
+            try
+            {
+                if (planid > 0)
+                {
+
+
+                    JobDbContext2 _db = new JobDbContext2();
+                    var result = _db.PlanRate.SqlQuery(@"exec Usp_GetplanDetailById 
+                @PlanID",
+                        new SqlParameter("@PlanID", planid)).ToList<PlanRate>();
+                    PlanRate data = new PlanRate();
+                    data = result.FirstOrDefault();
+
+                    if (data == null)
+                    {
+                        return Json("No plans are available");
+                    }
+                    else
+                    {
+                        var tt = data.PlanAmount + data.OTIAmount;
+                        Session["PlanName"] = data.PlanName;
+                        Session["PlanDesc"] = data.PlanDesc;
+                        Session["PlanAmount"] = data.PlanAmount;
+                        Session["Total"] = tt;
+                        Session["PlanID"] = data.PlanID;
+
+                    }
+                }
+               
+            }
+
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return Json(message);
+            }
             return View();
         }
 
@@ -160,33 +194,41 @@ namespace MyVitarak.Controllers
             JobDbContext2 _db = new JobDbContext2();
             try
             {
+                var res = 0;
+                res = _db.Database.ExecuteSqlCommand(@"exec uspInsertRegistration
+                    @pName,
+                    @pBusinessName,
+                    @pContactPerson,
+                    @pContactPersonMobile,
+                    @pAddress,
+                    @pCity,
+                    @pPin,
+                    @pEmail,
+                    @pMobile,
+                    @pUserName,
+                    @pPasssword",
+                    new SqlParameter("@pName", rs.Name),
+                    new SqlParameter("@pBusinessName", rs.BusinessName),
+                    new SqlParameter("@pContactPerson", rs.ContactPerson),
+                    new SqlParameter("@pContactPersonMobile", rs.ContactPersonMobile),
+                    new SqlParameter("@pAddress", rs.Address),
+                    new SqlParameter("@pCity", rs.City),
+                    new SqlParameter("@pPin", rs.PinCode),
+                    new SqlParameter("@pEmail", rs.Email),
+                    new SqlParameter("@pMobile", rs.Mobile),
+                    new SqlParameter("@pUserName", rs.UserName),
+                    new SqlParameter("@pPasssword", rs.password)
 
-                var res = _db.Database.ExecuteSqlCommand(@"exec [uspInsertRegistration] @mName,@mAddress,@mContactPerson,@mEmail,@mpassword,@mMobile,@mRegistrationDate",
-                    new SqlParameter("@mName", rs.Name),
-                    new SqlParameter("@mAddress", rs.Address),
-                    new SqlParameter("@mContactPerson", rs.ContactPerson),
-                    new SqlParameter("@mEmail", rs.Email),
-                    new SqlParameter("@mpassword", rs.password),
-                    new SqlParameter("@mMobile", rs.Mobile),
-                    new SqlParameter("@mRegistrationDate", DateTime.Now)
                     );
-
-                if (res == 0)
-                {
-                    return Json("Registration Fail");
-                }
-                else
-                {
-                    JobDbContext2 _db2 = new JobDbContext2();
-                    var result = _db2.RegistrationDetails.SqlQuery(@"exec Usp_GetRegistrationdetailfortenant").ToList<RegistrationDetails>();
-                    RegistrationDetails data = new RegistrationDetails();
-                    data = result.FirstOrDefault();
-
-                    Session["username"] = data.Email;
-                    Session["RegId"] = data.RegistrationID;
-                    return Json("Registration Sucessfull");
-                }
-
+                              
+                Session["CName"] = rs.Name;
+                Session["BusinessName"] = rs.BusinessName.Replace(" ", ""); ;
+                Session["ContactPerson"] = rs.ContactPerson;
+                Session["Address"] = rs.Address;
+                Session["Mobile"] = rs.Mobile;
+                Session["UserName"] = rs.UserName;
+                return Json("Registration Sucessfull");
+                
 
             }
             catch (Exception ex)
@@ -208,23 +250,32 @@ namespace MyVitarak.Controllers
                 var connectionState = conn.State;
                 try
                 {
+                    //==================  Get Security Code ==========================
+                   var SercurityCode = "";
+                    SecurityCode SC = new SecurityCode();
+                   var res = context.SecurityCode.SqlQuery(@"exec uspGenerateSecurityCode");
+                    SC = res.FirstOrDefault();
+                    SercurityCode = SC.Code;
+
+                    //==================  Insert Into Teanant ==========================
+
                     if (connectionState != ConnectionState.Open) conn.Open();
                     using (var cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = "[uspInsertTenant]";
-
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add(new SqlParameter("@mRegistrationID", rs.RegistrationID));
-                        cmd.Parameters.Add(new SqlParameter("@mSecurityCode", "SDGh1452"));
+                        cmd.Parameters.Add(new SqlParameter("@mName", rs.Name));
+                        cmd.Parameters.Add(new SqlParameter("@mDbname", rs.DbName));
+                        cmd.Parameters.Add(new SqlParameter("@mAddress", rs.Address));
+                        cmd.Parameters.Add(new SqlParameter("@mMobile", rs.Mobile));
+                        cmd.Parameters.Add(new SqlParameter("@mContactPerson", rs.ContactPerson));
+                        cmd.Parameters.Add(new SqlParameter("@mSecurityCode",SercurityCode));
                         cmd.Parameters.Add(new SqlParameter("@misActive", true));
-                        cmd.Parameters.Add(new SqlParameter("@misReadOnly", false));
-                        cmd.Parameters.Add(new SqlParameter("@mDbName", "testdb"));
-                        cmd.Parameters.Add(new SqlParameter("@isDbSchema", false));
+                        cmd.Parameters.Add(new SqlParameter("@misReadOnly",false));
+                        
                         cmd.ExecuteNonQuery();
-
                     }
-
-
+                    InsertDbschemaInUSerDatabase();
                 }
                 catch (Exception ex)
                 {
@@ -237,7 +288,7 @@ namespace MyVitarak.Controllers
                     if (connectionState != ConnectionState.Closed) conn.Close();
                 }
 
-                return Json("Application deployied sucessfull");
+                return Json("Application deployed sucessfull");
             }
 
         }
@@ -347,9 +398,9 @@ namespace MyVitarak.Controllers
             try
             {
                 JobDbContext2 _db = new JobDbContext2();
-                var result = _db.MailCheck.SqlQuery(@"exec Usp_CheckMobileExistance 
+                var result = _db.MailCheck.SqlQuery(@"exec Usp_CheckUserNameExistance 
                 @UserName",
-                    new SqlParameter("@UserName", UserName)).ToList<MailCheck>();
+                new SqlParameter("@UserName", UserName)).ToList<MailCheck>();
                 MailCheck data = new MailCheck();
                 data = result.FirstOrDefault();
 
@@ -408,39 +459,39 @@ namespace MyVitarak.Controllers
 
         }
 
-        [HttpPost]
-        public ActionResult Loginforpayment(Login L)
-        {
-            try
-            {
-                JobDbContext2 _db = new JobDbContext2();
-                var result = _db.LoginDetail.SqlQuery(@"exec usp_loginforpayment 
-                @username,@password",
-                    new SqlParameter("@username", L.Email),
-                    new SqlParameter("@password", L.password)).ToList<Login>();
-                Login data = new Login();
-                data = result.FirstOrDefault();
+        //[HttpPost]
+        //public ActionResult Loginforpayment(Login L)
+        //{
+        //    try
+        //    {
+        //        JobDbContext2 _db = new JobDbContext2();
+        //        var result = _db.LoginDetail.SqlQuery(@"exec usp_loginforpayment 
+        //        @username,@password",
+        //            new SqlParameter("@username", L.Email),
+        //            new SqlParameter("@password", L.password)).ToList<Login>();
+        //        Login data = new Login();
+        //        data = result.FirstOrDefault();
 
-                if (data == null)
-                {
-                    return Json("Please enter valid user Name password");
-                }
-                else
-                {
-                    //return RedirectToAction("Dashboard", "Master");
-                    Session["username"] = data.Email;
-                    Session["RegId"] = data.RegistrationID;
-                    return Json("Login Sucessfull");
+        //        if (data == null)
+        //        {
+        //            return Json("Please enter valid user Name password");
+        //        }
+        //        else
+        //        {
+        //            //return RedirectToAction("Dashboard", "Master");
+        //            Session["username"] = data.Email;
+        //            Session["RegId"] = data.RegistrationID;
+        //            return Json("Login Sucessfull");
 
-                }
-            }
+        //        }
+        //    }
 
-            catch (Exception ex)
-            {
-                return Json(ex.Message);
-            }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(ex.Message);
+        //    }
 
-        }
+        //}
          
         public ActionResult PlanRate(int id=0 )
         {

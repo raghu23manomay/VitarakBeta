@@ -336,10 +336,9 @@
     <Content Include="Views\Action\Hash.cshtml" />
     <Content Include="Views\Home\EstimateCost.cshtml" />
     <Content Include="Views\Home\LoginForPayment.cshtml" />
-    <Content Include="Views\Home\Reg.cshtml" />
     <Content Include="Views\Shared\_TempLayout.cshtml" />
     <Content Include="Views\Home\PlanRate.cshtml" />
-    <Content Include="Views\Home\_PartialLogin.cshtml" />
+    <Content Include="Views\Home\PaymentCheckout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

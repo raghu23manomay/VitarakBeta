@@ -286,7 +286,37 @@ namespace MyVitarak.Controllers
             return View();
         }
 
-                     
-                     
+        [HttpPost]
+        public ActionResult Hash(string key = "Eoujo5i4", string salt = "HBStnJyXeZ", string txnid = "trasns1234", string amount = "100", string pinfo = "milk", string fname = "raghu", string email = "rmudgal23@gmail.com", string mobile = "8237175481", string udf5 = "")
+        {
+            byte[] hash;
+            string postData = new System.IO.StreamReader(Request.InputStream).ReadToEnd();
+            dynamic data = JsonConvert.DeserializeObject(postData);
+            string d = key + "|" + txnid + "|" + amount + "|" + pinfo + "|" + fname + "|" + email + "|||||" + udf5 + "||||||" + salt;
+            var datab = Encoding.UTF8.GetBytes(d);
+            using (SHA512 shaM = new SHA512Managed())
+            {
+                hash = shaM.ComputeHash(datab);
+            }
+
+
+            string json = "{\"success\":\"" + GetStringFromHash(hash) + "\"}";
+            Response.Clear();
+            Response.ContentType = "application/json; charset=utf-8";
+            Response.Write(json);
+            Response.End();
+            return View();
+        }
+
+        private static string GetStringFromHash(byte[] hash)
+        {
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                result.Append(hash[i].ToString("X2").ToLower());
+            }
+            return result.ToString();
+        }
+
     }
 }

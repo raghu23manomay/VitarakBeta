@@ -31,172 +31,186 @@
             <strong>Already Registered?</strong> <a href="#" onclick="Loginmodalcall();return false" class="alert-link">Click here to login</a>
         </div>
         <div class="modal-header">
-
-            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user-plus marginRight15px" aria-hidden="true"></i>Registration</h4>
-        </div>
-        <br>
-        @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-horizontal", id = "frmregistration" }))
-        {
-        <div class="modal-body">
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="exampleInputName2" class="col-sm-3 control-label  left">Name</label>
-                        <div class="col-sm-9">
-                            @Html.TextBoxFor(a => a.Name, new { @class = "form-control", placeholder = "Enter Name", title = "Name", @id = "Name" })
-                            <p class="hidden" style="color: maroon;" id="valname">Name field should not empty</p>
-
-                        </div>
-                    </div>
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user-plus marginRight15px" aria-hidden="true"></i>Registration</h4>
                 </div>
                 <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="customerAddress" class="col-sm-3 control-label left">Business Name</label>
-                        <div class="col-sm-9">
-                            @Html.TextBoxFor(a => a.BusinessName, new { @class = "form-control", placeholder = "Enter BusinessName", title = "BusinessName", @id = "BusinessName" })
-                            <p class="hidden" style="color: maroon;" id="valBusinessName">Please Enter Business Name</p>
-                        </div>
-                    </div>
 
                 </div>
             </div>
+        </div>
+        <br>
+        @if (Session["Total"] != null)
+        {
+            <div class="alert alert-success text-center large-text" role="alert">
+                Total Due Today: &nbsp; <strong>@Session["Total"]</strong>
+            </div>
+        }
 
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
+        @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-horizontal", id = "frmregistration" }))
+        {
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
                         <div class="form-group">
+                            <label for="exampleInputName2" class="col-sm-3 control-label  left">Name</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(a => a.Name, new { @class = "form-control", placeholder = "Enter Name", title = "Name", @id = "Name" })
+                                <p class="hidden" style="color: maroon;" id="valname">Please Enter Name</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="customerAddress" class="col-sm-3 control-label left">Business Name</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(a => a.BusinessName, new { @class = "form-control", placeholder = "Enter BusinessName", title = "BusinessName", @id = "BusinessName" })
+                                <p class="hidden" style="color: maroon;" id="valBusinessName">Please Enter Business Name</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+
                             <label for="customerAddress" class="col-sm-3 control-label left">Address</label>
                             <div class="col-sm-9">
-                                @Html.TextAreaFor(a => a.Address, new { @class = "form-control", placeholder = "Enter Address", title = "Address", @id = "Address" })
+                                @Html.TextBoxFor(a => a.Address, new { @class = "form-control", placeholder = "Enter Address", title = "Address", @id = "Address" })
                                 <p class="hidden" style="color: maroon;" id="valaddress">Please Enter Address</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+
+                        <div class="form-group">
+                            <label for="exampleInputName2" class="col-sm-3 control-label left">Mobile No.</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(a => a.Mobile, new { @class = "form-control", placeholder = "Enter Mobile", title = "Mobile", @id = "Mobile" })
+                                <p class="hidden" id="CheckMobileExist"></p>
+                                <p class="hidden" style="color: maroon;" id="valmobile">Please Enter Mobile Number</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="exampleInputName2" class="col-sm-3 control-label left">City</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(a => a.City, new { @class = "form-control", placeholder = "Enter City", title = "City", @id = "City" })
+                                <p class="hidden" style="color: maroon;" id="valmobile">Please Select City Name</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="exampleInputName2" class="col-sm-3 control-label left">Zip Code</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(a => a.PinCode, new { @class = "form-control", placeholder = "Enter PinCode", title = "PinCode", @id = "PinCode" })
+                                <p class="hidden" style="color: maroon;" id="valmobile">Please Enter Zip Code</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="exampleInputName2" class="col-sm-3 control-label  left">Contact Person</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(a => a.ContactPerson, new { @class = "form-control", placeholder = "Enter Contact Person", title = "ContactPerson", @id = "ContactPerson" })
+                                <p class="hidden" style="color: maroon;" id="valcontactperson">Please Enter Contact Person</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="customerAddress" class="col-sm-3 control-label left">Contact Person Mobile</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(a => a.ContactPersonMobile, new { @class = "form-control", placeholder = "Enter ContactPersonMobile", title = "ContactPersonMobile", @id = "ContactPersonMobile" })
+                                <p class="hidden" style="color: maroon;" id="valmobile">Please Enter Contact Person Mobile Number</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
 
-                    <div class="form-group">
-                        <label for="exampleInputName2" class="col-sm-3 control-label left">Mobile No.</label>
-                        <div class="col-sm-9">
-                            @Html.TextBoxFor(a => a.Mobile, new { @class = "form-control", placeholder = "Enter Mobile", title = "Mobile", @id = "Mobile" })
-                            <p class="hidden" id="CheckMobileExist"></p>
-                            <p class="hidden" style="color: maroon;" id="valmobile">Please Enter Mobile Number</p>
+
+
+
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="customerAddress" class="col-sm-3 control-label left">User Name</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(a => a.UserName, new { @class = "form-control", placeholder = "Enter UserName", title = "UserName", @id = "UserName" })
+                                <p class="hidden" id="CheckUserNameExist"></p>
+                                <p class="hidden" style="color: maroon;" id="valmobile">Please Enter User Name</p>
+                            </div>
                         </div>
                     </div>
 
-                </div>
-            </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="exampleInputName2" class="col-sm-3 control-label  left">Email</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(a => a.Email, new { @class = "form-control", placeholder = "Enter Email", title = "Email", @id = "Email" })
+                                <p class="hidden" id="EmailCheckExist"></p>
+                                <p class="hidden" style="color: maroon;" id="valemail">Please Enter Email Id</p>
 
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="exampleInputName2" class="col-sm-3 control-label left">City</label>
-                        <div class="col-sm-9">
-                            @Html.TextBoxFor(a => a.City, new { @class = "form-control", placeholder = "Enter City", title = "City", @id = "City" })
-                            <p class="hidden" style="color: maroon;" id="valmobile">Please Select City Name</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="exampleInputName2" class="col-sm-3 control-label left">Zip Code</label>
-                        <div class="col-sm-9">
-                            @Html.TextBoxFor(a => a.PinCode, new { @class = "form-control", placeholder = "Enter PinCode", title = "PinCode", @id = "PinCode" })
-                            <p class="hidden" style="color: maroon;" id="valmobile">Please Enter Zip Code</p>
+                            </div>
                         </div>
                     </div>
 
                 </div>
 
-            </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="exampleInputName2" class="col-sm-3 control-label  left">Password</label>
+                            <div class="col-sm-9">
+                                @Html.PasswordFor(a => a.password, new { @class = "form-control", placeholder = "Enter password", title = "password", @id = "password" })
+                                <p class="hidden" style="color: maroon;" id="valpassword">Please Enter Password </p>
 
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="exampleInputName2" class="col-sm-3 control-label  left">Contact Person</label>
-                        <div class="col-sm-9">
-                            @Html.TextBoxFor(a => a.ContactPerson, new { @class = "form-control", placeholder = "Enter Contact Person", title = "ContactPerson", @id = "ContactPerson" })
-                            <p class="hidden" style="color: maroon;" id="valcontactperson">Please Enter Contact Person</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="customerAddress" class="col-sm-3 control-label left">Contact Person Mobile</label>
-                        <div class="col-sm-9">
-                            @Html.TextBoxFor(a => a.ContactPersonMobile, new { @class = "form-control", placeholder = "Enter ContactPersonMobile", title = "ContactPersonMobile", @id = "ContactPersonMobile" })
-                            <p class="hidden" style="color: maroon;" id="valmobile">Please Enter Contact Person Mobile Number</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="exampleInputName2" class="col-sm-3 control-label  left">Confirm Password</label>
+                            <div class="col-sm-9">
+                                @Html.PasswordFor(a => a.password, new { @class = "form-control", placeholder = "Enter password", title = "password", @id = "confirmpassword" })
+                                <p class="hidden" style="color: maroon;" id="valconfirmpassword">Please Confirm Your password</p>
+                                <p class="hidden" style="color: maroon;" id="valpasserror">Password not match</p>
 
-
-
-
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="customerAddress" class="col-sm-3 control-label left">User Name</label>
-                        <div class="col-sm-9">
-                            @Html.TextBoxFor(a => a.UserName, new { @class = "form-control", placeholder = "Enter UserName", title = "UserName", @id = "UserName" })
-                            <p class="hidden" id="CheckUserNameExist"></p>
-                            <p class="hidden" style="color: maroon;" id="valmobile">Please Enter User Name</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="exampleInputName2" class="col-sm-3 control-label  left">Email</label>
-                        <div class="col-sm-9">
-                            @Html.TextBoxFor(a => a.Email, new { @class = "form-control", placeholder = "Enter Email", title = "Email", @id = "Email" })
-                            <p class="hidden" id="EmailCheckExist"></p>
-                            <p class="hidden" style="color: maroon;" id="valemail">Please Enter Email Id</p>
-
+                            </div>
                         </div>
                     </div>
                 </div>
 
             </div>
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="exampleInputName2" class="col-sm-3 control-label  left">Password</label>
-                        <div class="col-sm-9">
-                            @Html.PasswordFor(a => a.password, new { @class = "form-control", placeholder = "Enter password", title = "password", @id = "password" })
-                            <p class="hidden" style="color: maroon;" id="valpassword">Please Enter Password </p>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="exampleInputName2" class="col-sm-3 control-label  left">Confirm Password</label>
-                        <div class="col-sm-9">
-                            @Html.PasswordFor(a => a.password, new { @class = "form-control", placeholder = "Enter password", title = "password", @id = "confirmpassword" })
-                            <p class="hidden" style="color: maroon;" id="valconfirmpassword">Please Confirm Your password</p>
-                            <p class="hidden" style="color: maroon;" id="valpasserror">Password not match</p>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-                       
-        </div>
             <div class="modal-footer" style="background-color: #f0f4f7;">
+
                 <div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;background-color:azure;"><img src='~/images/demo_wait.gif' width="64" height="64" /><br><b>Loading..</b></div>
                 <button type="button" class="btn btn-success" onclick="Registration();">Submit</button>
                 <button type="button" class="btn btn-warning" onclick="frmclose();">close</button>
             </div>
         }
     </div>
-    </div>
+        </div>
 
     <script>
 
@@ -259,8 +273,11 @@
                     Mobile: $("#Mobile").val()
                 },
                 success: function (da) {
+                    
                     $('#CheckMobileExist').html(da);
-                    if ($('#CheckMobileExist').text() == 'Email id is available') {
+                    if ($('#CheckMobileExist').text() == 'Mobile no already exist') {
+                        $("#CheckMobileExist").removeClass("hidden");
+                        $("#CheckMobileExist").addClass("emailred");
                       $("#valMobile").addClass("hidden");
                     }
                     else {
@@ -296,10 +313,9 @@
                 },
                 success: function (da) {
                     $('#CheckUserNameExist').html(da);
-                    if ($('#CheckUserNameExist').text() == 'Email id is available') {
+                    if ($('#CheckUserNameExist').text() == 'User Name already exist') {
                         $("#CheckUserNameExist").removeClass("hidden");
-                        $("#CheckUserNameExist").removeClass("emailred")
-                        $("#CheckUserNameExist").addClass("emailgreen");
+                        $("#CheckUserNameExist").addClass("emailred");
                         $("#valUserName").addClass("hidden");
                     }
                     else {
@@ -345,7 +361,7 @@
 
         function callestimate() {
 
-            var TeamDetailPostBackURL = '/Home/EstimateCost';
+            var TeamDetailPostBackURL = '/Home/PaymentCheckout';
 
             $.ajax({
                 type: "GET",
@@ -354,7 +370,7 @@
                 data: {},
                 datatype: "json",
                 success: function (data) {
-                    $('#mdlLoginpay12').html(data);
+                    $('#grid').html(data);
 
                 },
                 error: function () {
@@ -452,12 +468,15 @@
                 return false;
             }
             else if ($("#EmailCheckExist").text() == "Email id already exist") {
-
                 return false;
             }
-
-
-
+            else if ($("#CheckMobileExist").text() == "Mobile no already exist") {
+                return false;
+            }
+            else if ($("#CheckUserNameExist").text() == "User Name already exist") {
+                return false;
+            }
+                       
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -466,20 +485,25 @@
                 data:
                 {
                     Name: $("#Name").val(),
+                    BusinessName:$("#BusinessName").val(),
+                    ContactPerson: $("#ContactPerson").val(),
+                    ContactPersonMobile: $("#ContactPersonMobile").val(),
                     Address: $("#Address").val(),
+                    City: $("#City").val(),
+                    PinCode: $("#PinCode").val(),
                     Email: $("#Email").val(),
                     Mobile: $("#Mobile").val(),
-                    ContactPerson: $("#ContactPerson").val(),
-                    Email: $("#Email").val(),
+                    UserName:$("#UserName").val(),
                     password: $("#password").val()
+
 
                 },
                 success: function (da) {
-                    alert(da);
+                  
                     if (da == 'Registration Sucessfull') {
-                        $("#myModal .close").click()
-                        location.reload();
-                        //callestimate();
+                        alert(da);
+                       // Loginmodalcall()
+                        callestimate();
 
                     }
 
