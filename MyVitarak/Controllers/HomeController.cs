@@ -47,8 +47,8 @@ namespace MyVitarak.Controllers
 
                 JobDbContext2 _db = new JobDbContext2();
                 var result = _db.LoginDetail.SqlQuery(@"exec usp_login 
-                @Email,@password",
-                    new SqlParameter("@Email", L.UserName),
+                @username,@password",
+                    new SqlParameter("@username", L.UserName),
                     new SqlParameter("@password", L.password)).ToList<Login>();
                 Login data = new Login();
                 data = result.FirstOrDefault();
@@ -64,9 +64,18 @@ namespace MyVitarak.Controllers
                     Session["BusinessName"] = data.DbName;
                     Session["MobileNo"] = data.MobileNo;
                     Session["Name"] = data.Name;
-
+                    Session["UserID"] = data.UserID;
+                    Session["IsLiveUser"] = data.IsLiveUser;
+                    if(data.IsLiveUser==1)
+                    {
+                        return Json("Live");
+                    }
+                    else
+                    {
+                        return Json("NonLive");
+                    }
                     //  GetDbSchemaStatus(data.RegistrationID);
-                    return Json("Login Sucessfull");
+                    //return Json("Login Sucessfull");
 
                 }
             }
@@ -82,10 +91,12 @@ namespace MyVitarak.Controllers
 
         public void InsertDbschemaInUSerDatabase()
         {
-
+            
+            
             using (JobDbContext context = new JobDbContext())
             {
-
+                var c=context.Database.BeginTransaction();
+               
                 var conn = context.Database.Connection;
                 var connectionState = conn.State;
                 //var temp = "";
@@ -108,10 +119,12 @@ namespace MyVitarak.Controllers
                             }
                         }
                     }
+                    c.Commit();
                 }
                 catch (Exception ex)
                 {
                     // error handling
+                    c.Rollback();
                     var messege = ex.Message;
 
                 }
@@ -262,7 +275,7 @@ namespace MyVitarak.Controllers
                     if (connectionState != ConnectionState.Open) conn.Open();
                     using (var cmd = conn.CreateCommand())
                     {
-                        cmd.CommandText = "[uspInsertTenant]";
+                        cmd.CommandText = "uspInsertTenant";
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add(new SqlParameter("@mName", rs.Name));
                         cmd.Parameters.Add(new SqlParameter("@mDbname", rs.DbName));
@@ -502,6 +515,18 @@ namespace MyVitarak.Controllers
             return Request.IsAjaxRequest()
                    ? (ActionResult)PartialView("PlanRate",data)
                    : View("PlanRate",data);
+        }
+        public ActionResult Profile()
+        {
+            JobDbContext2 _db = new JobDbContext2();
+            var result = _db.RegistrationDetails.SqlQuery(@"exec uspGetRegDetails @RegistrationId",
+                    new SqlParameter("@RegistrationId", Session["UserID"])).ToList<RegistrationDetails>();
+            RegistrationDetails  data = result.FirstOrDefault();
+
+            return Request.IsAjaxRequest()
+                   ? (ActionResult)PartialView("Profile", data)
+                   : View("Profile", data);
+           
         }
     }
 }

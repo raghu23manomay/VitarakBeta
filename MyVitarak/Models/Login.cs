@@ -18,7 +18,7 @@ namespace MyVitarak.Models
         public int? UserTypeID { get; set; }
         public Boolean isActive   { get; set; }
         public string DbName { get; set; }
-
+        public int? IsLiveUser { get; set; }  
     }
 
     public partial class Payment
@@ -74,7 +74,7 @@ namespace MyVitarak.Models
         public string password { get; set; }
         public string Mobile { get; set; }
         public string ContactPerson { get; set; }
-
+        public string BusinessName { get; set; }
     }
 
     public partial class SecurityCode

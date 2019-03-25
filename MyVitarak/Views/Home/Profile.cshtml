@@ -1,0 +1,88 @@
+﻿@{
+    Layout = "~/Views/Shared/_TempLayout.cshtml";
+}
+
+<!-- All CSS -->
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+<!-- Bootstrap CSS -->
+<link href="~/WebSite/css/bootstrap.min.css" rel="stylesheet">
+<!-- FontAwesome CSS -->
+<link href="~/WebSite/css/font-awesome.min.css" rel="stylesheet">
+ 
+<link href="~/WebSite/css/animate.css" rel="stylesheet">
+<!-- Normalize CSS -->
+<link href="~/WebSite/css/normalize.css" rel="stylesheet">
+<!-- Main CSS -->
+<link href="~/WebSite/css/main.css" rel="stylesheet">
+<!-- Style CSS -->
+<link href="~/WebSite/css/style.css" rel="stylesheet">
+<!-- Responsive CSS -->
+<link href="~/WebSite/css/responsive.css" rel="stylesheet">
+
+@model  MyVitarak.Models.RegistrationDetails
+<div class="container">
+
+
+    <div class="row" style="margin-top:80px;">
+        <div class="col-md-6">  
+            <div class="">
+                <div class="">
+                    <div>
+                        <h2 class="no-margins">
+                            @Model.Name
+                        </h2>
+                        <h4>  @Model.BusinessName</h4>
+                        <small> 
+                            @Model.Mobile 
+                        </small>
+                        <small>
+                            @Model.ContactPerson
+                        </small> <small>
+    @Model.Email
+</small>
+                    </div>
+                   </div>
+               </div>
+           </div>
+           <div class="col-md-3">
+
+           </div>
+           <div class="col-md-3">
+               <small>Selected Plan</small>
+               <h2 class="no-margins">Trial</h2>
+               <div id="sparkline1"></div>
+           </div>
+
+
+       </div>
+
+       <div class="row">
+
+           <div class="col-lg-3">
+           </div>
+       </div>
+
+       <div></div>
+   </div>
+   <section id="pricing" class="pricing-area section-padding">
+       <div id="PlanRate"> 
+       </div>
+                      
+ </section>
+
+                            <script>
+
+    $(document).ready(function () {
+
+         $.ajax({
+            url: "@Url.Action("PlanRate", "Home")",
+             data: JSON.stringify({ id: 0}),
+             dataType: "text",
+             success: function (data) {
+                 $('#PlanRate').html(data);
+            }
+        });
+
+    });
+
+                            </script>

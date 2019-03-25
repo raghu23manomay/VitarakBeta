@@ -1193,3 +1193,20 @@ table tbody{
         transform: rotate(360deg);
     }
 }
+.profile-image {
+    width: 120px;
+    float: left;
+}
+.profile-info {
+    margin-left: 120px;
+}
+img.circle-border {
+    border: 6px solid #FFFFFF;
+    border-radius: 50%;
+}
+.m-b-md {
+    margin-bottom: 20px;
+}
+img {
+    vertical-align: middle;
+}

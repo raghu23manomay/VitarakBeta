@@ -86,12 +86,15 @@
                     password: $("#password").val()
                 },
                 success: function (da) {
-                    if (da == "Login Sucessfull") {
-                        $('#error').html(da);
+                    if (da == "Live") {
+                        url = "/Master/Dashboard";
+                       // $('#error').html(da);
                         window.location.href = url;
                     }
                     else {
-                        $('#error').html(da);
+                        url = "/Home/Profile";
+                        window.location.href = url;
+                      //  $('#error').html(da);
                     }
 
                 },
