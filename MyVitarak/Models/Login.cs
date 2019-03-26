@@ -106,7 +106,7 @@ namespace MyVitarak.Models
         [Key]
         public Int64 TenantID { get; set; }
         public Int64 RegistrationID { get; set; }
-        public Boolean isDbSchema { get; set; }
+        public Boolean isSchemaCreated { get; set; }
 
     } 
 

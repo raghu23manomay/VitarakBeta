@@ -11,6 +11,7 @@ using System.Configuration;
 using System.Web.Configuration;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Data.Entity;
 
 namespace MyVitarak.Controllers
 {
@@ -65,13 +66,16 @@ namespace MyVitarak.Controllers
                     Session["MobileNo"] = data.MobileNo;
                     Session["Name"] = data.Name;
                     Session["UserID"] = data.UserID;
+                  
                     Session["IsLiveUser"] = data.IsLiveUser;
                     if(data.IsLiveUser==1)
                     {
+                        GetDbSchemaStatus(data.TenantID);
                         return Json("Live");
                     }
                     else
                     {
+                        Session["RegID"] = data.UserID;
                         return Json("NonLive");
                     }
                     //  GetDbSchemaStatus(data.RegistrationID);
@@ -89,14 +93,15 @@ namespace MyVitarak.Controllers
         }
 
 
-        public void InsertDbschemaInUSerDatabase()
+        public void InsertDbschemaInUSerDatabase(Int64? regid, Int64? Tenantid)
         {
-            
-            
+
+          
             using (JobDbContext context = new JobDbContext())
             {
+                DbContextTransaction dbTran = context.Database.BeginTransaction();
               //  var c=context.Database.BeginTransaction();
-               
+
                 var conn = context.Database.Connection;
                 var connectionState = conn.State;
                
@@ -104,29 +109,29 @@ namespace MyVitarak.Controllers
                 {
                     var script = System.IO.File.ReadAllText(Server.MapPath(@"~/Scripts/DBSchema.sql"));
                     IEnumerable<string> commandStrings = Regex.Split(script, @"^\s*GO\s*$", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-                    
+
                     // Start a local transaction.
+
                     
-                   
+                        
                     if (connectionState != ConnectionState.Open) conn.Open();
                     foreach (string commandString in commandStrings)
                     {
                         if (commandString.Trim() != "")
                         {
-                            using (var cmd = conn.CreateCommand())
-                            {
-                                cmd.CommandText = commandString;
-                                cmd.CommandType = CommandType.Text;
-                                cmd.ExecuteNonQuery();
-                            }
+                            var res = 0;
+                            res = context.Database.ExecuteSqlCommand(commandString);
                         }
                     }
-                   // c.Commit();
+                    dbTran.Commit();
+                    updateDbShemaStatus(regid, Tenantid);
+                    // c.Commit();
                 }
                 catch (Exception ex)
                 {
                     // error handling
-                  //  c.Rollback();
+                    //  c.Rollback();
+                    dbTran.Rollback();
                     var messege = ex.Message;
 
                 }
@@ -138,26 +143,27 @@ namespace MyVitarak.Controllers
         }
 
 
-        public void updateDbShemaStatus(Int64? regid)
+        public void updateDbShemaStatus(Int64? regid, Int64? Tenantid)
         {
             JobDbContext2 _db2 = new JobDbContext2();
-            var result = _db2.Database.ExecuteSqlCommand(@"exec Usp_UpdateDbScemaStatus @RegistrationID",
-             new SqlParameter("@RegistrationID", regid));
+            var result = _db2.Database.ExecuteSqlCommand(@"exec Usp_UpdateDbScemaStatus @RegistrationID,@Tenantid",
+             new SqlParameter("@RegistrationID", regid),
+              new SqlParameter("@Tenantid", Tenantid));
         }
 
 
-        public void GetDbSchemaStatus(Int64? regid)
+        public void GetDbSchemaStatus(Int64? TenantID)
         {
             JobDbContext2 _db2 = new JobDbContext2();
-            var result = _db2.CheckDbSchema.SqlQuery(@"exec Usp_GetDbScemaStatus @RegistrationID",
-                new SqlParameter("@RegistrationID", regid)).ToList<CheckDbSchema>();
+            var result = _db2.CheckDbSchema.SqlQuery(@"exec Usp_GetDbScemaStatus @TenantID",
+                new SqlParameter("@TenantID", TenantID)).ToList<CheckDbSchema>();
             CheckDbSchema data = new CheckDbSchema();
             data = result.FirstOrDefault();
 
-            if (data.isDbSchema == false)
+            if (data.isSchemaCreated == false)
             {
-                InsertDbschemaInUSerDatabase();
-                updateDbShemaStatus(regid);
+                InsertDbschemaInUSerDatabase(0, TenantID);
+               // updateDbShemaStatus(0, TenantID);
             }
 
         }
@@ -289,10 +295,11 @@ namespace MyVitarak.Controllers
                         cmd.Parameters.Add(new SqlParameter("@mSecurityCode",SercurityCode));
                         cmd.Parameters.Add(new SqlParameter("@misActive", true));
                         cmd.Parameters.Add(new SqlParameter("@misReadOnly",false));
-                        
+                        cmd.Parameters.Add(new SqlParameter("@mRegID",Convert.ToInt64(Session["RegID"].ToString())));
+
                         cmd.ExecuteNonQuery();
                     }
-                    InsertDbschemaInUSerDatabase();
+                    InsertDbschemaInUSerDatabase(Convert.ToInt64(Session["RegID"].ToString()),0);
                 }
                 catch (Exception ex)
                 {
@@ -581,7 +588,7 @@ namespace MyVitarak.Controllers
             //_spService.BindDropdown("PricingUser", "", "").Select(i => new { i.Value, i.Text }).ToList();
             return Json(lstItem, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Profile()
+        public ActionResult Profile1()
         {
             JobDbContext2 _db = new JobDbContext2();
             var result = _db.RegistrationDetails.SqlQuery(@"exec uspGetRegDetails @RegistrationId",
