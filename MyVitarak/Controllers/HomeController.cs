@@ -218,6 +218,13 @@ namespace MyVitarak.Controllers
             try
             {
                 var res = 0;
+                var outParam = new SqlParameter
+                {
+                    ParameterName = "@Param",
+                    DbType = System.Data.DbType.Int64,
+                    Size = 20,
+                    Direction = System.Data.ParameterDirection.Output
+                };
                 res = _db.Database.ExecuteSqlCommand(@"exec uspInsertRegistration
                     @pName,
                     @pBusinessName,
@@ -229,7 +236,7 @@ namespace MyVitarak.Controllers
                     @pEmail,
                     @pMobile,
                     @pUserName,
-                    @pPasssword",
+                    @pPasssword, @Param out",
                     new SqlParameter("@pName", rs.Name),
                     new SqlParameter("@pBusinessName", rs.BusinessName),
                     new SqlParameter("@pContactPerson", rs.ContactPerson),
@@ -240,8 +247,8 @@ namespace MyVitarak.Controllers
                     new SqlParameter("@pEmail", rs.Email),
                     new SqlParameter("@pMobile", rs.Mobile),
                     new SqlParameter("@pUserName", rs.UserName),
-                    new SqlParameter("@pPasssword", rs.password)
-
+                    new SqlParameter("@pPasssword", rs.password),
+                    outParam  
                     );
                               
                 Session["CName"] = rs.Name;
@@ -249,7 +256,9 @@ namespace MyVitarak.Controllers
                 Session["ContactPerson"] = rs.ContactPerson;
                 Session["Address"] = rs.Address;
                 Session["Mobile"] = rs.Mobile;
-                Session["UserName"] = rs.UserName;
+                Session["UserName"] = rs.UserName; 
+                 Session["RegID"] = outParam.Value;
+                 
                 return Json("Registration Sucessfull");
                 
 
@@ -592,7 +601,7 @@ namespace MyVitarak.Controllers
         {
             JobDbContext2 _db = new JobDbContext2();
             var result = _db.RegistrationDetails.SqlQuery(@"exec uspGetRegDetails @RegistrationId",
-                    new SqlParameter("@RegistrationId", Session["UserID"])).ToList<RegistrationDetails>();
+                    new SqlParameter("@RegistrationId", Session["RegID"])).ToList<RegistrationDetails>();
             RegistrationDetails  data = result.FirstOrDefault();
 
             Session["CName"] = data.Name;

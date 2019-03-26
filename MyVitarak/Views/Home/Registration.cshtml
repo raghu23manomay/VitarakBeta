@@ -47,6 +47,11 @@
             <div class="alert alert-success text-center large-text" role="alert">
                 Total Due Today: &nbsp; <strong>@Session["Total"]</strong>
             </div>
+            @Html.Hidden("TotalAmount", Session["Total"], new { id = "TotalAmount" })
+        }
+        else
+        {
+            @Html.Hidden("TotalAmount",0, new { id = "TotalAmount" })
         }
 
         @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-horizontal", id = "frmregistration" }))
@@ -107,7 +112,7 @@
                         <div class="form-group">
                             <label for="exampleInputName2" class="col-sm-3 control-label left">City</label>
                             <div class="col-sm-9">
-                                @Html.TextBoxFor(a => a.City, new { @class = "form-control", placeholder = "Select City Name", title = "City", @id = "City" })                              
+                                @Html.TextBoxFor(a => a.City, new { @class = "form-control", placeholder = "Select City Name", title = "City", @id = "City" })
                                 <input type="text" class="hidden" id="CityId" value="" />
                                 <p class="hidden" style="color: maroon;" id="valCity">Please Select City Name</p>
                             </div>
@@ -391,9 +396,15 @@
 
         //============================================== Estimate modal call ==========================================================
 
-        function callestimate() {
-
-            var TeamDetailPostBackURL = '/Home/PaymentCheckout';
+    function callestimate() {
+        var TeamDetailPostBackURL = '/Home/PaymentCheckout';
+            var TotalAmount = $("#TotalAmount").val();
+            if (TotalAmount != 0 && TotalAmount != undefined) {
+                  TeamDetailPostBackURL = '/Home/PaymentCheckout';
+            }
+            else {
+                  TeamDetailPostBackURL = '/Home/Profile1';
+            }
 
             $.ajax({
                 type: "GET",
@@ -605,7 +616,8 @@
 
                     if (da == 'Registration Sucessfull') {
                         alert(da);
-                       // Loginmodalcall()
+                       
+                         
                         callestimate();
 
                     }

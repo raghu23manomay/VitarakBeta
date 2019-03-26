@@ -344,6 +344,7 @@
     <Content Include="Views\Home\PlanRate.cshtml" />
     <Content Include="Views\Home\PaymentCheckout.cshtml" />
     <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
