@@ -100,7 +100,7 @@ namespace MyVitarak.Controllers
             using (JobDbContext context = new JobDbContext())
             {
                 DbContextTransaction dbTran = context.Database.BeginTransaction();
-              //  var c=context.Database.BeginTransaction();
+             
 
                 var conn = context.Database.Connection;
                 var connectionState = conn.State;
@@ -109,11 +109,7 @@ namespace MyVitarak.Controllers
                 {
                     var script = System.IO.File.ReadAllText(Server.MapPath(@"~/Scripts/DBSchema.sql"));
                     IEnumerable<string> commandStrings = Regex.Split(script, @"^\s*GO\s*$", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-
-                    // Start a local transaction.
-
-                    
-                        
+           
                     if (connectionState != ConnectionState.Open) conn.Open();
                     foreach (string commandString in commandStrings)
                     {
@@ -125,12 +121,10 @@ namespace MyVitarak.Controllers
                     }
                     dbTran.Commit();
                     updateDbShemaStatus(regid, Tenantid);
-                    // c.Commit();
+                    
                 }
                 catch (Exception ex)
                 {
-                    // error handling
-                    //  c.Rollback();
                     dbTran.Rollback();
                     var messege = ex.Message;
 
@@ -245,7 +239,7 @@ namespace MyVitarak.Controllers
                     );
                               
                 Session["CName"] = rs.Name;
-                Session["BusinessName"] = rs.BusinessName.Replace(" ", ""); ;
+                Session["BusinessName"] = rs.BusinessName.Replace(" ", "_"); ;
                 Session["ContactPerson"] = rs.ContactPerson;
                 Session["Address"] = rs.Address;
                 Session["Mobile"] = rs.Mobile;
@@ -596,7 +590,7 @@ namespace MyVitarak.Controllers
             RegistrationDetails  data = result.FirstOrDefault();
 
             Session["CName"] = data.Name;
-            Session["BusinessName"] = data.BusinessName.Replace(" ", ""); ;
+            Session["BusinessName"] = data.BusinessName.Replace(" ", "_"); ;
             Session["ContactPerson"] = data.ContactPerson;
             Session["Address"] = data.Address;
             Session["Mobile"] = data.Mobile;

@@ -154,7 +154,7 @@
                         <div class="form-group">
                             <label for="customerAddress" class="col-sm-3 control-label left">User Name</label>
                             <div class="col-sm-9">
-                                @Html.TextBoxFor(a => a.UserName, new { @class = "form-control", placeholder = "Enter UserName", title = "UserName", @id = "UserName" })
+                                @Html.TextBoxFor(a => a.UserName, new { @class = "form-control", placeholder = "Enter UserName", title = "UserName", @id = "UserName", disabled = "disabled" })
                                 <p class="hidden" id="CheckUserNameExist"></p>
                                 <p class="hidden" style="color: maroon;" id="valmobile">Please Enter User Name</p>
                             </div>
@@ -344,6 +344,7 @@
                     BusinessName: $("#BusinessName").val()
                 },
                 success: function (da) {
+                    $("#UserName").val($("#BusinessName").val().replace(' ','_') + '_Admin');
                     $('#CheckBusinessNameExist').html(da);
                     if ($('#CheckBusinessNameExist').text() == 'Business Name already exist') {
                         $("#CheckBusinessNameExist").removeClass("hidden");
