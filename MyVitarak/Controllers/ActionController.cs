@@ -14,6 +14,7 @@ using System.Web.UI;
 using Newtonsoft.Json;
 using System.Text;
 using System.Security.Cryptography;
+using System.Web.UI.WebControls;
 
 namespace MyVitarak.Controllers
 {
@@ -70,9 +71,8 @@ namespace MyVitarak.Controllers
                 {
                     if (connectionState != ConnectionState.Closed) conn.Close();
                 }
-                //TempData["Data"] = dt;
-                //Download();
-
+                TempData["Data"] = dt;
+               
                 return View(dt);
             }
 
@@ -113,9 +113,8 @@ namespace MyVitarak.Controllers
                 {
                     if (connectionState != ConnectionState.Closed) conn.Close();
                 }
-                //TempData["Data"] = dt;
-                //Download();
-
+                TempData["Data"] = dt;
+               
                 return Request.IsAjaxRequest()
                       ? (ActionResult)PartialView("_PartialPurchaseRate", dt)
                       : View("_PartialPurchaseRate", dt);
@@ -129,53 +128,26 @@ namespace MyVitarak.Controllers
         [ActionName("Download")]
         public void Download()
         {
+            
             DataTable emps = TempData["Data"] as DataTable;
-            var grid = new System.Web.UI.WebControls.GridView();
-            grid.DataSource = emps;
-            grid.DataBind();
-            Response.ClearContent();
-            Response.Buffer = true;
-            Response.Charset = "";
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter htw = new HtmlTextWriter(sw);
-            grid.RenderControl(htw);
-            string filePath = Server.MapPath("~/PurchaseRateClientXLSheet/" + 1 + "/generated/");
+            var gv = new GridView();
+                gv.DataSource = emps;
+                gv.DataBind();
+                Response.ClearContent();
+                Response.Buffer = true;
+                Response.AddHeader("content-disposition", "attachment; filename=ExcelSheet.xls");
+                Response.ContentType = "application/ms-excel";
+                Response.Charset = "";
+                StringWriter objStringWriter = new StringWriter();
+                HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+                gv.RenderControl(objHtmlTextWriter);
+                Response.Output.Write(objStringWriter.ToString());
+                Response.Flush();
+                Response.End();
+               
+    }
 
-            bool isExists = System.IO.Directory.Exists(filePath);
-            if (!isExists) { System.IO.Directory.CreateDirectory(filePath); }
-
-            string fileName = "PurchaseRate" + ".xls";
-            // Write the rendered content to a file.
-            string renderedGridView = sw.ToString();
-            System.IO.File.WriteAllText(filePath + fileName, renderedGridView);
-
-        }
-
-        [HttpGet]
-        [ActionName("DownloadPurchaseExcel")]
-        public void DownloadPurchaseExcel()
-        {
-            DataTable emps = TempData["Data"] as DataTable;
-            var grid = new System.Web.UI.WebControls.GridView();
-            grid.DataSource = emps;
-            grid.DataBind();
-            Response.ClearContent();
-            Response.Buffer = true;
-            Response.Charset = "";
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter htw = new HtmlTextWriter(sw);
-            grid.RenderControl(htw);
-            string filePath = Server.MapPath("~/PurchaseClientXLSheet/" + 1 + "/generated/");
-
-            bool isExists = System.IO.Directory.Exists(filePath);
-            if (!isExists) { System.IO.Directory.CreateDirectory(filePath); }
-
-            string fileName = "Purchase" + ".xls";
-            // Write the rendered content to a file.
-            string renderedGridView = sw.ToString();
-            System.IO.File.WriteAllText(filePath + fileName, renderedGridView);
-
-        }
+        
 
         public ActionResult Purchase(DateTime? date)
         {
@@ -222,8 +194,8 @@ namespace MyVitarak.Controllers
                     if (connectionState != ConnectionState.Closed) conn.Close();
                 }
 
-                //TempData["Data"] = dt;
-                //DownloadPurchaseExcel();
+                TempData["Data"] = dt;
+                
                 return View(dt);
             }
 
@@ -271,9 +243,8 @@ namespace MyVitarak.Controllers
                     if (connectionState != ConnectionState.Closed) conn.Close();
                 }
 
-                //TempData["Data"] = dt;
-                //DownloadPurchaseExcel();
-
+                TempData["Data"] = dt;
+               
                 return Request.IsAjaxRequest()
                      ? (ActionResult)PartialView("_partialPurchaseGrid", dt)
                      : View("_partialPurchaseGrid", dt);

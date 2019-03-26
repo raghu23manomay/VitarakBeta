@@ -39,7 +39,7 @@ namespace MyVitarak.Models
         public string Product { get; set; }
         public int ProductBrandID { get; set; }
         public int CrateSize { get; set; }
-        public Decimal GST { get; set; }
+        public Decimal? GST { get; set; }
         public int? TotalRows { get; set; }
 
     }
@@ -190,7 +190,7 @@ namespace MyVitarak.Models
         public string CustomerType { get; set; }
         public Boolean isBillRequired { get; set; }
         public Boolean isActive { get; set; }
-        public Decimal DeliveryCharges { get; set; }
+        public Decimal? DeliveryCharges { get; set; }
     }
 
 
@@ -210,7 +210,7 @@ namespace MyVitarak.Models
         public int VehicleID { get; set; }
         public Boolean isBillRequired { get; set; }
         public Boolean isActive { get; set; }
-        public Decimal DeliveryCharges { get; set; }
+        public Decimal? DeliveryCharges { get; set; }
         public string Area { get; set; }
         public string VechicleNo { get; set; }
         public int? TotalRows { get; set; }

@@ -11,6 +11,7 @@ using System.IO;
 using System.Data.OleDb;
 using System.Xml;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace MyVitarak.Controllers
 {
@@ -1592,7 +1593,6 @@ namespace MyVitarak.Controllers
                     dt.Columns.Add("CityId", typeof(int));
                     dt.Columns.Add("LastUpdatedDate", typeof(DateTime));
 
-
                     foreach (var item in SaveLaneRate)
                     {
                         DataRow dr = dt.NewRow();
@@ -1643,30 +1643,25 @@ namespace MyVitarak.Controllers
         public void Download()
         {
             DataTable emps = TempData["Data"] as DataTable;
-            var grid = new System.Web.UI.WebControls.GridView();
-            grid.DataSource = emps;
-            grid.DataBind();
+            var gv = new GridView();
+            gv.DataSource = emps;
+            gv.DataBind();
             Response.ClearContent();
             Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=ExcelSheet.xls");
+            Response.ContentType = "application/ms-excel";
             Response.Charset = "";
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter htw = new HtmlTextWriter(sw);
-            grid.RenderControl(htw);
-            string filePath = Server.MapPath("~/CustomerRateXLSheet/" + 1 + "/generated/");
-
-            bool isExists = System.IO.Directory.Exists(filePath);
-            if (!isExists) { System.IO.Directory.CreateDirectory(filePath); }
-
-            string fileName = "CustomerRate" + ".xls";
-            // Write the rendered content to a file.
-            string renderedGridView = sw.ToString();
-            System.IO.File.WriteAllText(filePath + fileName, renderedGridView);
+            StringWriter objStringWriter = new StringWriter();
+            HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+            gv.RenderControl(objHtmlTextWriter);
+            Response.Output.Write(objStringWriter.ToString());
+            Response.Flush();
+            Response.End();
 
         }
         public ActionResult CustomerRates()
         {
-
-
+            
             using (JobDbContext context = new JobDbContext())
             {
                 DataTable dt = new DataTable();
@@ -1701,8 +1696,8 @@ namespace MyVitarak.Controllers
                     if (connectionState != ConnectionState.Closed) conn.Close();
                 }
 
-                //TempData["Data"] = dt;
-                //Download();
+                TempData["Data"] = dt;
+                
                 return View(dt);
             }
 
@@ -1748,8 +1743,8 @@ namespace MyVitarak.Controllers
                     if (connectionState != ConnectionState.Closed) conn.Close();
                 }
 
-                //TempData["Data"] = dt;
-                //Download();
+                TempData["Data"] = dt;
+               
                 return View("Partial_CustomerRates", dt);
             }
 

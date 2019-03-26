@@ -58,7 +58,6 @@
 </div>
 
 
-
 <script>
 
     function frmclose() {
@@ -67,13 +66,14 @@
     }
 
     $(document).ready(function () {
+       
         $(document).ajaxStart(function () {
             $("#wait").css("display", "block");
         });
         $(document).ajaxComplete(function () {
             $("#wait").css("display", "none");
         });
-
+       
         var url = "/Master/Dashboard";
         $('#btnlogin').on('click', function (e) {
 
@@ -91,7 +91,7 @@
                        // $('#error').html(da);
                         window.location.href = url;
                     }
-                    else {
+                    else if (da == "NonLive") {
                         url = "/Home/Profile";
                         window.location.href = url;
                       //  $('#error').html(da);
@@ -108,14 +108,6 @@
 
 
     });
-
-    //$('#frmloginmodal').on("submit", function (e) {
-    //    e.preventDefault();
-    //    login();
-    //});
-
-
-
 
     //============================================== Registration modal call ==========================================================
 
@@ -140,41 +132,6 @@
 
     }
 
-            //function login() {
-
-            //    debugger;
-            //    var url = "/Master/Dashboard";
-
-            //    $.ajax({
-            //        type: 'POST',
-            //        dataType: 'json',
-            //        url: '/Home/Login',
-
-            //        data:
-            //        {
-
-            //            Email: $("#username").val(),
-            //            password: $("#password").val()
-
-            //        },
-            //        success: function (da) {
-            //            // alert(da);
-            //            if (da == "Login Sucessfull") {
-            //                $('#error').html(da);
-            //                window.location.href = url;
-            //            }
-            //            else {
-            //                $('#error').html(da);
-            //            }
-            //        },
-
-            //        error: function (XMLHttpRequest, textStatus, errorThrown) {
-
-            //            alert(textStatus);
-            //        }
-            //    });
-
-            //    return false;
-            //}
+          
 
 </script>
