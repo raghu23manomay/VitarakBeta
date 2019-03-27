@@ -98,7 +98,8 @@ namespace MyVitarak.Models
         public bool isActive   { get; set; }
         public bool isReadOnly { get; set; }
         public string DbName { get; set; }
-
+        public Int32 PlanID { get; set; }
+        public Int64 PaidAmount { get; set; }
     }
 
     public partial class CheckDbSchema

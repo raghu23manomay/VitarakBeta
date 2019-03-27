@@ -168,7 +168,7 @@ namespace MyVitarak.Controllers
             {
                 if (planid > 0)
                 { 
-                    if(Session["UserID"]!=null)
+                    if(Session["RegID"]!=null)
                     {
                         Response.Redirect("PaymentCheckout",false);
                     }
@@ -290,15 +290,17 @@ namespace MyVitarak.Controllers
                     {
                         cmd.CommandText = "uspInsertTenant";
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add(new SqlParameter("@mName", rs.Name));
-                        cmd.Parameters.Add(new SqlParameter("@mDbname", rs.DbName));
-                        cmd.Parameters.Add(new SqlParameter("@mAddress", rs.Address));
-                        cmd.Parameters.Add(new SqlParameter("@mMobile", rs.Mobile));
-                        cmd.Parameters.Add(new SqlParameter("@mContactPerson", rs.ContactPerson));
-                        cmd.Parameters.Add(new SqlParameter("@mSecurityCode",SercurityCode));
-                        cmd.Parameters.Add(new SqlParameter("@misActive", true));
-                        cmd.Parameters.Add(new SqlParameter("@misReadOnly",false));
-                        cmd.Parameters.Add(new SqlParameter("@mRegID",Convert.ToInt64(Session["RegID"].ToString())));
+                        cmd.Parameters.Add(new SqlParameter("@pName", rs.Name));
+                        cmd.Parameters.Add(new SqlParameter("@pDbname", rs.DbName));
+                        cmd.Parameters.Add(new SqlParameter("@pAddress", rs.Address));
+                        cmd.Parameters.Add(new SqlParameter("@pMobile", rs.Mobile));
+                        cmd.Parameters.Add(new SqlParameter("@pContactPerson", rs.ContactPerson));
+                        cmd.Parameters.Add(new SqlParameter("@pSecurityCode",SercurityCode));
+                        cmd.Parameters.Add(new SqlParameter("@pisActive", true));
+                        cmd.Parameters.Add(new SqlParameter("@pisReadOnly",false));
+                        cmd.Parameters.Add(new SqlParameter("@pRegID",Convert.ToInt64(Session["RegID"].ToString())));
+                        cmd.Parameters.Add(new SqlParameter("@pPlanId", rs.PlanID));
+                        cmd.Parameters.Add(new SqlParameter("@pAmount", rs.PaidAmount));
 
                         cmd.ExecuteNonQuery();
                     }
