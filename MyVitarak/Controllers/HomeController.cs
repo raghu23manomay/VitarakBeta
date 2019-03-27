@@ -249,6 +249,7 @@ namespace MyVitarak.Controllers
                 Session["BusinessName"] = rs.BusinessName.Replace(" ", "_"); ;
                 Session["ContactPerson"] = rs.ContactPerson;
                 Session["Address"] = rs.Address;
+                Session["Email"] = rs.Email;
                 Session["Mobile"] = rs.Mobile;
                 Session["UserName"] = rs.UserName; 
                  Session["RegID"] = outParam.Value;

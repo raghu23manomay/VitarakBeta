@@ -1192,4 +1192,53 @@ table tbody{
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
+
+
+}
+
+.autocomplete-suggestions { /*border: 1px solid #999;*/
+    background: #FFF;
+    overflow: auto;
+}
+
+.autocomplete-suggestion {
+    padding: 2px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.autocomplete-selected {
+    background: #F0F0F0;
+}
+
+.autocomplete-suggestions strong {
+    font-weight: normal;
+    color: #3399FF;
+}
+
+.autocomplete-group {
+    padding: 2px 5px;
+}
+
+    .autocomplete-group strong {
+        display: block;
+        border-bottom: 1px solid #000;
+    }
+}
+.profile-image {
+    width: 120px;
+    float: left;
+}
+.profile-info {
+    margin-left: 120px;
+}
+img.circle-border {
+    border: 6px solid #FFFFFF;
+    border-radius: 50%;
+}
+.m-b-md {
+    margin-bottom: 20px;
+}
+img {
+    vertical-align: middle;
 }

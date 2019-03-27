@@ -345,6 +345,8 @@
     <Content Include="Views\Home\PaymentCheckout.cshtml" />
     <Content Include="Views\Home\Profile.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Master\EmployeeGridList.cshtml" />
+    <Content Include="Views\Master\Partial_OpeningBalance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
