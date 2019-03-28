@@ -3,8 +3,8 @@
 @using PagedList;
 @using PagedList.Mvc;
 @using GridMvc.Html
-@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>*@
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+
 @{           
     ViewBag.Title = "IndexForCustomerMaster";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -49,7 +49,8 @@
             </div>*@
 
 
-        <a href="@Url.Action("importexcel", "Master",new {@Mastername = Session["MasterName"]})"><button type="button" class="btn btn-primary pull-right marginRight15px"><i class="fa fa-download" aria-hidden="true"></i> Import</button></a>
+        <a href="@Url.Action("importexcel", "Master",new {@Mastername = Session["MasterName"]})">
+        <button type="button" class="btn btn-primary pull-right marginRight15px"><i class="fa fa-download" aria-hidden="true"></i> Import</button></a>
         <a href="@Url.Action("Add_Customer", "Master")" data-toggle="modal" data-target="#mdlAddEmployee"><input type="button" value=" + Customer" class="btn btn-primary dropdown-toggle pull-right marginRight15px"></a>
 
 

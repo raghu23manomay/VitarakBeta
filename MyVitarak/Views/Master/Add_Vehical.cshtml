@@ -126,9 +126,9 @@
             $('#OwnerVal').show();
             $('#TransportVal').hide();
         }
-        else if ($('#Address').val() == '' || $('#Address').val().length <= 50) {
+        else if ($('#Address').val() == '' || $('#Address').val().length <= 10) {
             error = 1;
-            alert("Minimum 50 characters Required Address");
+            alert("Minimum 10 characters Required Address");
             $('#AddressVal').show();
             $('#OwnerVal').hide();
             $('#TransportVal').hide();

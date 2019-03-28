@@ -109,6 +109,7 @@
 
         });
     $('#btnsave').on('click', function () {
+        
         var error = 0, regex = /^[a-zA-Z\s]+$/, EmployeeName = $('#EmployeeName').val();
         var a = $('#Mobile').val(), intRegex = /^[0-9]{10}$/;
         if ($('#EmployeeName').val() == '' || (!regex.test(EmployeeName))) {

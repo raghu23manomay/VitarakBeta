@@ -397,6 +397,13 @@ namespace MyVitarak.Controllers
 
             return View();
         }
+        public ActionResult Add_Customer1()
+        {
+            ViewData["Area"] = binddropdown("Area", 0);
+
+            return View();
+        }
+        
 
         [HttpPost]
         public ActionResult AddEmployee(Employee pm)
@@ -1868,7 +1875,7 @@ namespace MyVitarak.Controllers
                     new SqlParameter("@VehicleID", pm.VechicleID),
                     new SqlParameter("@isActive", 1),
                     new SqlParameter("@BillRequired", pm.isBillRequired),
-                    new SqlParameter("@DeliveryCharges", pm.DeliveryCharges)
+                    new SqlParameter("@DeliveryCharges", pm.DeliveryCharges == null ? 0 : pm.DeliveryCharges)
                     );
 
                 return Json("Data Updated Sucessfully");
