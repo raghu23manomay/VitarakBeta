@@ -150,18 +150,19 @@
 
         if ($('#Transport').val() == '' || (!regex.test(Transport))) {
             error = 1;
-            alert("Invalid or Required Transport");
+            alert("Please Enter Transport Name");
+           // $('#TransportVal').html("Please Enter Transport Name");;
             $('#TransportVal').show();
         }
         else if ($('#Owner').val() == '' || (!regex.test($('#Owner').val()))) {
             error = 1;
-            alert("Invalid or Required Owner");
+            alert("Please Enter Owner");
             $('#OwnerVal').show();
             $('#TransportVal').hide();
         }
-        else if ($('#Address').val() == '' || $('#Address').val().length <= 50) {
+        else if ($('#Address').val() == '' || $('#Address').val().length <= 10) {
             error = 1;
-            alert("Minimum 50 characters Required Address");
+            alert("Minimum 10 characters Required Address");
             $('#AddressVal').show();
             $('#OwnerVal').hide();
             $('#TransportVal').hide();

@@ -254,8 +254,8 @@
 
             <p class="hidden" id="planename">@Session["PlanName"] </p>
             <p class="hidden" id="plandesc">@Session["PlanDesc"]</p>
-            <p class="hidden" id="total">@Session["Total"] </p>
-            <p class="hidden" id="pid">@Session["PlanID"] </p>
+            <p class="hidden" id="PaidAmount">@Session["Total"] </p>
+            <p class="hidden" id="PlanID">@Session["PlanID"] </p>
 
 
         </div>
@@ -280,34 +280,34 @@
 
     });
 
-    function SavePayment() {
+    //function SavePayment() {
 
-        var payid = "vitarak1234"
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            url: '/Home/insert_Payment',
+    //    var payid = "vitarak1234"
+    //    $.ajax({
+    //        type: 'POST',
+    //        dataType: 'json',
+    //        url: '/Home/insert_Payment',
 
-            data:
-            {
-                payment_id: payid,
-                registration_id: $("#RegId").text(),
-                p_id: $("#pid").text(),
-                amount: $("#total").text()          
-            },
+    //        data:
+    //        {
+    //            payment_id: payid,
+    //            registration_id: $("#RegId").text(),
+    //            p_id: $("#pid").text(),
+    //            PaidAmount: $("#PaidAmount").text()          
+    //        },
 
-            success: function (da) {
-                alert(da); 
-            },
+    //        success: function (da) {
+    //            alert(da); 
+    //        },
 
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
+    //        error: function (XMLHttpRequest, textStatus, errorThrown) {
 
-                alert(textStatus);
-            }
-        });
+    //            alert(textStatus);
+    //        }
+    //    });
 
-        return false;
-    }
+    //    return false;
+    //}
 
     function SaveTenant() {
        
@@ -323,7 +323,9 @@
                 Address: $("#Address").text(),
                 Mobile: $("#Mobile").text(),
                 ContactPerson: $("#ContactPerson").text(),
-                DbName: $("#BusinessName").text()
+                DbName: $("#BusinessName").text(),
+                PlanID: $("#PlanID").text(),
+                PaidAmount: $("#PaidAmount").text()
 
             },
             success: function (da) {

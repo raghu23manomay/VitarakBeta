@@ -1,19 +1,17 @@
-﻿@model MyVitarak.Models.EmployeeList
+﻿@model MyVitarak.Models.Employee
+
 @{
     Layout = null;
 }
 
-<!DOCTYPE html>
-
 <script src="~/Scripts/jquery-1.12.4.min.js"></script>
-
 
 <div>
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user-plus marginRight15px" aria-hidden="true"></i>Update @Model.EmployeeName details</h4>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user-plus marginRight15px" aria-hidden="true"></i>Employee details</h4>
             </div>
 
             <div class="modal-body">
@@ -21,26 +19,25 @@
                     <div class="form-group">
                         <label for="exampleInputName2" class="col-sm-3 control-label">Name</label>
                         <div class="col-sm-9">
-                            @Html.HiddenFor(model => model.EmployeeID, new { @id = "EmployeeID" })
                             @Html.TextBoxFor(a => a.EmployeeName, new { @class = "form-control r-0 light s-12", placeholder = "Enter First Name", title = "EmployeeName", @id = "EmployeeName" })
-                            @*<label style="color:red" id="Employee">*</label>*@
+                            <label style="color:red" id="Employee">*</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="customerAddress" class="col-sm-3 control-label">Address</label>
                         <div class="col-sm-9">
-                            @Html.TextAreaFor(a => a.Address, new { @class = "form-control r-0 light s-12", placeholder = "Address Minimum 50 Characters ", title = "Address", @id = "Address" })
-                            @*<label style="color:red" id="AddressVal">*</label>*@
+                            @Html.TextBoxFor(a => a.Address, new { @class = "form-control r-0 light s-12", placeholder = "Enter Address", title = "Address", @id = "Address" })
+                            <label style="color:red" id="AddressVal">*</label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="customerArea" class="col-sm-3 control-label">Area / Route</label>
                         <div class="col-sm-9">
-                            @Html.DropDownList("model.AreaID", new SelectList((System.Collections.IEnumerable)ViewData["Area"], "Value", "Text", Model.AreaID), "Select Area", new { @class = "form-control input-sm", @id = "AreaID", Title = "ModeName" })
+                            @Html.DropDownList("Area", new SelectList((System.Collections.IEnumerable)ViewData["Area"], "Value", "Text"), "Select Area", new { @class = "form-control input-sm", @id = "AreaID", Title = "ModeName" })
                             @*@Html.HiddenFor(model => model.AreaID, new { @id = "AreaID" })*@
-                            @Html.ValidationMessageFor(model => model.AreaID, "", new { @class = "text-danger" })
-                            @*<label style="color:red" id="AreaVal">*</label>*@
+                            @Html.ValidationMessageFor(model => model.AreaID, "", new { @class = "text-danger", @id="valareaid" })
+                            <label style="color:red" id="AreaVal">*</label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -53,7 +50,6 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" id="Delete" class="btn btn-primary pull-left" onclick="deleteItem();" data-dismiss="modal">Delete</button>
                 <button type="button" id="Close" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="submit" id="btnsave" class="btn btn-primary">Save changes</button>
             </div>
@@ -62,51 +58,24 @@
 </div>
 
 <script>
-
-    function deleteItem() {
-        if (confirm("Are you sure?")) {
-
-            $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                url: '/Master/DeleteEmployee',
-
-                data:
-                {
-
-                    EmployeeID: $("#EmployeeID").val(),
-
-                },
-                success: function (da) {
-                    location.reload();
-
-
-
-                },
-
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-
-                }
-            });
-        }
-        return false;
-    }
-
     function abc() {
         $('.modal-backdrop').remove();
     }
     $('#Close').on('click', function () {
         location.reload();
     });
+
     $(document).ready(function () {
         $("#Employee").hide();
         $("#AddressVal").hide();
         $("#AreaVal").hide();
         $("#MobileVal").hide();
-
+      //  getArea();
         });
     $('#btnsave').on('click', function () {
-        
+        alert($("#EmployeeName").val());
+        alert($("#valareaid").val());
+
         var error = 0, regex = /^[a-zA-Z\s]+$/, EmployeeName = $('#EmployeeName').val();
         var a = $('#Mobile').val(), intRegex = /^[0-9]{10}$/;
         if ($('#EmployeeName').val() == '' || (!regex.test(EmployeeName))) {
@@ -115,7 +84,7 @@
             $('#Employee').show();
 
         }
-        else if ($('#Address').val() == '' || $('#Address').val().length <= 50) {
+       else if ($('#Address').val() == '' || $('#Address').val().length<=50) {
             error = 1;
             alert("Address must be minimum 50 character");
             $('#AddressVal').show();
@@ -129,7 +98,8 @@
             $('#AddressVal').hide();
         }
 
-        else if ($('#Mobile').val() == '' || (!intRegex.test(a))) {
+        else if ($('#Mobile').val() == '' || (!intRegex.test(a)))
+        {
             error = 1;
             alert("Invalid Mobile number");
             $('#MobileVal').show();
@@ -146,14 +116,13 @@
             $('#AddressVal').hide();
             $('#AreaVal').hide();
             $('#MobileVal').hide();
-           $.ajax({
+            $.ajax({
                 type: 'POST',
                 dataType: 'json',
-               url: '/Master/UpdateEmployee',
+                url: '/Master/AddEmployee',
 
                 data:
                 {
-                    EmployeeID: $("#EmployeeID").val(),
                     EmployeeName: $("#EmployeeName").val(),
                     Address: $("#Address").val(),
                     AreaID: $("#AreaID").val(),
@@ -175,34 +144,6 @@
             });
         }
     });
-
-
-     function getArea()
-    {
-             var returnResult = [];
-                          $.ajax({
-                        contentType: "application/json; charset=utf-8",
-                         url: "@Url.Action("GetArea", "Home")",
-                        method: 'GET',
-                        async: 'false',
-                        dataType: 'json',
-                        success: function (result) {
-                            var data = $.map(result, function (obj) {
-                                obj.value = obj.Text; // desired field
-                                obj.data = obj.Value; // desired field
-                                returnResult.push(obj);
-                                $("#Area").autocomplete({
-                                    lookup: returnResult,
-                                    onSelect: function (suggestion) {
-                                        $("#AreaID").val(suggestion.data);
-
-                                    }
-                                });
-
-                            });
-                        },
-                        error: function () { }
-                  });
-    }
+          
 
 </script>
