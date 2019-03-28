@@ -293,8 +293,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Master\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Master\IndexForEmployeeMaster.cshtml" />
-    <Content Include="Views\Master\Partial_EmployeeGridList.cshtml" />
+    <Content Include="Views\Master\EmployeeList.cshtml" />
+    <Content Include="Views\Master\EmployeeGridList.cshtml" />
     <Content Include="Views\Master\Add_Employee.cshtml" />
     <Content Include="Views\Master\Add_Vehical.cshtml" />
     <Content Include="Views\Master\CustomerRates.cshtml" />
@@ -344,7 +344,6 @@
     <Content Include="Views\Home\PaymentCheckout.cshtml" />
     <Content Include="Views\Home\Profile.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
-    <Content Include="Views\Master\EmployeeGridList.cshtml" />
     <Content Include="Views\Master\Partial_OpeningBalance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

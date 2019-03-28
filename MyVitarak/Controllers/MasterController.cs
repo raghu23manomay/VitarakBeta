@@ -446,7 +446,7 @@ namespace MyVitarak.Controllers
         }
 
 
-        public ActionResult IndexForEmployeeMaster(int? page, String Name)
+        public ActionResult EmployeeList(int? page, String Name)
         {
             var user = Session["username"];
             if (user == null)
@@ -459,8 +459,8 @@ namespace MyVitarak.Controllers
 
             Session["MasterName"] = "EmployeeMaster";
             return Request.IsAjaxRequest()
-                    ? (ActionResult)PartialView("IndexForEmployeeMaster", itemsAsIPagedList)
-                    : View("IndexForEmployeeMaster", itemsAsIPagedList);
+                    ? (ActionResult)PartialView("EmployeeList", itemsAsIPagedList)
+                    : View("EmployeeList", itemsAsIPagedList);
         }
 
         public StaticPagedList<EmployeeDetails> EmployeeGridList(int? page, String Name)

@@ -40,7 +40,7 @@
                     <div class="form-group">
                         <label for="customerArea" class="col-sm-3 control-label">Area / Route</label>
                         <div class="col-sm-9">
-                            @Html.DropDownList("Area", new SelectList((System.Collections.IEnumerable)ViewData["Area"], "Value", "Text"), "Select Area", new { @class = "form-control input-sm", @id = "AreaID", Title = "ModeName" })
+                            @Html.DropDownList("AreaID", new SelectList((System.Collections.IEnumerable)ViewData["Area"], "Value", "Text"), "Select Area", new { @class = "form-control input-sm", @id = "AreaID", Title = "ModeName" })
                             @*@Html.HiddenFor(model => model.AreaID, new { @id = "AreaID" })*@
                             <label style="color:red" id="AreaVal">*</label>
 
@@ -49,7 +49,7 @@
                     <div class="form-group">
                         <label for="exampleInputName2" class="col-sm-3 control-label">Collection person</label>
                         <div class="col-sm-9">
-                            @Html.DropDownList("Employee", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text"), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID", Title = "Employee Name" })
+                            @Html.DropDownList("EmployeeID", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text"), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID", Title = "Employee Name" })
                             <label style="color:red" id="EmployeeVal">*</label>
 
                         </div>
@@ -114,6 +114,7 @@
     });
     $('#btnsave').on('click', function ()
     {
+        debugger;
         var error = 0, regex = /^[a-zA-Z\s]+$/;
         var a = $('#Mobile').val(), intRegex = /^[0-9]{10}$/;
         if ($("#CustomerName").val() == "" || (!regex.test($("#CustomerName").val())))
@@ -138,7 +139,7 @@
            $("#EmployeeVal").hide();
         }
 
-         else if ($("#Area").val() == "") {
+        else if ($("#AreaID").val() == "") {
 
             error = 1;
            $("#CustomerNameVal").hide();
