@@ -345,7 +345,6 @@
     <Content Include="Views\Home\Profile.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Master\Partial_OpeningBalance.cshtml" />
-    <Content Include="Views\Master\Add_Customer1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

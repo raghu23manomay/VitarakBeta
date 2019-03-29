@@ -50,7 +50,7 @@
                 <div class="form-group">
                     <label for="exampleInputName2" class="col-sm-3 control-label">Collection person</label>
                     <div class="col-sm-9">
-                        @Html.DropDownList("model.SalesPersonID", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text", Model.SalesPersonID), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID1", Title = "Employee Name" })
+                        @Html.DropDownList("SalesPersonId", new SelectList((System.Collections.IEnumerable)ViewData["SalesPersonId"], "Value", "Text",Model.SalesPersonID), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID1", Title = "Employee Name" })
                         <label style="color:red" id="EmployeeVal">*</label>
 
                     </div>

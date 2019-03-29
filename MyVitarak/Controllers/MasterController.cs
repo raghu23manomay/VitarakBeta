@@ -1808,7 +1808,7 @@ namespace MyVitarak.Controllers
         public ActionResult Add_Customer()
         {
             ViewData["Area"] = binddropdown("Area", 0);
-            ViewData["Employee"] = binddropdown("Employee", 0);
+            ViewData["SalesPersonId"] = binddropdown("SalesPersonId", 0);
             ViewData["Vehicle"] = binddropdown("Vehicle", 0);
 
             return View();
@@ -1851,7 +1851,7 @@ namespace MyVitarak.Controllers
                 new SqlParameter("@CustomerID", CustomerID)).ToList<CustomerList>();
             md = result.FirstOrDefault();
             ViewData["Area"] = binddropdown("Area", 0);
-            ViewData["Employee"] = binddropdown("Employee", 0);
+            ViewData["SalesPersonId"] = binddropdown("SalesPersonId", 0);
             ViewData["Vehicle"] = binddropdown("Vehicle", 0);
             return Request.IsAjaxRequest()
                ? (ActionResult)PartialView("EditCustomer", md)

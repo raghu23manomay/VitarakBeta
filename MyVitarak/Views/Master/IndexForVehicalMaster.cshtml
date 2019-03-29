@@ -38,8 +38,6 @@
             </ul>
         </div>*@
         <a href="@Url.Action("importexcel", "Master",new {@Mastername = Session["MasterName"]})"><button type="button" class="btn btn-primary pull-right marginRight15px"><i class="fa fa-download" aria-hidden="true"></i> Import</button></a>
-        @*<button type="button" class="btn btn-primary dropdown-toggle pull-right marginRight15px" data-toggle="modal" data-target=".bs-example-modal-md"><i class="fa fa-plus" aria-hidden="true"></i> Employees</button>*@
-        @*<a href="@Url.Action("Add_Vehical", "Master")" data-toggle="modal" data-target="#mdlAddEmployee"><input type="button" value=" + Vehicles" class="btn btn-primary dropdown-toggle pull-right marginRight15px"></a>*@
         <button type="button" class="btn btn-primary dropdown-toggle pull-right marginRight15px" href="@Url.Action("Add_Vehical", "Master")" data-toggle="modal" data-target="#mdlAddEmployee"><i class="fa fa-plus" aria-hidden="true"></i> Vehicles</button>
         @*<nav class="pull-right marginRight15px">
             <ul class="pagination margin0">
