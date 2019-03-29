@@ -23,36 +23,37 @@
                 </div>
                 <button type=button class="btn btn-default"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> Filters</button>
                 <button type=button class="btn btn-default" style="padding:4.5px">
-                    @Html.DropDownList("model.AreaID", new SelectList((System.Collections.IEnumerable)ViewData["Area"], "Value", "Text"), "All", new { @class = "form-control",@id = "AreaID", Title = "ModeName",@style = "height: 23px; padding: initial; padding - top: initial;  padding - right: initial; padding - bottom: initial; padding - left: initial; " })
-                            </button>
-            
+                    @Html.DropDownList("model.AreaID", new SelectList((System.Collections.IEnumerable)ViewData["Area"], "Value", "Text"), "All", new { @class = "form-control", @id = "AreaID", Title = "ModeName", @style = "height: 23px; padding: initial; padding - top: initial;  padding - right: initial; padding - bottom: initial; padding - left: initial; " })
+                </button>
 
-                        </div>
-            
-                    </div>
-            
-                    <form class="navbar-form pull-left marginTop0">
+
+            </div>
+
+        </div>
+
+        <form class="navbar-form pull-left marginTop0">
             <input type="text" id="txtName" class="form-control" placeholder="Search by Customer Name">
         </form>
 
         @*<div class="btn-group pull-right">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-window-maximize" aria-hidden="true"></i> <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li class="float-right">
-                        <a class="nav-link" href="@Url.Action("importexcel", "Master",new {@Mastername = Session["MasterName"]})"><i class="icon icon-plus-circle"> </i> Import Excel </a>
-                    </li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                </ul>
-            </div>*@
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-window-maximize" aria-hidden="true"></i> <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li class="float-right">
+                    <a class="nav-link" href="@Url.Action("importexcel", "Master",new {@Mastername = Session["MasterName"]})"><i class="icon icon-plus-circle"> </i> Import Excel </a>
+                </li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+            </ul>
+        </div>*@
 
 
         <a href="@Url.Action("importexcel", "Master",new {@Mastername = Session["MasterName"]})">
-        <button type="button" class="btn btn-primary pull-right marginRight15px"><i class="fa fa-download" aria-hidden="true"></i> Import</button></a>
-        <a href="@Url.Action("Add_Customer", "Master")" data-toggle="modal" data-target="#mdlAddEmployee"><input type="button" value=" + Customer" class="btn btn-primary dropdown-toggle pull-right marginRight15px"></a>
-
+            <button type="button" class="btn btn-primary pull-right marginRight15px"><i class="fa fa-download" aria-hidden="true"></i> Import</button>
+        </a>
+        @*<a href="@Url.Action("Add_Customer", "Master")" data-toggle="modal" data-target="#mdlAddEmployee"><input type="button" value="" class="btn btn-primary dropdown-toggle pull-right marginRight15px"><i class="fa fa-plus" aria-hidden="true"></i></a>*@
+        <button type="button" class="btn btn-primary dropdown-toggle pull-right marginRight15px" href="@Url.Action("Add_Customer", "Master")" data-toggle="modal" data-target="#mdlAddEmployee"><i class="fa fa-plus" aria-hidden="true"></i> Customer</button>
 
         <nav class="pull-right marginRight15px" style="margin-top: -18px;">
             @Html.PagedListPager((IPagedList)Model, page => Url.Action("IndexForCustomerMaster", "Master", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 2, DisplayPageCountAndCurrentLocation = true }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "mgrid", OnComplete = "PagedOnComplete" }))

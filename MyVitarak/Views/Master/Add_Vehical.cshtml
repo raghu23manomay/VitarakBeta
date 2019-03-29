@@ -117,27 +117,31 @@
 
         if ($('#Transport').val() == '' || (!regex.test(Transport))) {
             error = 1;
-            alert("Invalid or Required Transport");
+           // alert("Invalid or Required Transport");
             $('#TransportVal').show();
+            $('#TransportVal').html('Please Enter Transport Name');
         }
         else if ($('#Owner').val() == '' || (!regex.test($('#Owner').val()))) {
             error = 1;
-            alert("Invalid or Required Owner");
+            //alert("Invalid or Required Owner");
             $('#OwnerVal').show();
+            $('#OwnerVal').html('Please Enter Owner Name');
             $('#TransportVal').hide();
         }
         else if ($('#Address').val() == '' || $('#Address').val().length <= 10) {
             error = 1;
-            alert("Minimum 10 characters Required Address");
+           // alert("Minimum 10 characters Required Address");
             $('#AddressVal').show();
+            $('#AddressVal').html('Minimum 10 characters Required Address');
             $('#OwnerVal').hide();
             $('#TransportVal').hide();
         }
 
         else if ($('#Mobile').val() == '' || (!intRegex.test(a))) {
             error = 1;
-            alert("Invalid or Required mobile number");
+            //alert("Invalid or Required mobile number");
             $('#MobileVal').show();
+            $('#MobileVal').html('Please Enter Mobile Number');
             $('#AddressVal').hide();
             $('#OwnerVal').hide();
             $('#TransportVal').hide();
@@ -145,8 +149,9 @@
         else if ($('#VechicleNo').val() == '' || (!vehicleregex.test($('#VechicleNo').val()))) {
             error = 1;
 
-            alert("Vehicle number should be 'MH 13 BH 1244'");
+           // alert("Vehicle number should be 'MH 13 BH 1244'");
             $('#VechicleNoVal').show();
+            $('#VechicleNoVal').html('Vehicle number should be MH 13 BH 1244');
             $('#MobileVal').hide();
             $('#AddressVal').hide();
             $('#OwnerVal').hide();
@@ -154,8 +159,9 @@
         }
         else if ($('#PrintOrder').val() == '' || (isNaN($('#PrintOrder').val()))) {
             error = 1;
-            alert("Invalid or Required PrintOrder");
+            //alert("Invalid or Required PrintOrder");
             $('#PrintOrderVal').show();
+            $('#PrintOrderVal').html('Please Enter Print Order');
             $('#VechicleNoVal').hide();
             $('#MobileVal').hide();
             $('#AddressVal').hide();
@@ -164,7 +170,8 @@
         }
         else if ($('#RatePerTrip').val() == '' || (isNaN($('#RatePerTrip').val()))) {
             error = 1;
-            alert("Invalid or Required Rate");
+         //   alert("Invalid or Required Rate");
+            $('#RateVal').html('Please Enter Rate Per Trip');
             $('#RateVal').show();
             $('#PrintOrderVal').hide();
             $('#VechicleNoVal').hide();
