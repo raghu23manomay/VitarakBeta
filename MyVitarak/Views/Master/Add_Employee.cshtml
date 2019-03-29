@@ -43,6 +43,7 @@
                         <label for="customerMobNo" class="col-sm-3 control-label  LeftAlign pad40">Mobile no.</label>
                         <div class="col-sm-8">
                             @Html.TextBoxFor(a => a.Mobile, new { @class = "form-control r-0 light s-12", placeholder = "Enter Mobile", title = "Mobile", @id = "Mobile" })
+                            <label style="color:red" id="MobileVal">*</label>
                         </div>
                     </div>
                 </form>
@@ -72,24 +73,27 @@
      //   getArea();
         });
     $('#btnsave').on('click', function () {
-        alert($("#AreaID").val());
+       
         var error = 0, regex = /^[a-zA-Z\s]+$/, EmployeeName = $('#EmployeeName').val();
         var a = $('#Mobile').val(), intRegex = /^[0-9]{10}$/;
         if ($('#EmployeeName').val() == '' || (!regex.test(EmployeeName))) {
             error = 1;
-            alert("Invalid Employee Name");
+         //   alert("Invalid Employee Name");
+            $('#Employee').html('Please Enter Employee Name');
             $('#Employee').show();
 
         }
        else if ($('#Address').val() == '' || $('#Address').val().length<=10) {
             error = 1;
-            alert("Address must be minimum 10 character");
+          // alert("Address must be minimum 10 character");
+            $('#AddressVal').html('Address must be minimum 10 character');
             $('#AddressVal').show();
             $('#Employee').hide();
         }
         else if ($('#AreaID').val() == '') {
             error = 1;
-            alert("Select Area");
+           // alert("Select Area");
+            $('#AreaVal').html('Please Select Area');
             $('#AreaVal').show();
             $('#Employee').hide();
             $('#AddressVal').hide();
@@ -98,7 +102,8 @@
         else if ($('#Mobile').val() == '' || (!intRegex.test(a)))
         {
             error = 1;
-            alert("Invalid Mobile number");
+           // alert("Invalid Mobile number");
+            $('#MobileVal').html('Invalid Mobile number');
             $('#MobileVal').show();
             $('#Employee').hide();
             $('#AddressVal').hide();
@@ -107,7 +112,6 @@
         else if (error) {
             return false;
         }
-
         else {
             $('#Employee').hide();
             $('#AddressVal').hide();
@@ -124,7 +128,6 @@
                     Address: $("#Address").val(),
                     AreaID: $("#AreaID").val(),
                     Mobile: $("#Mobile").val(),
-
 
                 },
                 success: function (da) {

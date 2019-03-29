@@ -24,7 +24,7 @@
                             <div class="col-sm-8">
                                 @Html.HiddenFor(model => model.EmployeeID, new { @id = "EmployeeID" })
                                 @Html.TextBoxFor(a => a.EmployeeName, new { @class = "form-control r-0 light s-12", placeholder = "Enter First Name", title = "EmployeeName", @id = "EmployeeName" })
-                                @*<label style="color:red" id="Employee">*</label>*@
+                                <label style="color:red" id="Employee">*</label>
                             </div>
                         </div>
                     <div class="form-group">
@@ -32,7 +32,7 @@
                         <label for="customerAddress" class="col-sm-3 control-label LeftAlign pad40">Address</label>
                         <div class="col-sm-8">
                             @Html.TextAreaFor(a => a.Address, new { @class = "form-control r-0 light s-12", placeholder = "Address Minimum 50 Characters ", title = "Address", @id = "Address" })
-                            @*<label style="color:red" id="AddressVal">*</label>*@
+                            <label style="color:red" id="AddressVal">*</label>
                         </div>
                     </div>
 
@@ -42,7 +42,7 @@
                             <div class="col-sm-8">
                                 @Html.DropDownList("model.AreaID", new SelectList((System.Collections.IEnumerable)ViewData["Area"], "Value", "Text", Model.AreaID), "Select Area", new { @class = "form-control input-sm", @id = "AreaID", Title = "ModeName" })
                                 @Html.ValidationMessageFor(model => model.AreaID, "", new { @class = "text-danger" })
-                                @*<label style="color:red" id="AreaVal">*</label>*@
+                                <label style="color:red" id="AreaVal">*</label>
                             </div>
                         </div>
                         <div class="form-group"> 
@@ -50,6 +50,7 @@
                             <label for="customerMobNo" class="col-sm-3 control-label LeftAlign pad40">Mobile No.</label>
                             <div class="col-sm-8">
                                 @Html.TextBoxFor(a => a.Mobile, new { @class = "form-control r-0 light s-12", placeholder = "Enter Mobile", title = "Mobile", @id = "Mobile" })
+                                <label style="color:red" id="MobileVal">*</label>
                             </div>
                         </div>
 </form>
@@ -114,19 +115,22 @@
         var a = $('#Mobile').val(), intRegex = /^[0-9]{10}$/;
         if ($('#EmployeeName').val() == '' || (!regex.test(EmployeeName))) {
             error = 1;
-            alert("Invalid Employee Name");
+           // alert("Invalid Employee Name");
+            $('#Employee').html('Please Enter Employee Name');
             $('#Employee').show();
 
         }
         else if ($('#Address').val() == '' || $('#Address').val().length <= 10) {
             error = 1;
-            alert("Address must be minimum 10 character");
+           // alert("Address must be minimum 10 character");
             $('#AddressVal').show();
+            $('#AddressVal').html('Address must be minimum 10 character');
             $('#Employee').hide();
         }
         else if ($('#AreaID').val() == '') {
             error = 1;
-            alert("Select Area");
+            //alert("Select Area");
+            $('#AreaVal').html('Please Select Area');
             $('#AreaVal').show();
             $('#Employee').hide();
             $('#AddressVal').hide();
@@ -134,7 +138,8 @@
 
         else if ($('#Mobile').val() == '' || (!intRegex.test(a))) {
             error = 1;
-            alert("Invalid Mobile number");
+          //  alert("Invalid Mobile number");
+            $('#MobileVal').html('Invalid Mobile number');
             $('#MobileVal').show();
             $('#Employee').hide();
             $('#AddressVal').hide();
