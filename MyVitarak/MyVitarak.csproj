@@ -197,7 +197,6 @@
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.css" />
     <Content Include="Scripts\toastr.min.js" />
-    <Content Include="Scripts\userdefinedtype.sql" />
     <Content Include="WebSite\.idea\misc.xml" />
     <Content Include="WebSite\.idea\modules.xml" />
     <Content Include="WebSite\.idea\workspace.xml" />
