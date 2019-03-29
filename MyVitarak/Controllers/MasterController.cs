@@ -29,7 +29,7 @@ namespace MyVitarak.Controllers
             return View();
         }
         // GET: Master
-        public ActionResult Index(int? page)
+        public ActionResult ProductList(int? page)
         {
             var user = Session["username"];
             if (user == null)
@@ -41,8 +41,8 @@ namespace MyVitarak.Controllers
 
             Session["MasterName"] = "ProductMaster";
             return Request.IsAjaxRequest()
-                    ? (ActionResult)PartialView("Index", itemsAsIPagedList)
-                    : View("Index", itemsAsIPagedList);
+                    ? (ActionResult)PartialView("ProductList", itemsAsIPagedList)
+                    : View("ProductList", itemsAsIPagedList);
         }
 
         //================================== Fill Product Grid Code ===========================================
@@ -81,8 +81,8 @@ namespace MyVitarak.Controllers
             itemsAsIPagedList = ProductGridList(page, pname);
 
             return Request.IsAjaxRequest()
-                    ? (ActionResult)PartialView("_partialGridProductMaster", itemsAsIPagedList)
-                    : View("_partialGridProductMaster", itemsAsIPagedList);
+                    ? (ActionResult)PartialView("ProductGrid", itemsAsIPagedList)
+                    : View("ProductGrid", itemsAsIPagedList);
         }
 
 

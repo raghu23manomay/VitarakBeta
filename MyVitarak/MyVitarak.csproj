@@ -249,7 +249,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Master\_partialGridProductMaster.cshtml" />
+    <Content Include="Views\Master\ProductGrid.cshtml" />
     <Content Include="Views\Home\_partialGridProductMaster.cshtml" />
     <Content Include="Views\Master\Add_Product.cshtml" />
     <Content Include="Views\Master\EditProduct.cshtml" />
@@ -290,7 +290,7 @@
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Master\Index.cshtml" />
+    <Content Include="Views\Master\ProductList.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Master\EmployeeList.cshtml" />
     <Content Include="Views\Master\EmployeeGridList.cshtml" />
