@@ -2240,5 +2240,26 @@ namespace MyVitarak.Controllers
 
         }
 
+        public ActionResult SearchSupplier(String val="")
+        {
+            JobDbContext _db = new JobDbContext();
+            try
+            {
+                var res = _db.SupplierMaster.SqlQuery(@"exec usp_SearchUser @Val",
+                    new SqlParameter("@Val", val)
+                   ).ToList<SupplierMaster>();
+
+                SupplierMaster rs = new SupplierMaster();
+                rs = res.FirstOrDefault();
+                return View("EditSupplier", rs);
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return Json(message);
+
+            }
+        }
+
     }
 }

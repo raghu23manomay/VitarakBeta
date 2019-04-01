@@ -12,8 +12,15 @@
         </div>
         <div class="modal-body">
             <form class="form-horizontal">
-                <div class="form-group">
-                    <label for="exampleInputName2" class="col-sm-3 control-label">Vendor Name</label>
+                <div class="form-group" >
+                    <label class="col-sm-3 control-label">Search Vendor</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="Search" class="form-control" />
+                        @*<p id="Vname" style="color:brown">Enter Vendor Name</p>*@
+                    </div>
+                </div>
+                <div class="form-group" id="grid2">
+                    <label class="col-sm-3 control-label">Vendor Name</label>
                     <div class="col-sm-9">
                         @Html.TextBoxFor(a => a.VendorName, new { @class = "form-control r-0 light s-12", placeholder = "Enter Vendor Name", title = "vendor name", @id = "VendorName" })
                         <p id="Vname" style="color:brown">Enter Vendor Name</p>
@@ -111,7 +118,28 @@
         location.reload();
         $('.modal-backdrop').remove();
     }
+    $('#Search').on('change', function () {
+            $.ajax({
+                url: "@Url.Action("SearchSupplier", "Master")",
+                    contentType: "application/json",
+                   //  data: JSON.stringify({ VendorID: $('#Search').val() }),
+                data: JSON.stringify({ id: "8237175481" }),
+                    dataType: "text",
+                  //  type: "GET",
+                    async: true,
+                success: function (data) {
+                    debugger;
+                        $('#grid3').html(data);
 
+                    },
+                    error: function (data) {
+
+                    },
+                    complete: function () {
+
+                    }
+                });
+    });
     $('#btnsave').on('click', function () {
         var isactive;
         var isChecked = $('#check').is(':checked');
