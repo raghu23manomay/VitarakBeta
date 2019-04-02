@@ -2240,9 +2240,16 @@ namespace MyVitarak.Controllers
 
         }
 
+
+        public ActionResult SearchSupplier()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult SearchSupplier(String val="")
         {
-            JobDbContext _db = new JobDbContext();
+            JobDbContext2 _db = new JobDbContext2();
             try
             {
                 var res = _db.SupplierMaster.SqlQuery(@"exec usp_SearchUser @Val",
@@ -2251,7 +2258,35 @@ namespace MyVitarak.Controllers
 
                 SupplierMaster rs = new SupplierMaster();
                 rs = res.FirstOrDefault();
-                return View("EditSupplier", rs);
+               // return View("SearchSupplier", rs);
+                return Request.IsAjaxRequest()
+                ? (ActionResult)PartialView("SearchSupplier",rs)
+                : View("SearchSupplier",rs);
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return Json(message);
+
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult AddVendor(Int64? UserId,Int64? TenantId,String MobileNo = "")
+        {
+            JobDbContext _db = new JobDbContext();
+            try
+            {
+                var res = _db.Database.ExecuteSqlCommand(@"exec USPAddVendor @UserId,@TenantId,@MobileNo",
+                    new SqlParameter("@UserId", UserId),
+                    new SqlParameter("@TenantId", TenantId),
+                    new SqlParameter("@MobileNo", MobileNo));
+
+                //return Request.IsAjaxRequest()
+                //? (ActionResult)PartialView("SearchSupplier")
+                //: View("SearchSupplier");
+                return Json("Supplier added sucessfully");
             }
             catch (Exception ex)
             {

@@ -1,0 +1,81 @@
+﻿@model MyVitarak.Models.SupplierMaster
+@{
+    Layout = null;
+}
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+@if (Model != null)
+{
+    <div class="row">
+
+        <div class="col-md-1"></div>
+
+
+        <div class="form-group col-md-9">
+            
+            <div class="ibox-content">
+                <div class="feed-activity-list">
+
+                    <div class="feed-element">
+                        <div>
+                            @Html.HiddenFor(model => model.userid, new { @id = "userid" })
+                            @Html.HiddenFor(model => model.TenantID, new { @id = "TenantID" })
+                            @Html.HiddenFor(model => model.PersonMobileNo, new { @id = "PersonMobileNo" })
+                            <small class="pull-right text-navy">1m ago</small>
+                            <strong id="ContactPerson">@Model.ContactPerson</strong>
+                            <div>@Model.PersonMobileNo</div>
+                            <div id="Address">@Model.Address</div>
+                            <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+             
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+
+        <div class="form-group col-md-9">
+
+            <button type="button" id="btnUseThis" class="btn btn-primary">Use This</button>
+        </div>
+    </div>
+}
+    <script>
+        $(document).ready(function () {
+            // suppliersearch();
+        });
+
+        $('#btnUseThis').on('click', function () {
+            
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Master/AddVendor',
+
+                data:
+                {
+                    UserId: $("#userid").val(),
+                    TenantId: $("#TenantID").val(), 
+                    MobileNo: $("#PersonMobileNo").val()
+                    
+
+                },
+                success: function (da) {
+
+                    alert(da);
+                    //window.location.reload();
+                    //$('#mdlAddSupplier').hide();
+                    //$('.modal-backdrop').remove();
+
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        })
+
+    </script>

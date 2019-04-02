@@ -4,7 +4,7 @@
 }
 <script src="~/Scripts/jquery-1.12.4.min.js"></script>
 
-<div class="modal-dialog modal-md" role="document">
+<div class="modal-dialog modal-md Popup80" role="document">
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" onclick="abc();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -12,67 +12,107 @@
         </div>
         <div class="modal-body">
             <form class="form-horizontal">
-                <div class="form-group" >
-                    <label class="col-sm-3 control-label">Search Vendor</label>
-                    <div class="col-sm-9">
-                        <input type="text" id="Search" class="form-control" />
-                        @*<p id="Vname" style="color:brown">Enter Vendor Name</p>*@
-                    </div>
-                </div>
-                <div class="form-group" id="grid2">
-                    <label class="col-sm-3 control-label">Vendor Name</label>
-                    <div class="col-sm-9">
-                        @Html.TextBoxFor(a => a.VendorName, new { @class = "form-control r-0 light s-12", placeholder = "Enter Vendor Name", title = "vendor name", @id = "VendorName" })
-                        <p id="Vname" style="color:brown">Enter Vendor Name</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputName2" class="col-sm-3 control-label">Address</label>
-                    <div class="col-sm-9">
-                        @Html.TextBoxFor(a => a.Address, new { @class = "form-control", placeholder = "Enter Address", title = "Address", @id = "Address" })
-                        <p id="VAddress" style="color:brown">Enter Address</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="GST" class="col-sm-3 control-label">Contact Person</label>
-                    <div class="col-sm-9">
+                <div class="row">
+                    <div class="col-md-6">
+                      
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-content" style="min-height:400px;">
+                                    <div class="form-group" id="grid">
 
-                        @Html.TextBoxFor(a => a.ContactPerson, new { @class = "form-control", placeholder = "Enter Contact Person", title = "ContactPerson", @id = "ContactPerson" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="customerArea" class="col-sm-3 control-label">Mobile Number</label>
-                    <div class="col-sm-9">
-                        @Html.TextBoxFor(a => a.PersonMobileNo, new { @class = "form-control", placeholder = "Enter Person Mobile No", title = "Person Mobile No", @id = "PersonMobileNo" })
-                        <p id="Mobileno" style="color:brown">Enter 10 Digit Mobile Number</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputName2" class="col-sm-3 control-label">Office Number</label>
-                    <div class="col-sm-9">
-                        @Html.TextBoxFor(a => a.OfficeNumber, new { @class = "form-control", placeholder = "Enter Office Number", title = "OfficeNumber", @id = "OfficeNumber" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputName2" class="col-sm-3 control-label">Email Id</label>
-                    <div class="col-sm-9">
-                        @Html.TextBoxFor(a => a.EmailID, new { @class = "form-control", placeholder = "Enter Email ID", title = "EmailID", @id = "EmailID" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputName2" class="col-sm-3 control-label">Fax Number</label>
-                    <div class="col-sm-9">
-                        @Html.TextBoxFor(a => a.FaxNumber, new { @class = "form-control", placeholder = "Enter Fax Number", title = "FaxNumber", @id = "FaxNumber" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputName2" class="col-sm-3 control-label">IsActive</label>
-                    <div class="col-sm-9">
-                        <input type="checkbox" id="check" checked>
-                        <span class="checkmark"></span>
-                    </div>
-                </div>
 
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-9">
+                                                <h3>
+                                                    <span class="text-navy">Search Vendor</span>
+                                                </h3>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-md-1"></div>
+
+
+                                            <div class="form-group col-md-9">
+                                                <input type="text" placeholder="Mobile No" name="search" id="search" class="form-control ">
+
+                                                <div class="col-md-1"></div>
+
+                                            </div>
+                                        </div>
+                                        <div class="row" id="SearchResult">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-content"  style="min-height:400px;">
+
+
+                                        <div class="form-group" id="grid2">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Vendor Name</label>
+                                                <div class="col-sm-9">
+                                                    @Html.TextBoxFor(a => a.VendorName, new { @class = "form-control r-0 light s-12", placeholder = "Enter Vendor Name", title = "vendor name", @id = "VendorName" })
+                                                    <p id="Vname" style="color:brown">Enter Vendor Name</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputName2" class="col-sm-3 control-label">Address</label>
+                                                <div class="col-sm-9">
+                                                    @Html.TextBoxFor(a => a.Address, new { @class = "form-control", placeholder = "Enter Address", title = "Address", @id = "Address" })
+                                                    <p id="VAddress" style="color:brown">Enter Address</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="GST" class="col-sm-3 control-label">Contact Person</label>
+                                                <div class="col-sm-9">
+
+                                                    @Html.TextBoxFor(a => a.ContactPerson, new { @class = "form-control", placeholder = "Enter Contact Person", title = "ContactPerson", @id = "ContactPerson" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="customerArea" class="col-sm-3 control-label">Mobile Number</label>
+                                                <div class="col-sm-9">
+                                                    @Html.TextBoxFor(a => a.PersonMobileNo, new { @class = "form-control", placeholder = "Enter Person Mobile No", title = "Person Mobile No", @id = "PersonMobileNo" })
+                                                    <p id="Mobileno" style="color:brown">Enter 10 Digit Mobile Number</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputName2" class="col-sm-3 control-label">Office Number</label>
+                                                <div class="col-sm-9">
+                                                    @Html.TextBoxFor(a => a.OfficeNumber, new { @class = "form-control", placeholder = "Enter Office Number", title = "OfficeNumber", @id = "OfficeNumber" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputName2" class="col-sm-3 control-label">Email Id</label>
+                                                <div class="col-sm-9">
+                                                    @Html.TextBoxFor(a => a.EmailID, new { @class = "form-control", placeholder = "Enter Email ID", title = "EmailID", @id = "EmailID" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputName2" class="col-sm-3 control-label">Fax Number</label>
+                                                <div class="col-sm-9">
+                                                    @Html.TextBoxFor(a => a.FaxNumber, new { @class = "form-control", placeholder = "Enter Fax Number", title = "FaxNumber", @id = "FaxNumber" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputName2" class="col-sm-3 control-label">IsActive</label>
+                                                <div class="col-sm-9">
+                                                    <input type="checkbox" id="check" checked>
+                                                    <span class="checkmark"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
             </form>
         </div>
         <div class="modal-footer">
@@ -81,6 +121,8 @@
         </div>
     </div>
 </div>
+   
+
 
 <script type="text/javascript">
 
@@ -110,6 +152,9 @@
 
 
 <script>
+    $(document).ready(function () {
+           
+    });
     $('#Mobileno').hide();
     $('#Vname').hide();
     $('#VAddress').hide();
@@ -118,28 +163,7 @@
         location.reload();
         $('.modal-backdrop').remove();
     }
-    $('#Search').on('change', function () {
-            $.ajax({
-                url: "@Url.Action("SearchSupplier", "Master")",
-                    contentType: "application/json",
-                   //  data: JSON.stringify({ VendorID: $('#Search').val() }),
-                data: JSON.stringify({ id: "8237175481" }),
-                    dataType: "text",
-                  //  type: "GET",
-                    async: true,
-                success: function (data) {
-                    debugger;
-                        $('#grid3').html(data);
-
-                    },
-                    error: function (data) {
-
-                    },
-                    complete: function () {
-
-                    }
-                });
-    });
+  
     $('#btnsave').on('click', function () {
         var isactive;
         var isChecked = $('#check').is(':checked');
@@ -199,9 +223,9 @@
             success: function (da) {
 
                 alert(da);
-                refresh();
-                $('#mdlAddSupplier').hide();
-                $('.modal-backdrop').remove();
+                window.location.reload();
+                //$('#mdlAddSupplier').hide();
+                //$('.modal-backdrop').remove();
 
             },
 
@@ -212,29 +236,45 @@
     });
 
 
-     function refresh()
-    {
+    $('#checksupplier').on('click', function () {
+        var isChecked = $('#checksupplier').is(':checked');
+        if (isChecked == true) {
 
-        $.ajax({
-            url: "@Url.Action("LoadDataForSuppier", "Master")",
-            contentType: "application/json",
-            data: JSON.stringify({ page: con }),
-            dataType: "text",
-            type: "POST",
-            async: true,
-            success: function (data) {
-                $('#grid1').html(data);
+            $('#grid').show();
+            $('#grid2').hide();
+           
+        }
+        else
+        {
+            $('#grid2').show();
+            $('#grid').hide();
+        }
 
-            },
-            error: function (data) {
+    });
 
-            },
-            complete: function () {
+     $('#search').on('change', function () {
+           
+            $.ajax({
+                url: "@Url.Action("SearchSupplier", "Master")",
+                contentType: "application/json",
+                 data: JSON.stringify({ val: $('#search').val() }),
+                //data: JSON.stringify({ id: "8237175481" }),
+                dataType: "text",
+                 type: "POST",
+                async: true,
+                success: function (data) {
 
+                  $('#SearchResult').html(data);
 
-            }
+                },
+                error: function (data) {
 
-        });
-    }
+                },
+                complete: function () {
+
+                }
+                });
+    }); 
+    
 
 </script>

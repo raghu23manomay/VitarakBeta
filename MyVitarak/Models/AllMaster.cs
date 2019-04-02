@@ -146,6 +146,8 @@ namespace MyVitarak.Models
         public string OfficeNumber { get; set; }
         public string FaxNumber { get; set; }
         public string Address { get; set; }
+        public Int64? TenantID { get; set; }
+        public Int64? userid { get; set; }
 
     }
 

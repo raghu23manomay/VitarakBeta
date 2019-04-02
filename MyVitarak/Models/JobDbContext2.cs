@@ -23,6 +23,8 @@ namespace MyVitarak.Models
         public DbSet<CheckDbSchema> CheckDbSchema { get; set; }
         public DbSet<MailCheck> MailCheck { get; set; }
         public DbSet<SecurityCode> SecurityCode { get; set; }
+        public DbSet<SupplierMaster> SupplierMaster { get; set; }
+        
     }
     
 }
