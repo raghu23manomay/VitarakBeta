@@ -43,9 +43,25 @@
                                             </div>
                                         </div>
                                         <div class="row" id="SearchResult">
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12" id="CPRates">
+
                                             </div>
+
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+
+                                        <div class="form-group col-md-9">
+
+                                            <button type="button" id="btnUseThis" class="btn btn-primary">Use This</button>
+                                        </div>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -264,7 +280,8 @@
                 async: true,
                 success: function (data) {
 
-                  $('#SearchResult').html(data);
+                    $('#SearchResult').html(data);
+                    CustomerProductRates();
 
                 },
                 error: function (data) {
@@ -275,6 +292,32 @@
                 }
                 });
     }); 
+
+
+
+    function CustomerProductRates()
+    {
+        $.ajax({
+                url: "@Url.Action("CustomerProductRates", "Master")",
+                contentType: "application/json",
+            data: JSON.stringify({ Mobile: $('#search').val() }),
+                //data: JSON.stringify({ id: "8237175481" }),
+                dataType: "text",
+                 type: "POST",
+                async: true,
+                success: function (data) {
+
+                    $('#CPRates').html(data);
+
+                },
+                error: function (data) {
+
+                },
+                complete: function () {
+
+                }
+                });
+    }
     
 
 </script>

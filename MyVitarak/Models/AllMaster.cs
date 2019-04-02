@@ -254,4 +254,16 @@ namespace MyVitarak.Models
         public Decimal BalanceAmount { get; set; }
     }
 
+    public class CustomerProductDetails
+    {
+
+        [Key]
+        public int ProductID { get; set; }
+        public int Customerid { get; set; }        
+        public string Product { get; set; }
+        public decimal Rate { get; set; }
+        public int CrateSize { get; set; }
+
+    }
+
 }

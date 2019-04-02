@@ -1,0 +1,36 @@
+﻿@model  IEnumerable<MyVitarak.Models.CustomerProductDetails>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ProductName <i class="fa fa-angle-down" aria-hidden="true"></i></th>
+
+            <th scope="col">Rate<i class="fa fa-angle-down" aria-hidden="true"></i></th>
+            <th scope="col">Crate Size<i class="fa fa-angle-down" aria-hidden="true"></i></th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td class="">
+                <div class="form-check height20Pixel">
+                    <input class="form-check-input" type="checkbox" id="one">
+                    <label class="form-check-label verticalAlignTop" for="one"> &nbsp;@item.Product</label>
+                </div>
+            </td>
+
+            <td class="">
+                <label class="form-check-label verticalAlignTop" for="one"> &nbsp;@item.Rate</label>
+            </td>
+            <td class="">
+                <label class="form-check-label verticalAlignTop" for="one"> &nbsp;@item.CrateSize</label>
+            </td>
+
+        </tr>
+
+        }
+
+    </tbody>
+</table>

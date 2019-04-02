@@ -2295,6 +2295,77 @@ namespace MyVitarak.Controllers
 
             }
         }
+        
+        public ActionResult PurchaseRates(string suppliername = "")
+        {
+            var user = Session["username"];
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            using (JobDbContext context = new JobDbContext())
+            {
+                DataTable dt = new DataTable();
+                DataSet ds = new DataSet();
+
+                var conn = context.Database.Connection;
+                var connectionState = conn.State;
+                try
+                {
+                    if (connectionState != ConnectionState.Open) conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = "SP_EXECUTESQL123";
+
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add(new SqlParameter("@suppliername", suppliername));
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            dt.Load(reader);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // error handling
+                    var messege = ex.Message;
+                }
+                finally
+                {
+                    if (connectionState != ConnectionState.Closed) conn.Close();
+                }
+                TempData["Data"] = dt;
+
+                return View(dt);
+            }
+
+        }
+
+
+        
+        public ActionResult CustomerProductRates(String Mobile = "")
+        {
+            JobDbContext _db = new JobDbContext();
+            try
+            {
+                var res = _db.CustomerProductDetails.SqlQuery(@"exec uspGetCustomerRate @pMobileNo",
+                    new SqlParameter("@pMobileNo", Mobile)
+                   ).ToList<CustomerProductDetails>();
+
+                //SupplierMaster rs = new SupplierMaster();
+               
+                return Request.IsAjaxRequest()
+                ? (ActionResult)PartialView("_VendorProductDetails", res)
+                : View("_VendorProductDetails", res);
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return Json(message);
+
+            }
+        }
 
     }
 }
