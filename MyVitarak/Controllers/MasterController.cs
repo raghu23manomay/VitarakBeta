@@ -2278,8 +2278,7 @@ namespace MyVitarak.Controllers
             JobDbContext _db = new JobDbContext();
             try
             {
-                var res = _db.Database.ExecuteSqlCommand(@"exec USPAddVendor @UserId,@TenantId,@MobileNo",
-                    new SqlParameter("@UserId", UserId),
+                var res = _db.Database.ExecuteSqlCommand(@"exec USPAddVendor @TenantId,@MobileNo", 
                     new SqlParameter("@TenantId", TenantId),
                     new SqlParameter("@MobileNo", MobileNo));
 
