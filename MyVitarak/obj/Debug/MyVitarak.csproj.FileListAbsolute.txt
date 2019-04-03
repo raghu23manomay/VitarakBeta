@@ -499,5 +499,3 @@ F:\Manomay\projects\Gitproject\MyVitarak\obj\Debug\MyVitarak.csproj.CoreCompileI
 F:\Manomay\projects\Gitproject\MyVitarak\obj\Debug\MyVitarak.csproj.CopyComplete
 F:\Manomay\projects\Gitproject\MyVitarak\obj\Debug\MyVitarak.dll
 F:\Manomay\projects\Gitproject\MyVitarak\obj\Debug\MyVitarak.pdb
-F:\Manomay\projects\Gitproject\MyVitarak\bin\payu_bolt.pdb
-F:\Manomay\projects\Gitproject\MyVitarak\obj\Debug\MyVitarak.csprojAssemblyReference.cache

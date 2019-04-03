@@ -37,7 +37,7 @@ namespace MyVitarak.Models
         [Key]
         public int ProductID { get; set; }
         public string Product { get; set; }
-        public int ProductBrandID { get; set; }
+        public int? ProductBrandID { get; set; }
         public int CrateSize { get; set; }
         public Decimal? GST { get; set; }
         public int? TotalRows { get; set; }
@@ -50,7 +50,7 @@ namespace MyVitarak.Models
         [Key]
         public int ProductID { get; set; }
         public string Product { get; set; }
-        public int ProductBrandID { get; set; }
+        public int? ProductBrandID { get; set; }
         public int? StockCount { get; set; }
         public Decimal? SalePrice { get; set; }
         public int CrateSize { get; set; }
@@ -259,6 +259,7 @@ namespace MyVitarak.Models
 
         [Key]
         public int ProductID { get; set; }
+        public int CustRateID { get; set; }
         public int Customerid { get; set; }        
         public string Product { get; set; }
         public decimal Rate { get; set; }

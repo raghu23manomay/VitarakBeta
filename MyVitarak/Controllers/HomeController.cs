@@ -95,7 +95,6 @@ namespace MyVitarak.Controllers
 
         public void InsertDbschemaInUSerDatabase(Int64? regid, Int64? Tenantid)
         {
-
           
             using (JobDbContext context = new JobDbContext())
             {
