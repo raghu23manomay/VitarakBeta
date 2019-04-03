@@ -2295,53 +2295,7 @@ namespace MyVitarak.Controllers
             }
         }
         
-        public ActionResult PurchaseRates(string suppliername = "")
-        {
-            var user = Session["username"];
-            if (user == null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            using (JobDbContext context = new JobDbContext())
-            {
-                DataTable dt = new DataTable();
-                DataSet ds = new DataSet();
-
-                var conn = context.Database.Connection;
-                var connectionState = conn.State;
-                try
-                {
-                    if (connectionState != ConnectionState.Open) conn.Open();
-                    using (var cmd = conn.CreateCommand())
-                    {
-                        cmd.CommandText = "SP_EXECUTESQL123";
-
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.Add(new SqlParameter("@suppliername", suppliername));
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            dt.Load(reader);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // error handling
-                    var messege = ex.Message;
-                }
-                finally
-                {
-                    if (connectionState != ConnectionState.Closed) conn.Close();
-                }
-                TempData["Data"] = dt;
-
-                return View(dt);
-            }
-
-        }
-
-
+      
         
         public ActionResult CustomerProductRates(String Mobile = "")
         {
@@ -2357,6 +2311,31 @@ namespace MyVitarak.Controllers
                 return Request.IsAjaxRequest()
                 ? (ActionResult)PartialView("_VendorProductDetails", res)
                 : View("_VendorProductDetails", res);
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return Json("No Record Found");
+
+            }
+        }
+
+
+        public ActionResult SaveCustomerProductRates(String Mobile = "", String Values="")
+        {
+            JobDbContext _db = new JobDbContext();
+            try
+            {
+                var res = _db.Database.ExecuteSqlCommand(@"exec USPPullSupplierRate @pMobileNo,@Values ",
+                    new SqlParameter("@pMobileNo", Mobile),
+                    new SqlParameter("@Values", Values)
+                   );
+
+                //SupplierMaster rs = new SupplierMaster();
+                return Json("product rates added sucessfully");
+                //return Request.IsAjaxRequest()
+                //? (ActionResult)PartialView("_VendorProductDetails", res)
+                //: View("_VendorProductDetails", res);
             }
             catch (Exception ex)
             {

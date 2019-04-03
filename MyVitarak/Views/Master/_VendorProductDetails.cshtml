@@ -14,14 +14,15 @@
         @foreach (var item in Model)
         {
         <tr>
-            <td class="">
+            
+            <td>
                 <div class="form-check height20Pixel">
-                    <input class="form-check-input" type="checkbox" id="one">
+                    <input class="form-check-input" type="checkbox" id="rateid" value="@item.CustRateID">
                     <label class="form-check-label verticalAlignTop" for="one"> &nbsp;@item.Product</label>
                 </div>
             </td>
 
-            <td class="">
+            <td>
                 <label class="form-check-label verticalAlignTop" for="one"> &nbsp;@item.Rate</label>
             </td>
             <td class="">
@@ -34,3 +35,44 @@
 
     </tbody>
 </table>
+
+<script>
+
+    $('#btnsave1').on('click', function () {
+        
+        var temp = "";
+        var val;
+        
+        $('input:checked').each(function () {
+            var val = $(this).attr("value");
+
+           
+            if (val != undefined )
+            { 
+                temp = temp + val+',';
+            }
+            
+        });
+        val = temp.slice(0, -1);
+
+        if (val == "")
+        {
+            alert('Please Select Products');
+            return false;
+        }
+
+        $.ajax({
+            url: '/Master/SaveCustomerProductRates',
+            type: 'GET',
+            data: { Mobile: $('#search').val(), Values: val },
+            success: function (result) {
+                alert(result);
+            }
+        });
+    });
+
+
+   
+   
+   
+</Script>
