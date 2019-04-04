@@ -46,9 +46,9 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-12" id="CPRates">
+                                          <div class="col-md-12" id="CPRates" style="color: brown;">
 
-                                            </div>
+                                          </div>
 
                                         </div>
                                     </div>
@@ -253,21 +253,21 @@
     });
 
 
-    $('#checksupplier').on('click', function () {
-        var isChecked = $('#checksupplier').is(':checked');
-        if (isChecked == true) {
+    //$('#checksupplier').on('click', function () {
+    //    var isChecked = $('#checksupplier').is(':checked');
+    //    if (isChecked == true) {
 
-            $('#grid').show();
-            $('#grid2').hide();
+    //        $('#grid').show();
+    //        $('#grid2').hide();
            
-        }
-        else
-        {
-            $('#grid2').show();
-            $('#grid').hide();
-        }
+    //    }
+    //    else
+    //    {
+    //        $('#grid2').show();
+    //        $('#grid').hide();
+    //    }
 
-    });
+    //});
 
      $('#search').on('change', function () {
            
@@ -306,9 +306,16 @@
                 dataType: "text",
                  type: "POST",
                 async: true,
-                success: function (data) {
-
-                    $('#CPRates').html(data);
+            success: function (data) {
+               
+                    if (data == '"No Product Record Found"')
+                    {
+                        $('#Errormsg').html(data);
+                    }
+                    else
+                    {
+                        $('#CPRates').html(data);
+                    }                    
 
                 },
                 error: function (data) {

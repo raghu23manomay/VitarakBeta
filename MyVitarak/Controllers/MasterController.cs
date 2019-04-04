@@ -1808,7 +1808,7 @@ namespace MyVitarak.Controllers
         public ActionResult Add_Customer()
         {
             ViewData["Area"] = binddropdown("Area", 0);
-            ViewData["SalesPersonId"] = binddropdown("SalesPersonId", 0);
+            ViewData["Employee"] = binddropdown("Employee", 0);
             ViewData["Vehicle"] = binddropdown("Vehicle", 0);
 
             return View();
@@ -1851,7 +1851,7 @@ namespace MyVitarak.Controllers
                 new SqlParameter("@CustomerID", CustomerID)).ToList<CustomerList>();
             md = result.FirstOrDefault();
             ViewData["Area"] = binddropdown("Area", 0);
-            ViewData["SalesPersonId"] = binddropdown("SalesPersonId", 0);
+            ViewData["Employee"] = binddropdown("Employee", 0);
             ViewData["Vehicle"] = binddropdown("Vehicle", 0);
             return Request.IsAjaxRequest()
                ? (ActionResult)PartialView("EditCustomer", md)
@@ -1872,7 +1872,7 @@ namespace MyVitarak.Controllers
                       new SqlParameter("@AreaID", pm.AreaID),
                     new SqlParameter("@Mobile", pm.Mobile),
                     new SqlParameter("@EmployeeId", pm.SalesPersonID),
-                    new SqlParameter("@VehicleID", pm.VechicleID),
+                    new SqlParameter("@VehicleID", pm.VehicleID),
                     new SqlParameter("@isActive", 1),
                     new SqlParameter("@BillRequired", pm.isBillRequired),
                     new SqlParameter("@DeliveryCharges", pm.DeliveryCharges == null ? 0 : pm.DeliveryCharges)
@@ -2315,12 +2315,13 @@ namespace MyVitarak.Controllers
             catch (Exception ex)
             {
                 string message = ex.Message;
-                return Json("No Record Found");
+                string errormsg = "No Product Record Found";
+                return Json(errormsg);
 
             }
         }
 
-
+        [HttpPost]
         public ActionResult SaveCustomerProductRates(String Mobile = "", String Values="")
         {
             JobDbContext _db = new JobDbContext();
@@ -2331,11 +2332,9 @@ namespace MyVitarak.Controllers
                     new SqlParameter("@Values", Values)
                    );
 
-                //SupplierMaster rs = new SupplierMaster();
+                
                 return Json("product rates added sucessfully");
-                //return Request.IsAjaxRequest()
-                //? (ActionResult)PartialView("_VendorProductDetails", res)
-                //: View("_VendorProductDetails", res);
+                
             }
             catch (Exception ex)
             {

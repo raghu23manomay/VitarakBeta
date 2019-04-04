@@ -50,7 +50,7 @@
                 <div class="form-group">
                     <label for="exampleInputName2" class="col-sm-3 control-label">Collection person</label>
                     <div class="col-sm-9">
-                        @Html.DropDownList("SalesPersonId", new SelectList((System.Collections.IEnumerable)ViewData["SalesPersonId"], "Value", "Text",Model.SalesPersonID), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID1", Title = "Employee Name" })
+                        @Html.DropDownList("model.SalesPersonId", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text",Model.SalesPersonID), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID1", Title = "Employee Name" })
                         <label style="color:red" id="EmployeeVal">*</label>
 
                     </div>
@@ -58,7 +58,7 @@
                 <div class="form-group">
                     <label for="exampleInputName2" class="col-sm-3 control-label">Vehicle</label>
                     <div class="col-sm-9">
-                        @Html.DropDownList("model.VechicleID", new SelectList((System.Collections.IEnumerable)ViewData["Vehicle"], "Value", "Text", Model.VechicleID), "Select Vehicle", new { @class = "form-control input-sm", @id = "VehicleID1", Title = "Vehicle Number" })
+                        @Html.DropDownList("model.VehicleID", new SelectList((System.Collections.IEnumerable)ViewData["Vehicle"], "Value", "Text", Model.VehicleID), "Select Vehicle", new { @class = "form-control input-sm", @id = "VehicleID1", Title = "Vehicle Number" })
                         <label style="color:red" id="VehicleVal">*</label>
 
                     </div>
@@ -148,7 +148,7 @@
        // debugger;
         var error = 0, regex = /^[a-zA-Z\s]+$/;
         var a = $('#Mobile').val(), intRegex = /^[0-9]{10}$/;
-        if ($("#CustomerName").val() == "" || (!regex.test($("#CustomerName").val()))) {
+        if ($("#CustomerName").val() == "" ) {
             error = 1;
             $("#CustomerNameVal").show();
             $("#AddressVal").hide();
@@ -233,7 +233,7 @@
                     AreaID: $("#AreaID1").val(),
                     Mobile: $("#Mobile").val(),
                     SalesPersonID: $("#EmployeeID1").val(),
-                    VechicleID: $("#VehicleID1").val(),
+                    VehicleID: $("#VehicleID1").val(), 
                     isActive: 1,
                     BillRequired: 1,
                     DeliveryCharges: $("#DeliveryCharges").val(),
