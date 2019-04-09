@@ -1224,7 +1224,7 @@ table tbody{
         display: block;
         border-bottom: 1px solid #000;
     }
-}
+
 .profile-image {
     width: 120px;
     float: left;
@@ -1241,4 +1241,13 @@ img.circle-border {
 }
 img {
     vertical-align: middle;
+}
+.LeftAlign {
+    text-align: left !important;
+}
+.pad40 {
+    padding-left: 43px;
+}
+.Popup80 {
+   width: 90%;
 }

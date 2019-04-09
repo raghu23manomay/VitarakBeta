@@ -390,6 +390,7 @@ namespace MyVitarak.Controllers
 
 
         /************************************************Add Employee************************************************************/
+
         [HttpGet]
         public ActionResult Add_Employee()
         {
@@ -495,9 +496,7 @@ namespace MyVitarak.Controllers
             }
             var itemsAsIPagedList = new StaticPagedList<EmployeeDetails>(result, pageIndex, pageSize, totalCount);
             return itemsAsIPagedList;
-
-
-
+        
         }
 
         [HttpPost]
@@ -1767,7 +1766,10 @@ namespace MyVitarak.Controllers
                 return RedirectToAction("Index", "Home");
             }
             StaticPagedList<CustomerDetails> itemsAsIPagedList;
-            itemsAsIPagedList = CustomerGridList(page);
+
+            if (Session["areaid"] == null) { Session["areaid"] = 0; }
+
+            itemsAsIPagedList = CustomerGridList(page,Convert.ToInt32(Session["areaid"].ToString()));
             ViewData["Area"] = binddropdown("Area", 0);
 
             Session["MasterName"] = "CustomerMaster";
@@ -1776,7 +1778,7 @@ namespace MyVitarak.Controllers
                     : View("IndexForCustomerMaster", itemsAsIPagedList);
         }
 
-        public StaticPagedList<CustomerDetails> CustomerGridList(int? page)
+        public StaticPagedList<CustomerDetails> CustomerGridList(int? page,int? areaid)
         {
 
             JobDbContext _db = new JobDbContext();
@@ -1786,9 +1788,11 @@ namespace MyVitarak.Controllers
             CustomerDetails Ulist = new CustomerDetails();
 
             IEnumerable<CustomerDetails> result = _db.CustomerDetails.SqlQuery(@"exec GetCustomerList
-                   @pPageIndex, @pPageSize",
-               new SqlParameter("@pPageIndex", pageIndex),
-               new SqlParameter("@pPageSize", pageSize)
+                   @pPageIndex, @pPageSize,@pName,@area",
+                new SqlParameter("@pPageIndex", pageIndex),
+                new SqlParameter("@pPageSize", pageSize),
+                new SqlParameter("@pName",""),
+                new SqlParameter("@area", areaid)
 
                ).ToList<CustomerDetails>();
 
@@ -1828,7 +1832,7 @@ namespace MyVitarak.Controllers
                     new SqlParameter("@Mobile", pm.Mobile),
                     new SqlParameter("@EmployeeId", pm.SalesPersonID),
                     new SqlParameter("@VehicleID", pm.VehicleID),
-                    new SqlParameter("@isActive", 1),
+                    new SqlParameter("@isActive", pm.isActive),
                     new SqlParameter("@BillRequired", pm.isBillRequired),
                     new SqlParameter("@DeliveryCharges", pm.DeliveryCharges)
                     );
@@ -1873,7 +1877,7 @@ namespace MyVitarak.Controllers
                     new SqlParameter("@Mobile", pm.Mobile),
                     new SqlParameter("@EmployeeId", pm.SalesPersonID),
                     new SqlParameter("@VehicleID", pm.VehicleID),
-                    new SqlParameter("@isActive", 1),
+                    new SqlParameter("@isActive", pm.isActive),
                     new SqlParameter("@BillRequired", pm.isBillRequired),
                     new SqlParameter("@DeliveryCharges", pm.DeliveryCharges == null ? 0 : pm.DeliveryCharges)
                     );
@@ -1993,10 +1997,13 @@ namespace MyVitarak.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            
+            if (area == null) { Session["areaid"] = 0; } else { Session["areaid"] = area; }
             StaticPagedList<CustomerDetails> itemsAsIPagedList;
-            itemsAsIPagedList = GridListCustomer(page, Name, area);
+            itemsAsIPagedList = GridListCustomer(page, Name, area = Convert.ToInt32(Session["areaid"].ToString()));
 
-            Session["MasterName"] = "CustomerMaster";
+
+
             return Request.IsAjaxRequest()
                     ? (ActionResult)PartialView("Partial_CustomerGridList", itemsAsIPagedList)
                     : View("Partial_CustomerGridList", itemsAsIPagedList);
@@ -2006,7 +2013,7 @@ namespace MyVitarak.Controllers
         {
 
             JobDbContext _db = new JobDbContext();
-            var pageIndex = (page ?? 1);
+            var pageIndex = 1;//(page ?? 1);
             const int pageSize = 20;
             int totalCount = 8;
             CustomerDetails Ulist = new CustomerDetails();

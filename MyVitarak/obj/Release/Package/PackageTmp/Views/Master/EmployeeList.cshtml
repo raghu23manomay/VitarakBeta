@@ -1,12 +1,12 @@
 ﻿
-@model  IEnumerable<MyVitarak.Models.CustomerDetails>
+@model  IEnumerable<MyVitarak.Models.EmployeeDetails>
+
 @using PagedList;
 @using PagedList.Mvc;
 @using GridMvc.Html
 <script src="~/Scripts/jquery-1.12.4.min.js"></script>
-
-@{           
-    ViewBag.Title = "IndexForCustomerMaster";
+@{
+    ViewBag.Title = "EmployeeList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -20,19 +20,23 @@
                         <label class="form-check-label verticalAlignTop" id="boxes" for="selectAll"></label>
                     </div>
                 </div>
-                <button type=button class="btn btn-default"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> Filters</button>
-                <button type=button class="btn btn-default" style="padding:4.5px">
-                   
-                    @Html.DropDownList("model.AreaID", new SelectList((System.Collections.IEnumerable)ViewData["Area"], "Value", "Text", Convert.ToInt32(Session["areaid"].ToString())), "All", new { @class = "form-control", @id = "AreaID", Title = "ModeName", @style = "height: 23px; padding: initial; padding - top: initial;  padding - right: initial; padding - bottom: initial; padding - left: initial; " })
-                </button>
-
-
+                @*<button type=button class="btn btn-default"><i class="fa fa-ban" aria-hidden="true"></i> Disqualify</button>
+                <button type=button class="btn btn-default"><i class="fa fa-envelope" aria-hidden="true"></i> Send email</button>
+                <button type=button class="btn btn-default"><i class="fa fa-tag" aria-hidden="true"></i> Add tags</button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h" aria-hidden="true"></i> More span class="caret"></span</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </div>*@
             </div>
-
         </div>
-
         <form class="navbar-form pull-left marginTop0">
-            <input type="text" id="txtName" class="form-control" placeholder="Search by Customer Name">
+            <input type="text" id="txtName" class="form-control" placeholder="Search by Emp Name">
         </form>
 
         @*<div class="btn-group pull-right">
@@ -47,51 +51,50 @@
                 <li><a href="#">Separated link</a></li>
             </ul>
         </div>*@
+        <a href="@Url.Action("importexcel", "Master",new {@Mastername = Session["MasterName"]})"><button type="button" class="btn btn-primary pull-right marginRight15px"><i class="fa fa-download" aria-hidden="true"></i> Import</button></a>
+        @*<a href="@Url.Action("Add_Employee", "Master")" data-toggle="modal" data-target="#mdlAddEmployee"><input type="button" value=" + Employees" class="btn btn-primary dropdown-toggle pull-right marginRight15px"></a>*@
+        <button type="button" class="btn btn-primary dropdown-toggle pull-right marginRight15px" href="@Url.Action("Add_Employee", "Master")" data-toggle="modal" data-target="#mdlAddEmployee"><i class="fa fa-plus" aria-hidden="true"></i> Employees</button>
 
-
-        <a href="@Url.Action("importexcel", "Master",new {@Mastername = Session["MasterName"]})">
-            <button type="button" class="btn btn-primary pull-right marginRight15px"><i class="fa fa-download" aria-hidden="true"></i> Import</button>
-        </a>
-        @*<a href="@Url.Action("Add_Customer", "Master")" data-toggle="modal" data-target="#mdlAddEmployee"><input type="button" value="" class="btn btn-primary dropdown-toggle pull-right marginRight15px"><i class="fa fa-plus" aria-hidden="true"></i></a>*@
-        <button type="button" class="btn btn-primary dropdown-toggle pull-right marginRight15px" href="@Url.Action("Add_Customer", "Master")" data-toggle="modal" data-target="#mdlAddEmployee"><i class="fa fa-plus" aria-hidden="true"></i> Customer</button>
-        <div id="page">
         <nav class="pull-right marginRight15px" style="margin-top: -18px;">
-            @Html.PagedListPager((IPagedList)Model, page => Url.Action("IndexForCustomerMaster", "Master", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 2, DisplayPageCountAndCurrentLocation = true }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "mgrid", OnComplete = "PagedOnComplete" }))
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("EmployeeList", "Master", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 2, DisplayPageCountAndCurrentLocation = true }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "mgrid", OnComplete = "PagedOnComplete" }))
             @if (Model.Count() == 0)
             {
                 <ul class="pagination margin0"></ul>
             }
         </nav>
-            </div>
 
         @*<div class="paginationCount pull-right marginTB7px marginRight15px"><b>1-30</b> of <b>250</b> Customers</div>*@
 
     </div>
     <div id="grid1" class="col-xs-12" style="margin-top:-15px">
-        @Html.Partial("Partial_CustomerGridList")
+        @Html.Partial("EmployeeGridList")
     </div>
 </div>
 
-<div id="mdlAddEmployee" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+@*<div id="mdlAddEmployee" class="modal fade" style="margin-left: 20%;padding-top: 50px;width: 60%;" data-backdrop="static" data-keyboard="false" role="dialog">
 </div>
 
-<div id="mdlEditEmployee" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
-</div>
+<div id="mdlEditEmployee" class="modal fade" style="margin-left: 20%;padding-top: 50px;width: 60%;" data-backdrop="static" data-keyboard="false" role="dialog">
+</div>*@
 
+<div class="modal fade bs-example-modal-md" id="mdlAddEmployee" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+</div>
+<div class="modal fade bs-example-modal-md" id="mdlEditEmployee" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+</div>
 <script>
-
-    $(document).ready(function () {
+    $("#EmployeeIndex").addClass("active");
+    $(document).ready(function () {     
 
         function countChecked() {
             var a = $("input:checked").length;
             $("#boxes").text(a);
         }
         $(document).on("click", "#one", function () {
-           
+
             countChecked();
         })
         $(document).on("click", "#selectAll", function () {
-            
+
             var check = $(this).prop("checked");
             if (check) {
                 $(':checkbox').each(function () {
@@ -103,12 +106,11 @@
             else {
                 $("#boxes").text(0);
             }
-           
+
         })
     });
 
-        
-    $('#CI').addClass("active");
+   
     $("#selectAll").change(function () {
 
         $('input:checkbox').not(this).prop('checked', this.checked);
@@ -134,14 +136,15 @@
         parseInt(con);
 
     }
-     $('#txtName').keyup(function () {
-         $("#boxes").text(0);
+
+    $('#txtName').keyup(function () {
+        $("#boxes").text(0);
                 $('#pageLoader').show();
 
                 $.ajax({
-                    url: "@Url.Action("LoadDataCustomer", "Master")",
+                    url: "@Url.Action("LoadData", "Master")",
                     contentType: "application/json",
-                    data: JSON.stringify({ page: con, Name: $('#txtName').val(), area: $('#AreaID').val()  }),
+                    data: JSON.stringify({ page: con, Name: $('#txtName').val() }),
                     dataType: "text",
                     type: "POST",
                     async: true,
@@ -158,30 +161,22 @@
                 });
 
     });
+             
+    function selectAll() {
+        var items = document.getElementsByName('acs');
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].type == 'checkbox')
+                items[i].checked = true;
+        }
+    }
 
-     $('#AreaID').on('change', function () {
-         $("#boxes").text(0);
-     $.ajax({
-            url: "@Url.Action("LoadDataCustomer", "Master")",
-         contentType: "application/json",
-         data: JSON.stringify({ page: con, Name: $('#txtName').val(), area: $('#AreaID').val()  }),
-            dataType: "text",
-            type: "POST",
-            async: true,
-            success: function (data) {
-                $('#grid1').html(data);
-                window.location.reload();
+    function UnSelectAll() {
+        var items = document.getElementsByName('acs');
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].type == 'checkbox')
+                items[i].checked = false;
+        }
+    }
 
-            },
-            error: function (data) {
-
-            },
-         complete: function () {
-
-         }
-
-        });
-    });
-         
-
+   
 </script>
