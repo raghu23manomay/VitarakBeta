@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label for="customerArea" class="col-sm-3 control-label">Area / Route</label>
                     <div class="col-sm-9">
-                        @Html.DropDownList("model.AreaID", new SelectList((System.Collections.IEnumerable)ViewData["Area"], "Value", "Text", Model.AreaID), "Select Area", new { @class = "form-control input-sm", @id = "AreaID", Title = "ModeName" })
+                        @Html.DropDownList("model.AreaID", new SelectList((System.Collections.IEnumerable)ViewData["Area"], "Value", "Text", Model.AreaID), "Select Area", new { @class = "form-control input-sm", @id = "AreaID1", Title = "ModeName" })
                         @*@Html.HiddenFor(model => model.AreaID, new { @id = "AreaID" })*@
                         <label style="color:red" id="AreaVal">*</label>
 
@@ -50,7 +50,7 @@
                 <div class="form-group">
                     <label for="exampleInputName2" class="col-sm-3 control-label">Collection person</label>
                     <div class="col-sm-9">
-                        @Html.DropDownList("model.SalesPersonID", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text", Model.SalesPersonID), "Select Employee", new { @class = "form-control input-sm", @id = "SalesPersonID", Title = "Employee Name" })
+                        @Html.DropDownList("model.SalesPersonId", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text",Model.SalesPersonID), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID1", Title = "Employee Name" })
                         <label style="color:red" id="EmployeeVal">*</label>
 
                     </div>
@@ -58,7 +58,7 @@
                 <div class="form-group">
                     <label for="exampleInputName2" class="col-sm-3 control-label">Vehicle</label>
                     <div class="col-sm-9">
-                        @Html.DropDownList("model.VechicleID", new SelectList((System.Collections.IEnumerable)ViewData["Vehicle"], "Value", "Text", Model.VechicleID), "Select Vehicle", new { @class = "form-control input-sm", @id = "VechicleID", Title = "Vehicle Number" })
+                        @Html.DropDownList("model.VehicleID", new SelectList((System.Collections.IEnumerable)ViewData["Vehicle"], "Value", "Text", Model.VehicleID), "Select Vehicle", new { @class = "form-control input-sm", @id = "VehicleID1", Title = "Vehicle Number" })
                         <label style="color:red" id="VehicleVal">*</label>
 
                     </div>
@@ -145,9 +145,10 @@
         $("#EmployeeVal").hide();
     });
     $('#btnsave').on('click', function () {
+       // debugger;
         var error = 0, regex = /^[a-zA-Z\s]+$/;
         var a = $('#Mobile').val(), intRegex = /^[0-9]{10}$/;
-        if ($("#CustomerName").val() == "" || (!regex.test($("#CustomerName").val()))) {
+        if ($("#CustomerName").val() == "" ) {
             error = 1;
             $("#CustomerNameVal").show();
             $("#AddressVal").hide();
@@ -168,7 +169,7 @@
             $("#EmployeeVal").hide();
         }
 
-        else if ($("#Area").val() == "") {
+        else if ($("#AreaID1").val() == "") {
 
             error = 1;
             $("#CustomerNameVal").hide();
@@ -191,7 +192,7 @@
             $("#EmployeeVal").hide();
         }
 
-        else if ($("#Employee").val() == "") {
+        else if ($("#EmployeeID1").val() == "") {
 
 
             error = 1;
@@ -202,7 +203,7 @@
             $("#VehicleVal").hide();
             $("#EmployeeVal").show();
         }
-        else if ($("#Vehicle").val() == "") {
+        else if ($("#VehicleID1").val() == "") {
 
             error = 1;
             $("#CustomerNameVal").hide();
@@ -218,7 +219,7 @@
         }
 
         else {
-
+           
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -229,10 +230,10 @@
                     CustomerID: $("#CustomerID").val(),
                     CustomerName: $("#CustomerName").val(),
                     Address: $("#Address").val(),
-                    AreaID: $("#AreaID").val(),
+                    AreaID: $("#AreaID1").val(),
                     Mobile: $("#Mobile").val(),
-                    SalesPersonID: $("#SalesPersonID").val(),
-                    VechicleID: $("#VechicleID").val(),
+                    SalesPersonID: $("#EmployeeID1").val(),
+                    VehicleID: $("#VehicleID1").val(), 
                     isActive: 1,
                     BillRequired: 1,
                     DeliveryCharges: $("#DeliveryCharges").val(),

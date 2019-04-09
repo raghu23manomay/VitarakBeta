@@ -2,6 +2,7 @@
 @using PagedList;
 @using PagedList.Mvc;
 @using GridMvc.Html;
+
 <table class="table table-bordered" style="margin-top:-20px;">
     <thead>
         <tr>
@@ -16,15 +17,15 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td class="col-md-6">
                     <div class="form-check height20Pixel">
                         <input class="form-check-input" type="checkbox" id="one">
                         <label class="form-check-label verticalAlignTop" for="one"> &nbsp;@item.Area</label>
                     </div>
                 </td>
 
-                <td>
-                    <a href="@Url.Action("FetchEditArea", "Master",new { @AreaId = item.AreaID})" data-toggle="modal" data-target="#mdlEditArea"><i class="icon-pencil">Edit</i></a>
+                <td class="col-md-1">
+                    <a href="@Url.Action("FetchEditArea", "Master",new { @AreaId = item.AreaID})" data-toggle="modal" data-target="#mdlEditArea"><i class="fa fa-edit">Action</i></a>
                 </td>
 
             </tr>

@@ -150,36 +150,40 @@
 
         if ($('#Transport').val() == '' || (!regex.test(Transport))) {
             error = 1;
-            alert("Invalid or Required Transport");
+           // alert("Please Enter Transport Name");
+            $('#TransportVal').html("Please Enter Transport Name");;
             $('#TransportVal').show();
         }
         else if ($('#Owner').val() == '' || (!regex.test($('#Owner').val()))) {
             error = 1;
-            alert("Invalid or Required Owner");
+            //alert("Please Enter Owner");
             $('#OwnerVal').show();
+            $('#OwnerVal').html('Please Enter Owner Name');
             $('#TransportVal').hide();
         }
-        else if ($('#Address').val() == '' || $('#Address').val().length <= 50) {
+        else if ($('#Address').val() == '' || $('#Address').val().length <= 10) {
             error = 1;
-            alert("Minimum 50 characters Required Address");
+         //   alert("Minimum 10 characters Required Address");
             $('#AddressVal').show();
+            $('#AddressVal').html('Minimum 10 characters Required Address');
             $('#OwnerVal').hide();
             $('#TransportVal').hide();
         }
 
         else if ($('#Mobile').val() == '' || (!intRegex.test(a))) {
             error = 1;
-            alert("Invalid or Required mobile number");
+           // alert("Invalid or Required mobile number");
             $('#MobileVal').show();
+            $('#MobileVal').html('Please Enter Mobile Number');
             $('#AddressVal').hide();
             $('#OwnerVal').hide();
             $('#TransportVal').hide();
         }
         else if ($('#VechicleNo').val() == '' || (!vehicleregex.test($('#VechicleNo').val()))) {
             error = 1;
-
-            alert("Vehicle number should be 'MH 13 BH 1244'");
+          //alert("Vehicle number should be 'MH 13 BH 1244'");
             $('#VechicleNoVal').show();
+            $('#VechicleNoVal').html('Vehicle number should be MH 13 BH 1244');
             $('#MobileVal').hide();
             $('#AddressVal').hide();
             $('#OwnerVal').hide();
@@ -187,8 +191,9 @@
         }
         else if ($('#PrintOrder').val() == '' || (isNaN($('#PrintOrder').val()))) {
             error = 1;
-            alert("Invalid or Required PrintOrder");
+           // alert("Invalid or Required PrintOrder");
             $('#PrintOrderVal').show();
+            $('#PrintOrderVal').html('Please Enter Print Order');
             $('#VechicleNoVal').hide();
             $('#MobileVal').hide();
             $('#AddressVal').hide();

@@ -6,7 +6,7 @@
 
 <script src="~/Scripts/jquery-1.12.4.min.js"></script>
 @{
-    ViewBag.Title = "IndexForProductMaster";
+    ViewBag.Title = "Product List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -39,17 +39,17 @@
             <input type="text" id="txtsearch" class="form-control" placeholder="Search...">
         </form>
 
-        @*<div class="btn-group pull-right">
+        <div class="btn-group pull-right">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-window-maximize" aria-hidden="true"></i> <span class="caret"></span></button>
             <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
+                <li><a href="@Url.Action("importexcel", "Master",new {@Mastername = "ProductMaster"})"  >Import</a></li>
+                @*<li><a href="#">Another action</a></li>
                 <li><a href="#">Something else here</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
+                <li><a href="#">Separated link</a></li>*@
             </ul>
-        </div>*@
-        <a class="btn btn-primary pull-right marginRight15px" href="@Url.Action("importexcel", "Master",new {@Mastername = "ProductMaster"})"><i class="fa fa-download" aria-hidden="true"> </i> Import</a>
+        </div> 
+        @*<a class="btn btn-primary pull-right marginRight15px" href="@Url.Action("importexcel", "Master",new {@Mastername = "ProductMaster"})"><i class="fa fa-download" aria-hidden="true"> </i> Import</a>*@
         <button type="button" class="btn btn-primary dropdown-toggle pull-right marginRight15px" href="@Url.Action("Add_Product", "Master")" data-toggle="modal" data-target="#mdlAddProduct"><i class="fa fa-plus" aria-hidden="true"></i> Products</button>
 
 
@@ -65,7 +65,7 @@
 
     </div>
     <div id="grid1" class="col-xs-12">
-        @Html.Partial("_partialGridProductMaster")
+        @Html.Partial("ProductGrid")
     </div>
 </div>
 <div class="modal fade bs-example-modal-md" id="mdlAddProduct" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">

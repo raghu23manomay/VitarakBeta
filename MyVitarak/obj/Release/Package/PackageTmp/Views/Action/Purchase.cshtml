@@ -38,18 +38,18 @@
                 <input type="text" id="txtsearch" class="form-control" placeholder="Search...">
             </div>
         </form>
-        @*<div class="btn-group pull-right">
+        <div class="btn-group pull-right">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-window-maximize" aria-hidden="true"></i> <span class="caret"></span></button>
             <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
+                <li><a href="@Url.Action("Download", "Action")">Export</a></li>
+                @*<li><a href="#">Another action</a></li>
                 <li><a href="#">Something else here</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
+                <li><a href="#">Separated link</a></li>*@
             </ul>
-        </div>*@
+        </div> 
         @*<a class="btn btn-primary pull-right marginRight15px" href="@Url.Action("#", "#",new {})"><i class="fa fa-history" aria-hidden="true"> </i> Lickage</a>*@
-        <a class="btn btn-primary pull-right marginRight15px" href="@Url.Action("Download", "Action")"><i class="fa fa-file-excel-o" aria-hidden="true"> </i> Export</a>
+        @*<a class="btn btn-primary pull-right marginRight15px" href="@Url.Action("Download", "Action")"><i class="fa fa-file-excel-o" aria-hidden="true"> </i> Export</a>*@
         @*<button type="button" class="btn btn-primary dropdown-toggle pull-right marginRight15px" href="@Url.Action("AddArea_Route", "Master")" data-toggle="modal" data-target="#mdlAddArea"><i class="fa fa-save" aria-hidden="true"></i> Save</button>*@
         <input type="date" id="txtdate" class="form-control pull-right marginRight15px" style="width:162px">
 

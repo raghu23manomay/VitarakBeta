@@ -209,9 +209,9 @@ namespace MyVitarak.Models
         public string CustomerNameEnglish { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         public string EmployeeName { get; set; }
-        public int VehicleID { get; set; }
-        public Boolean isBillRequired { get; set; }
-        public Boolean isActive { get; set; }
+        public int? VehicleID { get; set; }
+        public Boolean? isBillRequired { get; set; }
+        public Boolean? isActive { get; set; }
         public Decimal? DeliveryCharges { get; set; }
         public string Area { get; set; }
         public string VechicleNo { get; set; }

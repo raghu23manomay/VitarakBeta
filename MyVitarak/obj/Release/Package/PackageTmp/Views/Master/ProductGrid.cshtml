@@ -7,9 +7,9 @@
     <thead>
         <tr>
             <th scope="col">Product Name <i class="fa fa-angle-down" aria-hidden="true"></i></th>
-            <th scope="col">Squence <i class="fa fa-angle-down" aria-hidden="true"></i></th>
+            <th scope="col">Sequence <i class="fa fa-angle-down" aria-hidden="true"></i></th>
             <th scope="col">Brand Name <i class="fa fa-angle-down" aria-hidden="true"></i></th>
-            <th scope="col">Cart Size <i class="fa fa-angle-down" aria-hidden="true"></i></th>
+            <th scope="col">Crate Size <i class="fa fa-angle-down" aria-hidden="true"></i></th>
             <th scope="col">Gst % <i class="fa fa-angle-down" aria-hidden="true"></i></th>
             <th scope="col">Action<i class="fa fa-angle-down" aria-hidden="true"></i></th>
 
@@ -31,7 +31,7 @@
             <td>@item.CrateSize</td>
             <td>@item.GST</td>
             <td>
-                <a href="@Url.Action("FetchProductForUpdate", "Master",new { @ProductID = item.ProductID})" data-toggle="modal" data-target="#mdlEditProduct"><i class="fa fa-edit"> Edit</i></a>
+                <a href="@Url.Action("FetchProductForUpdate", "Master",new { @ProductID = item.ProductID})" data-toggle="modal" data-target="#mdlEditProduct"><i class="fa fa-edit">Action</i></a>
             </td>
 
         </tr>
