@@ -266,5 +266,15 @@ namespace MyVitarak.Models
         public int CrateSize { get; set; }
 
     }
+    public class DashboardCounts
+    {
+
+        [Key]
+        public Int64 vendorCount { get; set; }
+        public Int64 PurchaseAmount { get; set; }
+        public Int64 salesAmount { get; set; }
+        public Int64 CustomerCount { get; set; }
+         
+    }
 
 }

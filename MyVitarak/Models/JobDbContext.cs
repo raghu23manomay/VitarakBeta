@@ -39,8 +39,8 @@ namespace MyVitarak.Models
         public DbSet<OpeningBalance> OpeningBalance { get; set; }
         public DbSet<OpeningBalanceDeatils> OpeningBalanceDeatils { get; set; }
         public DbSet<Login> LoginDetail { get; set; }
-        public DbSet<CustomerProductDetails> CustomerProductDetails { get; set; }        
-
+        public DbSet<CustomerProductDetails> CustomerProductDetails { get; set; }
+        public DbSet<DashboardCounts> DashboardCounts { get; set; }
 
     }
 }

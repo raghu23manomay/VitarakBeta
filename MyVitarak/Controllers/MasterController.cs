@@ -2343,6 +2343,17 @@ namespace MyVitarak.Controllers
 
             }
         }
+        public ActionResult DashboardCounts(int id=0 )
+        {
+            JobDbContext _db = new JobDbContext();
+            DashboardCounts result = _db.DashboardCounts.SqlQuery(@"exec USPGetDashboardCounts").ToList<DashboardCounts>().FirstOrDefault();
+            
+
+            return Request.IsAjaxRequest()
+                   ? (ActionResult)PartialView("DashboardCounts", result)
+                   : View("DashboardCounts", result);
+        }
+
 
     }
 }

@@ -119,6 +119,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\Dashboardstyle.css" />
     <Content Include="css\plugins\font-awesome\css\font-awesome.css" />
     <Content Include="css\plugins\font-awesome\css\font-awesome.min.css" />
     <Content Include="css\plugins\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -138,6 +139,7 @@
     <Content Include="images\DashboardActual.png" />
     <Content Include="images\dashboard_1-1-1_.png" />
     <Content Include="images\Favicon.png" />
+    <Content Include="images\graph.png" />
     <Content Include="images\images.jpg" />
     <Content Include="images\logo.png" />
     <Content Include="images\milk.jpg" />
@@ -346,6 +348,7 @@
     <Content Include="Views\Master\Partial_OpeningBalance.cshtml" />
     <Content Include="Views\Master\SearchSupplier.cshtml" />
     <Content Include="Views\Master\_VendorProductDetails.cshtml" />
+    <Content Include="Views\Master\DashboardCounts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
