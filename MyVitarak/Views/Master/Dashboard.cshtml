@@ -100,13 +100,13 @@
 <script>
 
     $(document).ready(function () {
-
+        $('#Dash').addClass("active");
          $.ajax({
             url: "@Url.Action("DashboardCounts", "Master")",
              data: JSON.stringify({ id: 0}),
              dataType: "text",
              success: function (data) {
-                 debugger;
+
                  $('#Counts').html(data);
             }
         });
