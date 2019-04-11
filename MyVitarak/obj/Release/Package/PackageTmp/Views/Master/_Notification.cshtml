@@ -14,12 +14,11 @@
         <li>
             
                 <a style="color:black;">@item.Messege</a>
-                <p style="margin-left: 23px;">
-                                      
-                    <a id="@item.NotificationID" class="accept" style="color:green; font-size:11px;">Accept</a>
-                    <a id="btnsave" style="color:red; font-size:11px;">Reject</a>
-                    <a style="color:black;font-size:11px;"> @item.CreatedDate</a>
-                </p>
+            <p style="margin-left: 23px;">
+                <a id="btnsave" style="color:green; font-size:11px;">Accept</a>
+                <a id="btnsave" style="color:red; font-size:11px;">Reject</a>
+               <a style="color:black;font-size:11px;"> @item.CreatedDate</a>
+            </p>
             @*<a href="" data-toggle="modal" data-target="#mdlAddSupplier">@item.Messege</a>
         <div>
         <a id="btnsave" style="color:green; font-size:11px;">Accept</a>
@@ -30,41 +29,11 @@
             }
         }
 
+
     </ul>
 
 </a>
 
-<script>
-
-    $('.accept').click(function () {
-        var idValue = $(this).attr('id');
-        if (confirm("Are you sure?"))
-        {
-            $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                url: '/Master/AddVendor',
-
-                data:
-                {
-                    NotificationId: idValue
-
-                },
-                success: function (da) {
-                    alert(da);
-                    $('#btnsave1').show();
-                    $('#btnUseThis').hide();
-                },
-
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-
-                }
-            });
-        }
-        })
-
-
-</script>
 
 
 

@@ -2280,14 +2280,13 @@ namespace MyVitarak.Controllers
 
 
         [HttpPost]
-        public ActionResult AddVendor(Int64? UserId,Int64? TenantId,String MobileNo = "")
+        public ActionResult AddVendor(int? NotificationId)
         {
             JobDbContext _db = new JobDbContext();
             try
             {
-                var res = _db.Database.ExecuteSqlCommand(@"exec USPAddVendor @TenantId,@MobileNo", 
-                    new SqlParameter("@TenantId", TenantId),
-                    new SqlParameter("@MobileNo", MobileNo));
+                var res = _db.Database.ExecuteSqlCommand(@"exec USPAddVendor @NotificationId", 
+                    new SqlParameter("@NotificationId", NotificationId));
 
                 //return Request.IsAjaxRequest()
                 //? (ActionResult)PartialView("SearchSupplier")

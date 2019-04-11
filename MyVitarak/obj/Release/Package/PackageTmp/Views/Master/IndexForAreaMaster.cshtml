@@ -21,16 +21,22 @@
                         <label class="form-check-label verticalAlignTop" id="boxes" for="selectAll"></label>
                     </div>
                 </div>
-                
+
             </div>
         </div>
         <form class="navbar-form pull-left marginTop0">
             <input type="text" id="txtsearch" class="form-control" placeholder="Search...">
         </form>
 
-       
-        <a class="btn btn-primary pull-right marginRight15px" href="@Url.Action("importexcel", "Master",new {@Mastername = "AreaMaster"})"><i class="fa fa-download" aria-hidden="true"> </i> Import</a>
-        <button type="button" class="btn btn-primary dropdown-toggle pull-right marginRight15px" href="@Url.Action("AddArea_Route", "Master")" data-toggle="modal" data-target="#mdlAddArea"><i class="fa fa-plus" aria-hidden="true"></i> Areas</button>
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-window-maximize" aria-hidden="true"></i> <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="@Url.Action("importexcel", "Master",new {@Mastername = "AreaMaster"})">Import</a></li>
+
+            </ul>
+        </div>
+        @*<a class="btn btn-primary pull-right marginRight15px" href="@Url.Action("importexcel", "Master",new {@Mastername = "AreaMaster"})"><i class="fa fa-download" aria-hidden="true"> </i> Import</a>
+        <button type="button" class="btn btn-primary dropdown-toggle pull-right marginRight15px" href="@Url.Action("AddArea_Route", "Master")" data-toggle="modal" data-target="#mdlAddArea"><i class="fa fa-plus" aria-hidden="true"></i> Areas</button>*@
 
 
 
@@ -60,7 +66,7 @@
 
 <script>
     $(document).ready(function () {
-        //// ########## Count Checked ########## //
+        // Count Checked 
 
         function countChecked() {
             var a = $("input:checked").length;
