@@ -1,50 +1,5 @@
 ﻿@model  IEnumerable<MyVitarak.Models.NotificationDetails>
-
-
-
-
-@*<a href="#" class="btn btn-danger btn-sm" style="    margin-top: -24px;height: 43px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i> <span class="badge">4</span></a>*@
-@*<button class="btn btn-danger btn-xs" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i> <span class="badge">4</span></button>*@
-@*<ul  >
-
-        @if (Model.Count() != 0)
-        {
-            foreach (var item in Model)
-            {
-        <li>
-            
-                <a style="color:black;">@item.Messege</a>
-            <p style="margin-left: 23px;">
-                <a id="btnsave" style="color:green; font-size:11px;">Accept</a>
-                <a id="btnsave" style="color:red; font-size:11px;">Reject</a>
-               <a style="color:black;font-size:11px;"> @item.CreatedDate</a>
-            </p>
-            @*<a href="" data-toggle="modal" data-target="#mdlAddSupplier">@item.Messege</a>
-        <div>
-        <a id="btnsave" style="color:green; font-size:11px;">Accept</a>
-        <a id="btnsave" style="color:red; font-size:11px;">Reject</a>
-        </div>*@
-        </li>
-            }
-        }
-
-
-    </ul>
-
-                    </a>
-                    <div class="media-body">
-                        <small class="pull-right">46h ago</small>
-                        @item.Messege  <br>
-                        <small class="text-muted"> @item.CreatedDate  </small>
-                        <p style="margin-left: 23px;">
-                            <a id="btnsave" style="color:green; font-size:11px;">Accept</a>
-                            <a id="btnsave" style="color:red; font-size:11px;">Reject</a>
-                            <a style="color:black;font-size:11px;"> @item.CreatedDate</a>
-                        </p>
-                    </div>
-                </div>
-            </li>
-            <li class="divider"></li>*@
+ 
    
 @if (Model.Count() != 0)
 {
@@ -55,37 +10,7 @@
 
                 <div>
 
-<script>
 
-    $('.accept').click(function () {
-        var idValue = $(this).attr('id');
-        if (confirm("Are you sure?"))
-        {
-            $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                url: '/Master/AddVendor',
-
-                data:
-                {
-                    NotificationId: idValue
-
-                },
-                success: function (da) {
-                    alert(da);
-                    $('#btnsave1').show();
-                    $('#btnUseThis').hide();
-                },
-
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-
-                }
-            });
-        }
-        })
-
-
-</script>
 
                     <div class="ibox-content profile-content">
                         <h4><strong>
@@ -117,5 +42,33 @@
 }
 
 
+        <script>
+
+            $('.accept').click(function () {
+                var idValue = $(this).attr('id');
+                if (confirm("Are you sure?")) {
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        url: '/Master/AddVendor',
+
+                        data:
+                        {
+                            NotificationId: idValue
+
+                        },
+                        success: function (da) {
+                            alert(da);
+                            $('#btnsave1').show();
+                            $('#btnUseThis').hide();
+                        },
+
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                        }
+                    });
+                }
+            })
 
 
+        </script>
