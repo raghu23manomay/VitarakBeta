@@ -1251,3 +1251,63 @@ img {
 .Popup80 {
    width: 90%;
 }
+ 
+
+/* WRAPPERS */
+ 
+
+.wrapper1 {
+    padding: 0 20px;
+}
+
+.wrapper-content1 {
+    padding: 90px 10px 40px;
+}
+.TopMargin {
+    margin-top: 10px
+}
+
+
+@media (min-width: 768px) {
+    #page-wrapper {
+        position: inherit;
+        margin: 0 0 0 240px;
+        min-height: 2002px;
+    }
+}
+
+.title-action {
+    text-align: right;
+    padding-top: 30px;
+}
+
+.ibox-content h1,
+.ibox-content h2,
+.ibox-content h3,
+.ibox-content h4,
+.ibox-content h5,
+.ibox-title h1,
+.ibox-title h2,
+.ibox-title h3,
+.ibox-title h4,
+.ibox-title h5 {
+    margin-top: 5px;
+}
+
+ul.unstyled,
+ol.unstyled {
+    list-style: none outside none;
+    margin-left: 0;
+}
+
+.big-icon {
+    font-size: 160px !important;
+    color: #e5e6e7;
+}
+
+.float-e-margins .btn {
+    margin-bottom: 5px;
+}
+.stat-percent {
+    float: right;
+}

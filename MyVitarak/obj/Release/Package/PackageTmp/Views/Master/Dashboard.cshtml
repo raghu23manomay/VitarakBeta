@@ -2,93 +2,120 @@
 @{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <h2>Dashboard</h2>
-
-    
-    <style>
-        body {
-            
-            line-height: 1.8;
-            color: #f5f6f7;
-        }
-
-        p {
-            font-size: 16px;
-        }
-
-        .margin {
-            margin-bottom: 45px;
-        }
-
-        .bg-1 {
-            background-color: #1abc9c; /* Green */
-            color: #ffffff;
-        }
-
-        .bg-2 {
-            background-color: #474e5d; /* Dark Blue */
-            color: #ffffff;
-        }
-
-        .bg-3 {
-            background-color: #ffffff; /* White */
-            color: #555555;
-        }
-
-        .bg-4 {
-            background-color: #2f2f2f; /* Black Gray */
-            color: #fff;
-        }
-
-        .container-fluid {
-            padding-top: 70px;
-            padding-bottom: 70px;
-        }
-
-   
-
-        
-    </style>
+<link href="~/css/bootstrap.min.css" rel="stylesheet">
+<link href="~/css/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" />
 
 
+<link href="~/css/style.css" rel="stylesheet" />
+<body>
 
-    <!-- First Container -->
-<hr style="background-color:indianred;">
-    <div class="marginTop110 marginBottom0 bg-1 text-center" style="margin-top:77px;">
-            
-    </div>
 
-    <!-- Second Container -->
-    <div class="container-fluid bg-2 text-center">
-        <h3 class="margin">About Us</h3>
-        <p> This product is designed and developed by manomay softwares,pune.this computer program is protected by copyright laws.Unauthorized reproduction or distribution of thisprogram,or any portion of it,may result in severe civil or criminal penaltirs and will br prosecuted to the maximum penalties under law</p>
-        <a href="#" class="btn btn-default btn-lg">
-            <span class="glyphicon glyphicon-search"></span> Search
-        </a>
-    </div>
+    <div class="wrapper1 wrapper-content1">
 
-    <!-- Third Container (Grid) -->
-    <div class="container-fluid bg-3 text-center">
-        <h3 class="margin">Where To Find Me?</h3><br>
-        <div class="row">
-            <div class="col-sm-4">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <img src="~/images/cow.jpg" class="img-responsive margin" style="width:100%; height:336px" alt="Image">
+        <div class="gray-bg">
+
+            <div class="">
+                <div class="row" id="Counts">
+
+
+                </div>
+                <div class="row TopMargin">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                               
+                                @*<div class="pull-right">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-xs btn-white active">Today</button>
+                                        <button type="button" class="btn btn-xs btn-white">Monthly</button>
+                                        <button type="button" class="btn btn-xs btn-white">Annual</button>
+                                    </div>
+                                </div>*@
+                            </div>
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <div class="col-lg-9">
+                                        <div class="flot-chart">
+                                            <div class="flot-chart-content" id="flot-dashboard-chart">
+                                                <img src="~/images/graph.png" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="col-lg-3">
+                                            <ul class="stat-list">
+                                                <li>
+                                                    <h2 class="no-margins">2,346</h2>
+                                                    <small>Total orders in period</small>
+                                                    <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i></div>
+                                                    <div class="progress progress-mini">
+                                                        <div style="width: 48%;" class="progress-bar"></div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <h2 class="no-margins ">4,422</h2>
+                                                    <small>Orders in last month</small>
+                                                    <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i></div>
+                                                    <div class="progress progress-mini">
+                                                        <div style="width: 60%;" class="progress-bar"></div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <h2 class="no-margins ">9,180</h2>
+                                                    <small>Monthly income from orders</small>
+                                                    <div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i></div>
+                                                    <div class="progress progress-mini">
+                                                        <div style="width: 22%;" class="progress-bar"></div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>*@
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
             </div>
-            <div class="col-sm-4">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <img src="~/images/images.jpg" class="img-responsive margin" style="width:100%; height:336px" alt="Image">
-            </div>
-            <div class="col-sm-4">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <img src="~/images/milk.jpg" class="img-responsive margin" style="width:100%; height:336px" alt="Image">
-            </div>
+
         </div>
+
+
     </div>
+
+
+    <!-- Flot -->
+
+
+
+
+</body>
+
 <script>
-    $('#Dash').addClass("active");
-    </script>
+
+    $(document).ready(function () {
+        $('#Dash').addClass("active");
+         $.ajax({
+            url: "@Url.Action("DashboardCounts", "Master")",
+             data: JSON.stringify({ id: 0}),
+             dataType: "text",
+             success: function (data) {
+
+                 $('#Counts').html(data);
+            }
+        });
 
 
+
+
+         
+        });
+</script>
+
+  

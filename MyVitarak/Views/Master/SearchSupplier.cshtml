@@ -47,25 +47,52 @@
 
         
 
-        $('#btnUseThis').on('click', function () {
+        //$('#btnUseThis').on('click', function () {
                                             
+        //    $.ajax({
+        //        type: 'POST',
+        //        dataType: 'json',
+        //        url: '/Master/AddVendor',
+
+        //        data:
+        //        {
+        //            UserId: $("#userid").val(),
+        //            TenantId: $("#TenantID").val(), 
+        //            MobileNo: $("#PersonMobileNo").val()
+                    
+
+        //        },
+        //        success: function (da) {
+        //            alert(da);         
+        //            $('#btnsave1').show();
+        //            $('#btnUseThis').hide();
+        //        },
+
+        //        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+        //        }
+        //    });
+        //})
+
+
+        $('#btnUseThis').on('click', function () {
+           // alert($("#search").val());
+
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: '/Master/AddVendor',
+                url: '/Master/AddNotification',
 
                 data:
                 {
-                    UserId: $("#userid").val(),
-                    TenantId: $("#TenantID").val(), 
-                    MobileNo: $("#PersonMobileNo").val()
-                    
+                    Mobile: $("#search").val()
 
                 },
                 success: function (da) {
-                    alert(da);         
+                    alert(da);
                     $('#btnsave1').show();
-                    $('#btnUseThis').hide();
+                    //$('#btnUseThis').hide();
+                    $("#btnUseThis").attr("disabled", true);
                 },
 
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

@@ -18,7 +18,7 @@
                     <label for="exampleInputName2" class="col-sm-3 control-label">Name</label>
                     <div class="col-sm-9">
                         @Html.TextBoxFor(a => a.CustomerName, new { @class = "form-control r-0 light s-12", placeholder = "Enter CustomerName", title = "CustomerName", @id = "CustomerName" })
-                        <label style="color:red" id="CustomerNameVal">*</label>
+                        <label style="color:red" id="CustomerNameVal"></label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -26,13 +26,14 @@
                     <div class="col-sm-9">
 
                         @Html.TextAreaFor(a => a.Address, new { @class = "form-control r-0 light s-12", placeholder = "Enter Address", title = "Address", @id = "Address" })
+                        <label style="color:red" id="AddressVal"></label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="customerMobNo" class="col-sm-3 control-label">Mobile no.</label>
                     <div class="col-sm-9">
                         @Html.TextBoxFor(a => a.Mobile, new { @class = "form-control r-0 light s-12", placeholder = "Enter Mobile", title = "Mobile", @id = "Mobile" })
-                        <label style="color:red" id="MobileVal">*</label>
+                        <label style="color:red" id="MobileVal"></label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -41,7 +42,7 @@
                         @Html.DropDownList("model.AreaID", new SelectList((System.Collections.IEnumerable)ViewData["Area"], "Value", "Text"), "Select Area", new { @class = "form-control input-sm", @id = "AreaID1", Title = "ModeName" })
                         @*@Html.DropDownList("model.AreaID", new SelectList((System.Collections.IEnumerable)ViewData["Area"], "Value", "Text"), "Select Area", new { @class = "form-control input-sm", @id = "AreaID", Title = "ModeName" })*@
                         @*@Html.HiddenFor(model => model.AreaID, new { @id = "AreaID" })*@
-                        <label style="color:red" id="AreaVal">*</label>
+                        <label style="color:red" id="AreaVal"></label>
 
                     </div>
                 </div>
@@ -49,7 +50,7 @@
                     <label for="exampleInputName2" class="col-sm-3 control-label">Collection person</label>
                     <div class="col-sm-9">
                         @Html.DropDownList("model.SalesPersonId", new SelectList((System.Collections.IEnumerable)ViewData["Employee"], "Value", "Text"), "Select Employee", new { @class = "form-control input-sm", @id = "EmployeeID1", Title = "Employee Name" })
-                        <label style="color:red" id="EmployeeVal">*</label>
+                        <label style="color:red" id="EmployeeVal"></label>
 
                     </div>
                 </div>
@@ -57,7 +58,7 @@
                     <label for="exampleInputName2" class="col-sm-3 control-label">Vehicle</label>
                     <div class="col-sm-9">
                         @Html.DropDownList("model.VehicleID", new SelectList((System.Collections.IEnumerable)ViewData["Vehicle"], "Value", "Text"), "Select Vehicle", new { @class = "form-control input-sm", @id = "VehicleID1", Title = "Vehicle Number" })
-                        <label style="color:red" id="VehicleVal">*</label>
+                        <label style="color:red" id="VehicleVal"></label>
 
                     </div>
                 </div>
@@ -68,18 +69,20 @@
                         </label>
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" id="DeliveryCharges" class="form-control" placeholder="0">
+                        @Html.TextBoxFor(a => a.DeliveryCharges, new { @class = "form-control", @id = "DeliveryCharges" })
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-4">
                         <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox2"> Bill printing required
+                            @Html.CheckBoxFor(a => a.isBillRequired, new { @id = "inlineCheckbox2" })
+                            Bill printing required
                         </label>
                     </div>
                     <div class="col-sm-4">
                         <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox3"> Active
+                            @Html.CheckBoxFor(m => m.isActive, new { @id = "inlineCheckbox3" })
+                            Active
                         </label>
                     </div>
                 </div>
@@ -112,11 +115,34 @@
         $("#EmployeeVal").hide();
     });
     $('#btnsave').on('click', function () {
+
+        var isbillrequired;
+        var billrequiredcheck = $('#inlineCheckbox2').is(':checked');
+        if (billrequiredcheck == true) {
+
+            isbillrequired = true;
+        }
+        else {
+            isbillrequired = false;
+        }
+
+        var isactive;
+        var isChecked = $('#inlineCheckbox3').is(':checked');
+        if (isChecked == true) {
+
+            isactive = true;
+        }
+        else {
+            isactive = false;
+        }
+
+
         var error = 0, regex = /^[a-zA-Z\s]+$/;
         var a = $('#Mobile').val(), intRegex = /^[0-9]{10}$/;
         if ($("#CustomerName").val() == "" || (!regex.test($("#CustomerName").val()))) {
             error = 1;
             $("#CustomerNameVal").show();
+            $("#CustomerNameVal").html('Please Enter Customer Name');
             $("#AddressVal").hide();
             $("#AreaVal").hide();
             $("#MobileVal").hide();
@@ -126,9 +152,10 @@
 
         else if ($('#Address').val() == '') {
             error = 1;
-            alert(" Required Address");
+           // alert(" Required Address");
             $("#CustomerNameVal").hide();
             $("#AddressVal").show();
+            $("#AddressVal").html('Please Enter Address');
             $("#AreaVal").hide();
             $("#MobileVal").hide();
             $("#VehicleVal").hide();
@@ -141,6 +168,7 @@
             $("#CustomerNameVal").hide();
             $("#AddressVal").hide();
             $("#AreaVal").show();
+            $("#AreaVal").html('Please Select Area');
             $("#MobileVal").hide();
             $("#VehicleVal").hide();
             $("#EmployeeVal").hide();
@@ -154,6 +182,7 @@
             $("#AddressVal").hide();
             $("#AreaVal").hide();
             $("#MobileVal").show();
+            $("#MobileVal").html('Please Enter 10 Digit Mobile No');
             $("#VehicleVal").hide();
             $("#EmployeeVal").hide();
         }
@@ -168,17 +197,18 @@
             $("#MobileVal").hide();
             $("#VehicleVal").hide();
             $("#EmployeeVal").show();
+            $("#EmployeeVal").html('Please Select Employee');
         }
-        else if ($("#Vehicle").val() == "") {
+        //else if ($("#Vehicle").val() == "") {
 
-            error = 1;
-            $("#CustomerNameVal").hide();
-            $("#AddressVal").hide();
-            $("#AreaVal").hide();
-            $("#MobileVal").hide();
-            $("#VehicleVal").show();
-            $("#EmployeeVal").hide();
-        }
+        //    error = 1;
+        //    $("#CustomerNameVal").hide();
+        //    $("#AddressVal").hide();
+        //    $("#AreaVal").hide();
+        //    $("#MobileVal").hide();
+        //    $("#VehicleVal").show();
+        //    $("#EmployeeVal").hide();
+        //}
 
         else if (error) {
             return false;
@@ -200,8 +230,8 @@
                     Mobile: $("#Mobile").val(),
                     SalesPersonID: $("#EmployeeID1").val(),
                     VehicleID: $("#VehicleID1").val(),
-                    isActive: 1,
-                    BillRequired: 1,
+                    isActive: isactive,
+                    isBillRequired: isbillrequired,
                     DeliveryCharges: $("#DeliveryCharges").val(),
 
 

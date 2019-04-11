@@ -611,5 +611,8 @@ namespace MyVitarak.Controllers
                    : View("Profile", data);
            
         }
+
+
+       
     }
 }

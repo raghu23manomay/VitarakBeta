@@ -348,6 +348,7 @@
     <Content Include="Views\Master\SearchSupplier.cshtml" />
     <Content Include="Views\Master\_VendorProductDetails.cshtml" />
     <Content Include="Views\Master\DashboardCounts.cshtml" />
+    <Content Include="Views\Master\_Notification.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -277,4 +277,21 @@ namespace MyVitarak.Models
          
     }
 
+
+    public class NotificationDetails
+    {
+
+        [Key]
+        public Int64 NotificationID { get; set; }
+        public Int64 FromTenantID  { get; set; }
+        public Int64 ToTenantID    { get; set; }
+        public Boolean IsRead        { get; set; }
+        public Boolean approve       { get; set; }
+        public String Messege       { get; set; }
+        public int CreatedBy     { get; set; }
+        public String CreatedDate { get; set; }
+
+    }
+    
+
 }

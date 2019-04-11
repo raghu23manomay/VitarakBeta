@@ -170,7 +170,7 @@
             async: true,
             success: function (data) {
                 $('#grid1').html(data);
-                window.location.reload();
+                window.location.href = "/Master/IndexForCustomerMaster?page=1";
 
             },
             error: function (data) {

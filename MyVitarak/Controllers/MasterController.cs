@@ -2361,6 +2361,60 @@ namespace MyVitarak.Controllers
                    : View("DashboardCounts", result);
         }
 
+        public ActionResult _Notification()
+        {
+            try
+            {
+                JobDbContext2 _db = new JobDbContext2();
+                var result = _db.NotificationDetails.SqlQuery(@"exec UspUserNotification 
+                @UserId",
+                new SqlParameter("@UserId", Session["UserID"])).ToList<NotificationDetails>();
+                //NotificationDetails data = new NotificationDetails();
+                //data = result.FirstOrDefault();
+
+                return Request.IsAjaxRequest()
+                   ? (ActionResult)PartialView("_Notification", result)
+                   : View("_Notification", result);
+
+
+            }
+
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+
+        }
+
+
+        [HttpPost]
+        public ActionResult AddNotification(String Mobile="")
+        {
+            JobDbContext2 _db = new JobDbContext2();
+            try
+            {
+
+                var res = _db.Database.ExecuteSqlCommand(@"exec USPAddNotification @pUserID,@pMobileNo",
+                    new SqlParameter("@pUserID",Session["UserID"]),
+                    new SqlParameter("@pMobileNo", Mobile));
+
+                if(res > 0)
+                {
+                    return Json("Request has been send");
+                }
+                else
+                {
+                    return Json("Request fail");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return Json(message);
+
+            }
+        }
 
     }
 }
