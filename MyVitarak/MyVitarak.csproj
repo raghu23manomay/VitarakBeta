@@ -203,7 +203,7 @@
     <Content Include="css\plugins\font-awesome\scss\_variables.scss" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Excelsheet\Area_Master.xlsx" />
-    <Content Include="Excelsheet\EmployeeMaster.xlsx" />
+    <Content Include="Excelsheet\Employee_Master.xlsx" />
     <Content Include="Excelsheet\Supplier_Master.xlsx" />
     <Content Include="Excelsheet\VehicalMaster.xlsx" />
     <Content Include="Excelsheet\Product_Master.xlsx" />
