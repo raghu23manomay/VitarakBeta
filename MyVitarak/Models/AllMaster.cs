@@ -290,6 +290,9 @@ namespace MyVitarak.Models
         public String Messege       { get; set; }
         public int CreatedBy     { get; set; }
         public String CreatedDate { get; set; }
+        public String MessegeFrom { get; set; }
+        public String Mobile { get; set; }
+        public String Address { get; set; }
 
     }
     
