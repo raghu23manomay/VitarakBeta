@@ -1,0 +1,41 @@
+﻿@model  IEnumerable<MyVitarak.Models.NotificationDetails>
+
+
+
+<a href="#">
+    <a href="#" class="btn btn-danger btn-sm" style="    margin-top: -24px;height: 43px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i> <span class="badge">4</span></a>
+    @*<button class="btn btn-danger btn-xs" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i> <span class="badge">4</span></button>*@
+    <ul class="dropdown-menu">
+                             
+        @if (Model.Count() != 0)
+        {
+            foreach (var item in Model)
+            {
+        <li>
+            
+                <a style="color:black;">@item.Messege</a>
+            <p style="margin-left: 23px;">
+                <a id="btnsave" style="color:green; font-size:11px;">Accept</a>
+                <a id="btnsave" style="color:red; font-size:11px;">Reject</a>
+               <a style="color:black;font-size:11px;"> @item.CreatedDate</a>
+            </p>
+            @*<a href="" data-toggle="modal" data-target="#mdlAddSupplier">@item.Messege</a>
+        <div>
+        <a id="btnsave" style="color:green; font-size:11px;">Accept</a>
+        <a id="btnsave" style="color:red; font-size:11px;">Reject</a>
+        </div>*@
+        </li>
+                
+            }
+        }
+
+
+    </ul>
+
+</a>
+
+
+
+
+
+
