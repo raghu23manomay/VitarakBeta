@@ -149,6 +149,20 @@
     <Content Include="js\jquery-ui.min.js" />
     <Content Include="js\jquery.dataTables.min.js" />
     <Content Include="js\jquery.js" />
+    <Content Include="js\Plugins\flot\curvedLines.js" />
+    <Content Include="js\Plugins\flot\excanvas.min.js" />
+    <Content Include="js\Plugins\flot\jquery.flot.js" />
+    <Content Include="js\Plugins\flot\jquery.flot.pie.js" />
+    <Content Include="js\Plugins\flot\jquery.flot.resize.js" />
+    <Content Include="js\Plugins\flot\jquery.flot.spline.js" />
+    <Content Include="js\Plugins\flot\jquery.flot.symbol.js" />
+    <Content Include="js\Plugins\flot\jquery.flot.time.js" />
+    <Content Include="js\Plugins\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="js\Plugins\jquery-2.1.1.js" />
+    <Content Include="js\Plugins\pace\pace.min.js" />
+    <Content Include="js\Plugins\peity\jquery.peity.min.js" />
+    <Content Include="js\Plugins\slimscroll\jquery.slimscroll.js" />
+    <Content Include="js\Plugins\slimscroll\jquery.slimscroll.min.js" />
     <Content Include="Scripts\autocomplete\jquery.autocomplete.js" />
     <Content Include="Scripts\autocomplete\jquery.autocomplete.min.js" />
     <Content Include="Scripts\autocomplete\license.txt" />
@@ -348,6 +362,7 @@
     <Content Include="Views\Master\SearchSupplier.cshtml" />
     <Content Include="Views\Master\_VendorProductDetails.cshtml" />
     <Content Include="Views\Master\DashboardCounts.cshtml" />
+    <Content Include="Views\Shared\Dash_Layout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -357,6 +372,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="css\Newcss\" />
     <Folder Include="CustomerRateXLSheet\" />
     <Folder Include="SalesOrderXLSheet\" />
     <Folder Include="uploads\" />
