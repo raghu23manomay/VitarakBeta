@@ -2,16 +2,7 @@
 
 @using System.Data
 @model System.Data.DataTable
-
-<style>
-    /*.Mytable {
-        width: 130%;
-        max-width: 130%;
-        margin-bottom: 20px;
-    }*/
-</style>
-
-
+  
 <table class="table table-bordered">
 
     <thead>
@@ -30,8 +21,7 @@
             <tr>
 
                 @foreach (System.Data.DataColumn col in Model.Columns)
-                {
-
+                { 
 
                     if (row[col.ColumnName].ToString() == "")
                     {
@@ -66,9 +56,7 @@
                         }
                     }
 
-                }
-
-
+                } 
             </tr>
         }
     </tbody>

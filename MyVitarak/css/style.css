@@ -1261,7 +1261,7 @@ img {
 }
 
 .wrapper-content1 {
-    padding: 90px 10px 40px;
+    padding: 10px 10px 40px;
 }
 .TopMargin {
     margin-top: 10px
@@ -1340,41 +1340,7 @@ ol.unstyled {
     height: 200px;
     margin: auto;
 }
-@media (min-width: 768px) {
-    #page-wrapper {
-        position: inherit;
-        margin: 0 0 0 240px;
-        min-height: 2002px;
-    }
-    .MobileRes {
-        display: none!important;
-    }
-}
-@media (max-width: 767px) {
-    .navbar-nav .open .dropdown-menu .dropdown-header, .navbar-nav .open .dropdown-menu > li > a {
-        color: white;
-    }
 
-    .MobileRes {
-        display: block;
-    }
-    .MobileRes1 {
-        display: none;
-    }
-    .marginTop140 {
-        margin-top: 57px;
-    }
-
-    .icon-bar {
-        color: black;
-        border-color: black;
-        background-color: black;
-    }
-
-    .navbar-form {
-        padding: 0px 15px;
-    }
-}
 
  .navbar-form-custom {
     float: left;
@@ -1452,6 +1418,53 @@ ol.unstyled {
 }
 .notifyMobile {
     position: relative;
-    right: -71px;
+    right: -121px;
     top: 14px;
+}
+.scroll-x {
+    overflow-x: auto;
+}
+
+@media (min-width: 768px) { /*this datalist form desktop*/
+    #page-wrapper {
+        position: inherit;
+        margin: 0 0 0 240px;
+        min-height: 2002px;
+    }
+
+    .MobileRes {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) { /*form mobile*/
+    .navbar-nav .open .dropdown-menu .dropdown-header, .navbar-nav .open .dropdown-menu > li > a {
+        color: white;
+    }
+
+    .MobileRes {
+        display: block;
+    }
+
+    .MobileRes1 {
+        display: none;
+    }
+
+    .marginTop140 {
+        margin-top: 57px;
+    }
+
+    .icon-bar {
+        color: black;
+        border-color: black;
+        background-color: black;
+    }
+
+    .navbar-form {
+        padding: 0px 15px;
+    }
+    .marginTop10Mob {
+        margin-top: 10px;
+    }
+
 }

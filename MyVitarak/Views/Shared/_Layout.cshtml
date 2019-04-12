@@ -10,11 +10,7 @@
     <link href="~/css/style.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/toastr.min.js"></script>
     <script src="~/Scripts/toastr.js"></script>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+      
 </head>
 <body>
 
@@ -44,7 +40,7 @@
                 <ul class="nav navbar-nav navbar-right marginRight0px  MobileRes1">
                     <li class="dropdown ">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                            <i class="fa fa-envelope"></i>  <span class="label label-warning" id="NotificationCount">4</span>
                         </a>
                         <ul class="dropdown-menu dropdown-messages" id="grid"></ul>
                     </li>
@@ -86,7 +82,7 @@
 
                         </ul>
                     </li>
-                    <li >
+                    <li>
                         <a href="#" class="dropdown-toggle paddingLeft5px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus" aria-hidden="true"></i> New</a>
                         <ul class="dropdown-menu">
                             <li><a href="@Url.Action("Add_Product", "Master")" data-toggle="modal" data-target="#mdlAddProduct">Add Product</a></li>
@@ -98,19 +94,19 @@
 
                         </ul>
                     </li>
-
-                    <li><a href="#"><i class="fa fa-bolt" aria-hidden="true"></i> Activity</a></li>
-                    <li class="MobileRes">
-                        <a href="#" class=" dropdown-toggle paddingLeft5px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"<span class="caret"></span></a>
+                    <li>
+                        <a href="#" class="dropdown-toggle paddingLeft5px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> Setting</a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Notification</a></li>
+                            <li><a href="#">Subscription</a></li>
+                            <li><a href="#">Billing</a></li>
+                            <li><a href="#">Team</a></li>
+                            @*<li role="separator" class="divider"></li>*@ 
                             <li><a href="@Url.Action("logout", "Master")">Logout</a></li>
                         </ul>
-                    </li>
+                    </li> 
 
                 </ul>
 
@@ -156,8 +152,7 @@
     </div>
 
     <script src="~/Scripts/bootstrap.min.js"></script>
-
-
+     
 </body>
 </html>
 <script>
@@ -168,13 +163,13 @@
             $(this).addClass("active");
         });
         if ($(window).width() < 768) {
-             
+
             $.ajax({
                 url: "@Url.Action("_Notification", "Master")",
                 contentType: "application/json",
-                 data: { },
+                data: {},
                 dataType: "text",
-                 type: "POST",
+                type: "POST",
                 async: true,
                 success: function (data) {
                     $('#gridMobile').html(data);
@@ -186,15 +181,15 @@
                 complete: function () {
 
                 }
-                });
+            });
         }
         else {
-              $.ajax({
+            $.ajax({
                 url: "@Url.Action("_Notification", "Master")",
                 contentType: "application/json",
-                 data: { },
+                data: {},
                 dataType: "text",
-                 type: "POST",
+                type: "POST",
                 async: true,
                 success: function (data) {
                     $('#grid').html(data);
@@ -206,11 +201,8 @@
                 complete: function () {
 
                 }
-                });
-        }
-
-
-
+            });
+        } 
 
     });
 </script>
