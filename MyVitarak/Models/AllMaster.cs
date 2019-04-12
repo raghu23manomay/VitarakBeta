@@ -297,6 +297,15 @@ namespace MyVitarak.Models
 
 
     }
-    
+    public class Chart
+    {
+
+        [Key]
+        public int  id { get; set; }
+        public String Value { get; set; }
+       
+
+    }
+
 
 }

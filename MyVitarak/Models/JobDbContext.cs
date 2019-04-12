@@ -41,6 +41,7 @@ namespace MyVitarak.Models
         public DbSet<Login> LoginDetail { get; set; }
         public DbSet<CustomerProductDetails> CustomerProductDetails { get; set; }
         public DbSet<DashboardCounts> DashboardCounts { get; set; }
+        public DbSet<Chart> Chart { get; set; }
 
     }
 }

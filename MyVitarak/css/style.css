@@ -1261,7 +1261,7 @@ img {
 }
 
 .wrapper-content1 {
-    padding: 10px 10px 40px;
+    padding: 90px 10px 40px;
 }
 .TopMargin {
     margin-top: 10px
@@ -1466,5 +1466,7 @@ ol.unstyled {
     .marginTop10Mob {
         margin-top: 10px;
     }
-
+    .wrapper-content1 {
+        padding: 10px 10px 40px;
+    }
 }

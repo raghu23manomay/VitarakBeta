@@ -2374,6 +2374,31 @@ namespace MyVitarak.Controllers
 
             }
         }
+        [HttpPost]
+        public ActionResult ChartInfo( )
+        {
+            JobDbContext _db = new JobDbContext();
+
+            string res1 = "";
+            try
+            {
+               
+                var result = _db.Chart.SqlQuery(@"exec GetSalesChart").ToList<Chart>().FirstOrDefault();
+
+
+                res1 = result.Value;
+
+
+
+                return Json(res1);
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return Json(res1);
+
+            }
+        }
 
       public ActionResult  UpdateNotificationStatus(int? NotificationId)
         {
