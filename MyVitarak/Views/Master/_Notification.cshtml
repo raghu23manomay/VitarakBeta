@@ -9,19 +9,22 @@
             <div class="ibox float-e-margins">
 
                 <div>
-                                       
+
                     <div class="ibox-content profile-content">
-                        <h4><strong>
-                            @item.MessegeFrom
-                        <p><i class="fa fa-map-marker"></i> 
-                            <small>@item.Address |  @item.Mobile </small></p>
-                    </strong>
+                        <h4>
+                            <strong>
+                                @item.MessegeFrom
+                                <p>
+                                    <i class="fa fa-map-marker"></i>
+                                    <small>@item.Address |  @item.Mobile </small>
+                                </p>
+                            </strong>
                         </h4>
-                        
+
                         <p class="font12">
-                           @item.Messege 
+                            @item.Messege
                         </p>
-                        
+
                         <div class="user-button">
                             <div class="row">
                                 <div class="col-md-6">
@@ -33,6 +36,17 @@
                             </div>
                         </div>
                     </div>
+
+                    @if (item.IsRead == 1)
+                    {
+                        <div class="ibox-content profile-content">
+                            <p class="font12">
+                                @item.ReplayMessege
+                            </p>
+                                                        
+                        </div>
+
+                    }
                 </div>
             </div>
         </div>
@@ -57,8 +71,7 @@
                         },
                         success: function (da) {
                             alert(da);
-                            $('#btnsave1').show();
-                            $('#btnUseThis').hide();
+                            
                         },
 
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -68,5 +81,29 @@
                 }
             })
 
+
+
+            function NotificationAction()
+            {
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '/Master/UpdateNotificationStatus',
+
+                    data:
+                    {
+                        NotificationId: idValue
+
+                    },
+                    success: function (da) {
+                        alert(da);
+
+                    },
+
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                    }
+                });
+            }
 
         </script>

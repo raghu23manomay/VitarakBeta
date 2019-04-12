@@ -285,14 +285,16 @@ namespace MyVitarak.Models
         public Int64 NotificationID { get; set; }
         public Int64 FromTenantID  { get; set; }
         public Int64 ToTenantID    { get; set; }
-        public Boolean IsRead        { get; set; }
-        public Boolean approve       { get; set; }
+        public int? IsRead        { get; set; }
+        public int? approve       { get; set; }
         public String Messege       { get; set; }
         public int CreatedBy     { get; set; }
         public String CreatedDate { get; set; }
         public String MessegeFrom { get; set; }
         public String Mobile { get; set; }
         public String Address { get; set; }
+        public String ReplayMessege { get; set; }
+
 
     }
     
