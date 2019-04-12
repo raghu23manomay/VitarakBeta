@@ -295,6 +295,15 @@ namespace MyVitarak.Models
         public String Address { get; set; }
 
     }
-    
+    public class Chart
+    {
+
+        [Key]
+        public int  id { get; set; }
+        public String Value { get; set; }
+       
+
+    }
+
 
 }

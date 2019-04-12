@@ -55,14 +55,7 @@
                                                     <div style="width: 60%;" class="progress-bar"></div>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <h2 class="no-margins ">9,180</h2>
-                                                <small>Monthly income from orders</small>
-                                                <div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i></div>
-                                                <div class="progress progress-mini">
-                                                    <div style="width: 22%;" class="progress-bar"></div>
-                                                </div>
-                                            </li>
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -70,9 +63,7 @@
 
                         </div>
                     </div>
-                </div>
-
-
+                </div> 
 
             </div>
 
@@ -110,6 +101,18 @@
              success: function (data) {
 
                  $('#Counts').html(data);
+            }
+        });
+         $.ajax({
+            url: "@Url.Action("ChartInfo", "Master")", 
+             data: {},
+             dataType: "json",
+             type: "POST",
+             async: false,
+             success: function (data) {
+                 
+                 //data3 = data;
+                 
             }
         });
         var data2 = [
