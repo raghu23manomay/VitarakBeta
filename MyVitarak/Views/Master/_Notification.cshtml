@@ -40,20 +40,16 @@
                         </div>
                     </div>
 
-                    @if (item.IsRead == 1)
-                    {
-                        <div class="ibox-content profile-content">
-                            <p class="font12">
-                                @item.ReplayMessege
-                            </p>
-                                                        
-                        </div>
-
-                    }
                 </div>
             </div>
         </div>
     }
+}
+else
+{
+    <p class="font12 text-center">
+      <b>No Notifications.</b>
+    </p>
 }
 
 
@@ -71,11 +67,11 @@
                 {
                     NotificationId: idValue
 
-                        },
-                        success: function (da) {
-                            alert(da);
-                            
-                        },
+                },
+                success: function (da) {
+                    alert(da);
+
+                },
 
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
 
@@ -86,27 +82,26 @@
 
 
 
-            function NotificationAction()
+    function NotificationAction() {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/Master/UpdateNotificationStatus',
+
+            data:
             {
-                $.ajax({
-                    type: 'POST',
-                    dataType: 'json',
-                    url: '/Master/UpdateNotificationStatus',
+                NotificationId: idValue
 
-                    data:
-                    {
-                        NotificationId: idValue
+            },
+            success: function (da) {
+                alert(da);
 
-                    },
-                    success: function (da) {
-                        alert(da);
+            },
 
-                    },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
 
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-
-                    }
-                });
             }
+        });
+    }
 
-        </script>
+</script>
