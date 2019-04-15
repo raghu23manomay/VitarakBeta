@@ -28,6 +28,18 @@ namespace MyVitarak.Controllers
             }
             return View();
         }
+        
+        public ActionResult ColumnChart()
+        {
+            JobDbContext _db = new JobDbContext(); 
+
+            IEnumerable<Chart> result = _db.Chart.SqlQuery(@"exec GetSalesChart").ToList<Chart>(); 
+           
+            return Request.IsAjaxRequest()
+                    ? (ActionResult)PartialView("ColumnChart", result)
+                    : View("ColumnChart", result);
+
+        }
         // GET: Master
         public ActionResult ProductList(int? page)
         {
@@ -2374,31 +2386,7 @@ namespace MyVitarak.Controllers
 
             }
         }
-        [HttpPost]
-        public ActionResult ChartInfo( )
-        {
-            JobDbContext _db = new JobDbContext();
-
-            string res1 = "";
-            try
-            {
-               
-                var result = _db.Chart.SqlQuery(@"exec GetSalesChart").ToList<Chart>().FirstOrDefault();
-
-
-                res1 = result.Value;
-
-
-
-                return Json(res1);
-            }
-            catch (Exception ex)
-            {
-                string message = ex.Message;
-                return Json(res1);
-
-            }
-        }
+         
 
       public ActionResult  UpdateNotificationStatus(int? NotificationId)
         {

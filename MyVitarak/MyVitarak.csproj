@@ -56,6 +56,9 @@
     <Reference Include="GridMvc">
       <HintPath>..\..\mvc\mvc\bin\GridMvc.dll</HintPath>
     </Reference>
+    <Reference Include="JQChart.Web.Mvc">
+      <HintPath>..\..\..\..\New folder (2)\JqChart\bin\Mvc5\JQChart.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -143,6 +146,43 @@
     <Content Include="images\logo.png" />
     <Content Include="images\milk.jpg" />
     <Content Include="images\Popup.png" />
+    <Content Include="jschart\css\jquery.jqChart.css" />
+    <Content Include="jschart\css\jquery.jqGauges.css" />
+    <Content Include="jschart\css\jquery.jqRangeSlider.css" />
+    <Content Include="jschart\js\i18n\chart.locale-ar.js" />
+    <Content Include="jschart\js\i18n\chart.locale-bg.js" />
+    <Content Include="jschart\js\i18n\chart.locale-bg1251.js" />
+    <Content Include="jschart\js\i18n\chart.locale-cat.js" />
+    <Content Include="jschart\js\i18n\chart.locale-cn.js" />
+    <Content Include="jschart\js\i18n\chart.locale-cs.js" />
+    <Content Include="jschart\js\i18n\chart.locale-de.js" />
+    <Content Include="jschart\js\i18n\chart.locale-dk.js" />
+    <Content Include="jschart\js\i18n\chart.locale-el.js" />
+    <Content Include="jschart\js\i18n\chart.locale-en.js" />
+    <Content Include="jschart\js\i18n\chart.locale-fa.js" />
+    <Content Include="jschart\js\i18n\chart.locale-fi.js" />
+    <Content Include="jschart\js\i18n\chart.locale-fr.js" />
+    <Content Include="jschart\js\i18n\chart.locale-he.js" />
+    <Content Include="jschart\js\i18n\chart.locale-hu.js" />
+    <Content Include="jschart\js\i18n\chart.locale-is.js" />
+    <Content Include="jschart\js\i18n\chart.locale-it.js" />
+    <Content Include="jschart\js\i18n\chart.locale-jp.js" />
+    <Content Include="jschart\js\i18n\chart.locale-lt.js" />
+    <Content Include="jschart\js\i18n\chart.locale-nl.js" />
+    <Content Include="jschart\js\i18n\chart.locale-no.js" />
+    <Content Include="jschart\js\i18n\chart.locale-pl.js" />
+    <Content Include="jschart\js\i18n\chart.locale-pt-br.js" />
+    <Content Include="jschart\js\i18n\chart.locale-pt.js" />
+    <Content Include="jschart\js\i18n\chart.locale-ro.js" />
+    <Content Include="jschart\js\i18n\chart.locale-ru.js" />
+    <Content Include="jschart\js\i18n\chart.locale-sk.js" />
+    <Content Include="jschart\js\i18n\chart.locale-sp.js" />
+    <Content Include="jschart\js\i18n\chart.locale-sv.js" />
+    <Content Include="jschart\js\i18n\chart.locale-tr.js" />
+    <Content Include="jschart\js\i18n\chart.locale-ua.js" />
+    <Content Include="jschart\js\jquery-1.11.1.min.js" />
+    <Content Include="jschart\js\jquery.jqChart.min.js" />
+    <Content Include="jschart\js\jquery.jqGauges.min.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\datatables.css" />
     <Content Include="js\datatables.js" />
@@ -364,6 +404,7 @@
     <Content Include="Views\Master\DashboardCounts.cshtml" />
     <Content Include="Views\Master\_Notification.cshtml" />
     <Content Include="Views\Shared\LoginLayout.cshtml" />
+    <Content Include="Views\Master\ColumnChart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

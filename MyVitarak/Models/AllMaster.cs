@@ -301,10 +301,10 @@ namespace MyVitarak.Models
     {
 
         [Key]
-        public int  id { get; set; }
-        public String Value { get; set; }
-       
-
+        public string Label { get; set; }
+        public Int32 Value1 { get; set; }
+        public Int32 Value2 { get; set; }
+        
     }
 
 
