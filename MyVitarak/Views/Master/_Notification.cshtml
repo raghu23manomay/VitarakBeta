@@ -39,10 +39,17 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     }
+}
+else
+{
+    <p class="font12 text-center">
+      <b>No Notifications.</b>
+    </p>
 }
 
 
@@ -63,8 +70,7 @@
                 },
                 success: function (da) {
                     alert(da);
-                    $('#btnsave1').show();
-                    $('#btnUseThis').hide();
+
                 },
 
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -74,5 +80,28 @@
         }
     })
 
+
+
+    function NotificationAction() {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/Master/UpdateNotificationStatus',
+
+            data:
+            {
+                NotificationId: idValue
+
+            },
+            success: function (da) {
+                alert(da);
+
+            },
+
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+    }
 
 </script>

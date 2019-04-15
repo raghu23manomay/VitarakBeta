@@ -2170,50 +2170,13 @@ namespace MyVitarak.Controllers
 
             JobDbContext _db = new JobDbContext();
             copyrate rs = new copyrate();
-            var res = _db.copyrate.SqlQuery(@"exec CustomerListCopy "
-
-                  ).ToList<copyrate>();
+            var res = _db.copyrate.SqlQuery(@"exec CustomerListCopy").ToList<copyrate>();
 
             rs = res.FirstOrDefault();
-            return PartialView("Partial_CustomerCopyRates", res);
-
-            //using (JobDbContext context = new JobDbContext())
-            //{
-            //    DataTable dt = new DataTable();
-            //    DataSet ds = new DataSet();
-
-            //    var conn = context.Database.Connection;
-            //    var connectionState = conn.State;
-            //    try
-            //    {
-            //        if (connectionState != ConnectionState.Open) conn.Open();
-            //        using (var cmd = conn.CreateCommand())
-            //        {
-            //            cmd.CommandText = "CustomerListCopy";
-            //            cmd.CommandType = CommandType.StoredProcedure;
-            //            using (var reader = cmd.ExecuteReader())
-            //            {
-            //                dt.Load(reader);
-            //            }
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        // error handling
-            //        var messege = ex.Message;
-            //    }
-            //    finally
-            //    {
-            //        if (connectionState != ConnectionState.Closed) conn.Close();
-            //    }
-            //    //return Redirect("Home/SalesOrder");
-            //    TempData["Data"] = dt;
-            //    DownloadSalesExcelSheet();
-            //    return PartialView("Partial_CustomerCopyRates", dt);
-            //    // return View(dt);
-            //}
+            return PartialView("Partial_CustomerCopyRates", res);               
+           
         }
-        //, int? CustomerId,int? ProductId,DateTime? pdate
+       
 
         [HttpPost]
         [ValidateInput(false)]
@@ -2232,8 +2195,8 @@ namespace MyVitarak.Controllers
                     new SqlParameter("@ProductId", ProductId),
                     new SqlParameter("@CheckCustomerID", item),
                     new SqlParameter("@pdate", pdate)
-
                    );
+
                 }
 
                 return Json("Data Copied Sucessfully");
@@ -2242,11 +2205,9 @@ namespace MyVitarak.Controllers
             {
                 string message = ex.Message;
                 return Json(message);
-
             }
 
         }
-
 
         public ActionResult SearchSupplier()
         {
@@ -2288,10 +2249,9 @@ namespace MyVitarak.Controllers
                 var res = _db.Database.ExecuteSqlCommand(@"exec USPAddVendor @NotificationId", 
                     new SqlParameter("@NotificationId", NotificationId));
 
-                //return Request.IsAjaxRequest()
-                //? (ActionResult)PartialView("SearchSupplier")
-                //: View("SearchSupplier");
-                return Json("Supplier added sucessfully");
+                UpdateNotificationStatus(NotificationId); //update notification status after opration
+
+                return Json("Request Accepted");
             }
             catch (Exception ex)
             {
@@ -2436,6 +2396,26 @@ namespace MyVitarak.Controllers
             {
                 string message = ex.Message;
                 return Json(res1);
+
+            }
+        }
+
+      public ActionResult  UpdateNotificationStatus(int? NotificationId)
+        {
+            JobDbContext2 _db = new JobDbContext2();
+            try
+            {
+
+                var res = _db.Database.ExecuteSqlCommand(@"exec USPupdateNotificationStatus @pNotificationID",
+                    new SqlParameter("@pNotificationID", NotificationId));
+
+                return Json("");
+
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return Json(message);
 
             }
         }
