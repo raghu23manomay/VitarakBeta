@@ -37,7 +37,7 @@
                 <ul class="nav navbar-nav navbar-right marginRight0px  MobileRes1">
                     <li class="dropdown ">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope"></i>  <span class="label label-warning" id="NotificationCount">4</span>
+                            <i class="fa fa-envelope"></i>  <span class="label label-warning" id="NotificationCount" ></span>
                         </a>
                         <ul class="dropdown-menu dropdown-messages" id="grid"></ul>
                     </li>
@@ -170,7 +170,6 @@
                 async: true,
                 success: function (data) {
                     $('#gridMobile').html(data);
-
                 },
                 error: function (data) {
 
@@ -196,6 +195,24 @@
 
                 },
                 complete: function () {
+
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Master/NotificationCount',
+                data:
+                {
+                 
+                },
+                success: function (da) {
+                 $('#NotificationCount').html(da);
+
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
 
                 }
             });
