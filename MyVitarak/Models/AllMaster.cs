@@ -7,7 +7,7 @@ using System.Web;
 
 namespace MyVitarak.Models
 {
-   
+
     public class AllMaster
     {
     }
@@ -235,7 +235,7 @@ namespace MyVitarak.Models
 
     }
 
-    
+
     public class EditRoute
     {
         [Key]
@@ -260,7 +260,7 @@ namespace MyVitarak.Models
         [Key]
         public int ProductID { get; set; }
         public int CustRateID { get; set; }
-        public int Customerid { get; set; }        
+        public int Customerid { get; set; }
         public string Product { get; set; }
         public decimal Rate { get; set; }
         public int CrateSize { get; set; }
@@ -274,7 +274,7 @@ namespace MyVitarak.Models
         public Int64 PurchaseAmount { get; set; }
         public Int64 salesAmount { get; set; }
         public Int64 CustomerCount { get; set; }
-         
+
     }
 
 
@@ -283,29 +283,32 @@ namespace MyVitarak.Models
 
         [Key]
         public Int64 NotificationID { get; set; }
-        public Int64 FromTenantID  { get; set; }
-        public Int64 ToTenantID    { get; set; }
-        public int? IsRead        { get; set; }
-        public int? approve       { get; set; }
-        public String Messege       { get; set; }
-        public int CreatedBy     { get; set; }
+        public Int64 FromTenantID { get; set; }
+        public Int64 ToTenantID { get; set; }
+        public int? IsRead { get; set; }
+        public int? approve { get; set; }
+        public String Messege { get; set; }
+        public int CreatedBy { get; set; }
         public String CreatedDate { get; set; }
         public String MessegeFrom { get; set; }
         public String Mobile { get; set; }
         public String Address { get; set; }
-        public String ReplayMessege { get; set; }
-
 
     }
     public class Chart
     {
 
         [Key]
-        public int  id { get; set; }
+        public int id { get; set; }
         public String Value { get; set; }
-       
 
     }
 
+    public class NotoficationCount
+    {
 
+        [Key]
+        public int CountAll { get; set; }
+
+    }
 }

@@ -2346,6 +2346,33 @@ namespace MyVitarak.Controllers
         }
 
 
+        public ActionResult NotificationCount()
+        {
+            try
+            {
+                JobDbContext2 _db = new JobDbContext2();
+                var result = _db.NotoficationCount.SqlQuery(@"exec UspUserNotificationCount 
+                @UserId",
+                new SqlParameter("@UserId", Session["UserID"])).ToList<NotoficationCount>();
+                NotoficationCount data = new NotoficationCount();
+                data = result.FirstOrDefault();
+                int count = data.CountAll;
+
+                return Json(count);
+                //return Request.IsAjaxRequest()
+                //   ? (ActionResult)PartialView("_Notification", data)
+                //   : View("_Notification", data);
+
+            }
+
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+
+        }
+
+
         [HttpPost]
         public ActionResult AddNotification(String Mobile="")
         {

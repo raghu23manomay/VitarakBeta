@@ -25,6 +25,8 @@ namespace MyVitarak.Models
         public DbSet<SecurityCode> SecurityCode { get; set; }
         public DbSet<SupplierMaster> SupplierMaster { get; set; }
         public DbSet<NotificationDetails> NotificationDetails { get; set; }
+        public DbSet<NotoficationCount> NotoficationCount { get; set; }
+        
 
     }
     
