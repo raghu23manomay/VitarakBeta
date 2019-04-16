@@ -2424,8 +2424,31 @@ namespace MyVitarak.Controllers
                 var res = _db.Database.ExecuteSqlCommand(@"exec USPupdateNotificationStatus @pNotificationID",
                     new SqlParameter("@pNotificationID", NotificationId));
 
-                return Json("");
+                return Json("Notification Removed");
 
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return Json(message);
+
+            }
+        }
+
+
+
+
+
+        [HttpPost]
+        public ActionResult OnSeenNotificationUpdate()
+        {
+            JobDbContext2 _db = new JobDbContext2();
+            try
+            {
+                var res = _db.Database.ExecuteSqlCommand(@"exec UspSeenNotificationUpdate @pUserID",
+                     new SqlParameter("@pUserID", Session["UserID"]));
+
+                return Json("");
             }
             catch (Exception ex)
             {

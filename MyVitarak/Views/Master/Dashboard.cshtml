@@ -111,7 +111,7 @@
             }
         });
          
-        debugger;
+     
          $.ajax({
             url: "@Url.Action("ColumnChart", "Master")", 
              data: {},
@@ -119,7 +119,7 @@
            //  type: "POST",
              async: false,
              success: function (data) {
-                 debugger;
+               
                  //data3 = data;
                  $('#flot-dashboard-chart').html(data);
                  

@@ -35,7 +35,7 @@
 
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right marginRight0px  MobileRes1">
-                    <li class="dropdown ">
+                    <li class="dropdown" id="notecount">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                             <i class="fa fa-envelope"></i>  <span class="label label-warning" id="NotificationCount" ></span>
                         </a>
@@ -48,7 +48,7 @@
                             <li><a href="#">Notification</a></li>
                             <li><a href="#">Subscription</a></li>
                             <li><a href="#">Billing</a></li>
-                            <li><a href="#">Team</a></li>
+                            <li><a href="@Url.Action("EmployeeList", "Master")" id="EmployeeIndex1">Team</a></li>
                             <hr style="margin-top:0px;margin-bottom:0px;">
                             <li><a href="@Url.Action("logout", "Master")">Logout</a></li>
                         </ul>
@@ -99,14 +99,12 @@
                             <li><a href="#">Notification</a></li>
                             <li><a href="#">Subscription</a></li>
                             <li><a href="#">Billing</a></li>
-                            <li><a href="#">Team</a></li>
+                            <li><a href="@Url.Action("EmployeeList", "Master")" id="EmployeeIndex1">Team</a></li>
                             @*<li role="separator" class="divider"></li>*@ 
                             <li><a href="@Url.Action("logout", "Master")">Logout</a></li>
                         </ul>
                     </li> 
-
                 </ul>
-
             </div>
         </div>
 
@@ -159,6 +157,29 @@
             $('li a').removeClass("active");
             $(this).addClass("active");
         });
+
+        $("#notecount").on("click", function () {
+              $.ajax({
+                url: "@Url.Action("OnSeenNotificationUpdate", "Master")",
+                contentType: "application/json",
+                data: {},
+                dataType: "text",
+                type: "POST",
+                async: true,
+                success: function (data) {
+                   
+                },
+                error: function (data) {
+
+                },
+                complete: function () {
+
+                }
+            });
+        });
+
+
+
         if ($(window).width() < 768) {
 
             $.ajax({
@@ -208,8 +229,12 @@
                  
                 },
                 success: function (da) {
-                 $('#NotificationCount').html(da);
-
+                    $('#NotificationCount').html(da);
+                    if (da == 0)
+                    {
+                        $('#NotificationCount').hide();
+                    }
+                   
                 },
 
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

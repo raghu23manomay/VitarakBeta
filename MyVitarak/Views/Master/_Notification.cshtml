@@ -10,11 +10,11 @@
 
         foreach (var item in Model)
         {
-            if (item.IsRead == 1)
+            if (item.NotType == 1)
             {
                 <div class="col-md-12">
                     <div class="ibox float-e-margins">
-
+                        <button type="button" class="close closeNote" id="@item.NotificationID" data-dismiss="modal" onclick="abc();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <div>
 
                             <div class="ibox-content profile-content">
@@ -46,6 +46,7 @@
                         <div>
 
                             <div class="ibox-content profile-content">
+                                <button type="button" class="close closeNote" id="@item.NotificationID" data-dismiss="modal" onclick="abc();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4>
                                     <strong>
                                         @item.MessegeFrom
@@ -88,10 +89,6 @@
 
 
 
-
-
-
-
 <script>
 
     $('.accept').click(function () {
@@ -119,28 +116,31 @@
         }
     })
 
+    $('.closeNote').click(function () {
+        var idValue = $(this).attr('id');
+        if (confirm("Are you sure?")) {
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/Master/UpdateNotificationStatus',
 
+                data:
+                {
+                    NotificationId: idValue
 
-    function NotificationAction() {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            url: '/Master/UpdateNotificationStatus',
+                },
+                success: function (da) {
+                    alert(da);
 
-            data:
-            {
-                NotificationId: idValue
+                },
 
-            },
-            success: function (da) {
-                alert(da);
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
 
-            },
+                }
+            });
+        }
+    })
 
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-
-            }
-        });
-    }
+   
 
 </script>
