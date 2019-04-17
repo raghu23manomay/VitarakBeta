@@ -405,6 +405,7 @@
     <Content Include="Views\Master\_Notification.cshtml" />
     <Content Include="Views\Shared\LoginLayout.cshtml" />
     <Content Include="Views\Master\ColumnChart.cshtml" />
+    <Content Include="Views\Master\DashboardData.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

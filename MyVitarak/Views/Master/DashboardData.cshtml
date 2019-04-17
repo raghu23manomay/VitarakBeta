@@ -1,0 +1,74 @@
+﻿
+@using System.Data
+@model System.Data.DataTable 
+@{
+
+    Layout = null;
+}
+
+ 
+        <div class="col-xs-12">
+
+
+            <div class="table-responsive">
+                <table class="table table-striped scroll-x">
+
+                    <thead>
+
+                        <tr>
+                            @foreach (System.Data.DataColumn col in Model.Columns)
+                            {
+                                if (@col.Caption == "ID")
+                                {
+                                    <th>#</th>
+                                }
+                                else
+                                {
+                                    <th>@col.Caption</th>
+                                }
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ Int32 i = 1;
+                            foreach (System.Data.DataRow row in Model.Rows)
+                            {
+                        <tr>
+
+                            @foreach (System.Data.DataColumn col in Model.Columns)
+                            {
+
+                                if (col.ToString() == "No")
+                                {
+                                    <td>
+                                        @i
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        @row[col.ColumnName]
+                                    </td>
+                                }
+
+                            }
+
+                        </tr>
+                                i = i + 1;
+                            }
+                            }
+                    </tbody>
+                </table>
+
+
+            </div>
+
+
+
+        </div>
+ 
+
+
+
+ 
+ 
