@@ -2559,9 +2559,11 @@ namespace MyVitarak.Controllers
                  
                 dt_clone.Rows.Add(drStockBal);  
             }
-
-            dt_clone.Merge(dtData, true);
-            
+            try
+            {
+                dt_clone.Merge(dtData, true);
+            }
+            catch { }
             //mColCount = dtData.Columns.Count;
 
             //drStockBal = dt_clone.NewRow();
@@ -2598,10 +2600,10 @@ namespace MyVitarak.Controllers
 
             }
 
-            DataView dv = dt_clone.DefaultView;
-            dv.Sort = "No asc";
-            DataTable sortedDT = dv.ToTable();
-            return sortedDT;
+        ///    DataView dv = dt_clone.DefaultView;
+     //       dv.Sort = "No asc";
+       //    DataTable sortedDT = dv.ToTable();
+            return dt_clone;
         }
         
 
