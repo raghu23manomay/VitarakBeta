@@ -2457,6 +2457,155 @@ namespace MyVitarak.Controllers
 
             }
         }
+        public ActionResult DashboardData()
+        {
+            using (JobDbContext context = new JobDbContext())
+            {
+                DataTable dt = new DataTable();
+                DataSet ds = new DataSet();
+
+                var conn = context.Database.Connection;
+                var connectionState = conn.State;
+                try
+                {
+                    if (connectionState != ConnectionState.Open) conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = "uspDailyBussinessReport";
+
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            dt.Load(reader);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // error handling
+                    var messege = ex.Message;
+                }
+                finally
+                {
+                    if (connectionState != ConnectionState.Closed) conn.Close();
+                }
+                TempData["Data"] = dt;
+                DataTable    dt_clone= AddStockBalance(dt);
+                return Request.IsAjaxRequest()
+                  ? (ActionResult)PartialView("DashboardData", dt_clone)
+                  : View("DashboardData", dt);
+            }
+
+        }
+        public DataTable AddStockBalance(DataTable dtData)
+        {
+           
+           DateTime _mdate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            String.Format("{0:MM/dd/yyyy}", _mdate);
+            String.Format("{0:G}", _mdate);
+            // _mdate = dateEdit1.DateTime.ToString("MM-dd-yyyy");
+            Decimal Gridco = 0;
+            Decimal Barbil = 0;
+            Decimal Total = 0;
+            Decimal mLickage = 0;
+            int j = 0;
+
+            DataTable dtStockBal = new DataTable();
+            DataTable dt1 = new DataTable();
+            using (JobDbContext context = new JobDbContext())
+            {
+               
+                DataSet ds = new DataSet();
+
+                var conn = context.Database.Connection;
+                var connectionState = conn.State;
+                
+                    if (connectionState != ConnectionState.Open) conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = "uspDayStockBalanceForDashoard";
+
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            dt1.Load(reader);
+                        }
+                    } 
+            }
+            dtStockBal = dt1; 
+            int mColCount = dtStockBal.Columns.Count;
+            DataTable dt_clone = new DataTable();
+            dt_clone.TableName = "CloneStockTable";
+            dt_clone = dtStockBal.Clone();
+            DataRow drStockBal = dt_clone.NewRow();
+            drStockBal[0] = 0;
+            drStockBal["daytrans"] = "Stock CF";
+
+            if (dtStockBal.Rows.Count > 1)
+            {
+                for (int i = 2; i <= dtStockBal.Columns.Count - 1; i++)
+                {
+                    Gridco = decimal.Parse(dtStockBal.Rows[j][i].ToString());
+                    Barbil = decimal.Parse(dtStockBal.Rows[j + 1][i].ToString());
+
+                    mLickage = decimal.Parse(dtStockBal.Rows[j + 2][i].ToString());
+
+                    Total = Gridco - (Barbil + mLickage);
+                    drStockBal[i] = Total;
+                   
+                }
+                 
+                dt_clone.Rows.Add(drStockBal);  
+            }
+            try
+            {
+                dt_clone.Merge(dtData, true);
+            }
+            catch { }
+            //mColCount = dtData.Columns.Count;
+
+            //drStockBal = dt_clone.NewRow();
+            //drStockBal[0] = 7;
+            //drStockBal[1] = "Purchase";
+            //if (dtData.Rows.Count > 1)
+            //{
+            //    for (int i = 2; i <= dtData.Columns.Count - 1; i++)
+            //    {
+            //        Gridco = decimal.Parse(dtData.Rows[j][i].ToString());
+            //        drStockBal[i] = Gridco;
+            //    }
+            //    dt_clone.Rows.Add(drStockBal);
+
+            //} 
+
+            DataRow drBal = dt_clone.NewRow();
+            drBal[0] = 8;
+            drBal[1] = "Bal";
+            if (dtData.Rows.Count > 1)
+            {
+                for (int i = 2; i <= dtData.Columns.Count - 1; i++)
+                {
+                    Gridco = decimal.Parse(dtData.Rows[j][i].ToString());
+                    Barbil = decimal.Parse(dtData.Rows[j + 1][i].ToString());
+
+                    mLickage = decimal.Parse(dtData.Rows[j + 2][i].ToString());
+
+                    Total = decimal.Parse(dt_clone.Rows[0][i].ToString()) + Gridco - (Barbil + mLickage);
+                    drBal[i] = Total;
+                 
+                }
+                dt_clone.Rows.Add(drBal);
+
+            }
+
+        ///    DataView dv = dt_clone.DefaultView;
+     //       dv.Sort = "No asc";
+       //    DataTable sortedDT = dv.ToTable();
+            return dt_clone;
+        }
+        
 
     }
 }
