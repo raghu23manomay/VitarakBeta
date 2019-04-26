@@ -34,7 +34,7 @@
             </ul>
         </div>
         @*<a href="@Url.Action("importexcel", "Master",new {@Mastername = Session["MasterName"]})"><button type="button" class="btn btn-primary pull-right marginRight15px"><i class="fa fa-download" aria-hidden="true"></i> Import</button></a>*@
-        <button type="button" class="btn btn-primary dropdown-toggle pull-right marginRight15px" href="@Url.Action("Add_Vehical", "Master")" data-toggle="modal" data-target="#mdlAddEmployee"><i class="fa fa-plus" aria-hidden="true"></i> Vehicles</button>
+        <button type="button" class="btn btn-primary dropdown-toggle pull-right marginRight15px marginTop10Mob" href="@Url.Action("Add_Vehical", "Master")" data-toggle="modal" data-target="#mdlAddEmployee"><i class="fa fa-plus" aria-hidden="true"></i> Vehicles</button>
 
         <nav class="pull-right marginRight15px" style="margin-top: -18px;">
             @Html.PagedListPager((IPagedList)Model, page => Url.Action("IndexForVehicalMaster", "Master", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 2, DisplayPageCountAndCurrentLocation = true }, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "mgrid", OnComplete = "PagedOnComplete" }))
@@ -46,7 +46,7 @@
         @*<div class="paginationCount pull-right marginTB7px marginRight15px"><b>1-30</b> of <b>250</b> Vehicles</div>*@
 
     </div>
-    <div id="grid1" class="col-xs-12" style="margin-top:-15px">
+    <div id="grid1" class="col-xs-12  scroll-x" style="margin-top:-15px">
         @Html.Partial("Partial_VehicalGridList")
     </div>
 

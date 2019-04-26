@@ -31,14 +31,16 @@ namespace MyVitarak.Controllers
         
         public ActionResult ColumnChart()
         {
-            JobDbContext _db = new JobDbContext(); 
+            JobDbContext _db = new JobDbContext();
 
-            IEnumerable<Chart> result = _db.Chart.SqlQuery(@"exec GetSalesChart").ToList<Chart>(); 
-           
+            IEnumerable<Chart> result = _db.Chart.SqlQuery(@"exec GetSalesChart").ToList<Chart>();
+
             return Request.IsAjaxRequest()
                     ? (ActionResult)PartialView("ColumnChart", result)
                     : View("ColumnChart", result);
 
+            
+            
         }
         // GET: Master
         public ActionResult ProductList(int? page)
@@ -2605,7 +2607,7 @@ namespace MyVitarak.Controllers
        //    DataTable sortedDT = dv.ToTable();
             return dt_clone;
         }
-        
 
+       
     }
 }

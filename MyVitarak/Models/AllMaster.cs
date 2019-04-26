@@ -313,4 +313,6 @@ namespace MyVitarak.Models
         public int CountAll { get; set; }
 
     }
+
+    
 }

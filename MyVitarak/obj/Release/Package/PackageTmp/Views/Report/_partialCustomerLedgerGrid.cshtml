@@ -2,17 +2,10 @@
 @using System.Data
 @model System.Data.DataTable
 
-<style>
-    .Mytable {
-
-        width: 130%;
-        max-width: 130%;
-        margin-bottom: 20px;
-    }
-</style>
+ 
 <div class="outer">
     <div class="inner">
-        <table class="table table-bordered Mytable">
+        <table class="table table-bordered ">
             <thead>
                 <tr>
                 <tr>
@@ -24,45 +17,57 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (System.Data.DataRow row in Model.Rows)
+                @if (Model.Rows.Count == 0)
                 {
-                    <tr>
+                    if (Model.Columns.Count > 0)
+                    {
+                        <tr> 
+                            <td colspan="@Model.Columns.Count" class="text-center"> No Data Found</td>
+                        </tr> 
+                    }
+                }
+                else
+                {
+                    foreach (System.Data.DataRow row in Model.Rows)
+                    {
+                        <tr>
 
-                        @foreach (System.Data.DataColumn col in Model.Columns)
-                        {
-
-
-                            if (row[col.ColumnName].ToString() == "")
+                            @foreach (System.Data.DataColumn col in Model.Columns)
                             {
-                                <td contenteditable='true'>
-                                    0.00
-                                </td>
-                            }
 
-                            else
-                            {
-                                string temp = row[col.ColumnName].ToString();
-                                decimal Num = 0;
-                                bool isNum = decimal.TryParse(temp, out Num);
-                                if (isNum == false)
+
+                                if (row[col.ColumnName].ToString() == "")
                                 {
-
-                                    <td class="fix" style="width:195px;">
-                                        <input class="form-check-input" type="checkbox" id="one">
-                                        <b> @row[col.ColumnName]</b>
+                                    <td >
+                                        0.00
                                     </td>
                                 }
+
                                 else
                                 {
-                                    <td contenteditable='true'>
-                                        <b> @row[col.ColumnName]</b>
-                                    </td>
+                                    string temp = row[col.ColumnName].ToString();
+                                    decimal Num = 0;
+                                    bool isNum = decimal.TryParse(temp, out Num);
+                                    if (isNum == false)
+                                    {
+
+                                        <td class="fix" style="width:195px;">
+                                            <input class="form-check-input" type="checkbox" id="one">
+                                            <b> @row[col.ColumnName]</b>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td >
+                                            <b> @row[col.ColumnName]</b>
+                                        </td>
+                                    }
                                 }
+
                             }
 
-                        }
-                        
-                    </tr>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>

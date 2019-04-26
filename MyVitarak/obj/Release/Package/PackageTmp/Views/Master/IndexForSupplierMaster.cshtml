@@ -35,7 +35,7 @@
             </ul>
         </div>
         @*<a class="btn btn-primary pull-right marginRight15px" href="@Url.Action("importexcel", "Master",new {@Mastername = "SupplierMaster"})"><i class="fa fa-download" aria-hidden="true"> </i> Import</a>*@
-        <button type="button" class="btn btn-primary dropdown-toggle pull-right marginRight15px" href="@Url.Action("Add_Supplier", "Master")" data-toggle="modal" data-target="#mdlAddSupplier"><i class="fa fa-plus" aria-hidden="true"></i> Suppliers</button>
+        <button type="button" class="btn btn-primary dropdown-toggle pull-right marginRight15px marginTop10Mob" href="@Url.Action("Add_Supplier", "Master")" data-toggle="modal" data-target="#mdlAddSupplier"><i class="fa fa-plus" aria-hidden="true"></i> Suppliers</button>
          
 
         <nav class="paginationCount pull-right marginTB7px marginRight15px" style="margin-top:-20px;">
@@ -46,7 +46,7 @@
             }
         </nav>
     </div>
-    <div id="grid1" class="col-xs-12">
+    <div id="grid1" class="col-xs-12  scroll-x">
         @Html.Partial("_partialGridSupplierMaster")
     </div>
     

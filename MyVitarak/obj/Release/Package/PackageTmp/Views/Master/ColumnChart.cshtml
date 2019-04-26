@@ -1,0 +1,46 @@
+﻿
+@{
+    Layout = null;
+}
+@model IEnumerable<MyVitarak.Models.Chart>
+@using JQChart.Web.Mvc
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="~/jschart/css/jquery.jqChart.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/le-frog/jquery-ui-1.8.20.css" />
+    <script src="~/jschart/js/jquery-1.11.1.min.js"></script>
+    <script src="~/jschart/js/jquery.jqChart.min.js"></script>
+    <body>
+
+        <div>
+            @(Html.JQChart()
+                                                                          .Chart(Model)
+                                                                          .ID("jqChart") 
+                                                                          .Title("Sales")
+                                                                          .Animation(TimeSpan.FromSeconds(1))
+                                                                          .Shadows(true)
+                                                                          .Series(series =>
+                                                                              {
+                                                                                  series.Column()
+                                                                                        .Title("Quantity")
+                                                                                        .FillStyle("#418CF0")
+                                                                                        .XValues(el => el.Label)
+                                                                                        .YValues(el => el.Value1);
+
+                                                                                  series.Column()
+                                                                                        .Title("Amount")
+                                                                                        .FillStyle("#FCB441")
+                                                                                        .XValues(el => el.Label)
+                                                                                        .YValues(el => el.Value2);
+                                                                              }
+                                                                          )
+                                                                          .Render()
+            )
+        </div>
+    </body>
+</html>
+
